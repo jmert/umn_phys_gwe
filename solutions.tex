@@ -1,0 +1,42 @@
+\documentclass[10pt]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage[
+		exponent-product     = \cdot,
+		load-configurations  = abbreviations,
+		inter-unit-separator = {}\cdot{},
+		per-mode             = symbol-or-fraction,
+		separate-uncertainty = true,
+		math-micro           = \text{μ},
+		text-micro           = μ
+	]{siunitx}
+\usepackage{empheq}
+\usepackage{xcolor}
+\usepackage[parfill]{parskip}
+\usepackage[margin=1in]{geometry}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+
+\usepackage{hyperref}
+
+\pagestyle{empty}
+\begin{document}
+
+\tableofcontents
+\clearpage
+
+\newcommand{\sL}{\ensuremath{\mathscr L}}
+
+\section{Fall 2011 Part I}
+\input{2011fall_p1}
+\clearpage
+
+\section{Fall 2011 Part II}
+\input{2011fall_p2}
+\clearpage
+
+\section{Fall 2012 Part I}
+\input{2012fall_p1}
+\clearpage
+
+\end{document}

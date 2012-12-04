@@ -1,0 +1,248 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Problem 1}
+\subsubsection{Question}
+Assume you have three identical particles and three single particle states
+$|a〉$, $|b〉$, and $|c〉$ available for them. Count how many different
+three-particle states there can be if the particles are (a) fermions and (b)
+bosons.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 2}
+\subsubsection{Question}
+Show that a particle in a one-dimensional infinite square well initially in a
+state $Ψ(x,0)$ will always return to that state after a time $T = 4ma²/π\hbar$
+where $a$ is the width of the well.
+
+\subsubsection{Answer}
+Use the standard time independent Schödinger equation
+\begin{align*}
+	Ψ(x,t) &= ψ(x) e^{iEt/\hbar}
+\end{align*}
+with associated differential equation
+\begin{align*}
+	-\frac{\hbar²}{2m} \frac{d²ψ}{dx²} + V(x)ψ &= Eψ
+\end{align*}
+
+For an infinite square well, the potential has the form
+\begin{align*}
+	V(x) &=
+		\begin{cases}
+			0	&	|x| < \frac{a}{2} \\
+			∞	&	\text{otherwise}
+		\end{cases}
+\end{align*}
+so that the only region to consider is $-\frac{a}{2} < x < \frac{a}{2}$. In this
+region, the differential equation takes the form of a harmonic oscillator
+\begin{align*}
+	\frac{d²ψ}{dx²} &= -\frac{2mE}{\hbar²}ψ
+\end{align*}
+leading to solutions
+\begin{align*}
+	ψ(x) ={}& A\cos kx + B\sin kx \\
+	{}& \text{where } k² = \frac{2mE}{\hbar²}
+\end{align*}
+
+The boundary conditions $ψ(-\frac{a}{2}) = 0$ and $ψ(\frac{a}{2}) = 0$ impose
+\begin{align*}
+	ψ\left(-\frac{a}{2}\right) &= 0 = A\cos \frac{ka}{2} - B\sin \frac{ka}{2} \\
+	ψ\left(\frac{a}{2}\right)  &= 0 = A\cos \frac{ka}{2} + B\sin \frac{ka}{2}
+\end{align*}
+so that $B = 0$ and
+\begin{align*}
+	0 &= 2A \cos \frac{ka}{2} \\
+	\frac{(2n+1)π}{2} &= \frac{ka}{2} \\
+	k &= \frac{(2n+1)π}{a}
+\end{align*}
+
+We already had a relation for $k$ defined, so substitute and solve for the
+energies $E_n$.
+\begin{align*}
+	\frac{(2n+1)²π²}{a²} &= \frac{2mE}{\hbar²} \\
+	E_n &= \frac{(2n+1)²π²\hbar²}{2ma²}
+\end{align*}
+
+Then considering $Ψ(x,t)$, the complex exponential is periodic in time with
+period
+\begin{align*}
+	T_n &= \frac{2π\hbar}{E}
+\end{align*}
+where $n = 0$ will be the case with the longest periodicity, so
+\begin{align*}
+	T &= \frac{2π\hbar · 2ma²}{π²\hbar²} \\
+	{} &= \frac{4ma²}{π\hbar}
+\end{align*}
+
+Therefore, the function is periodic in time with a periodicity
+\begin{empheq}[box=\fbox]{align}
+	T &= \frac{4ma²}{π\hbar}
+\end{empheq}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 3}
+\subsubsection{Question}
+Consider a system of $N$ independent classical molecules, each at a fixed
+position, with magnetic moment $\vec μ$ in an external magnetic field $\vec B$.
+Determine the partition function, and hence find the free energy and the
+magnetization at temperature $T$, when the molecules can only be oriented
+parallel or antiparallel to the external magnetic field.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 4}
+\subsubsection{Question}
+A photon collides with a stationary electron. If the photon scatters at an
+angle $θ$, show that the resulting wavelength $λ'$ is given in terms of the
+original wavelength $λ$ by
+\begin{align*}
+	λ' &= λ + \frac{h}{mc} (1 - \cos θ)
+\end{align*}
+where $m$ is the mass of the electron.
+
+\subsubsection{Answer}
+Start by considering conservation of momentum for the system. The initial values
+are
+\begin{align*}
+	p_{γx} &= \frac{h}{λ}		&		p'_{γx} &= \frac{h}{λ'} \cos θ \\
+	p_{γy} &= 0					&		p'_{γy} &= \frac{h}{λ'} \sin θ \\
+	p_{ex} &= 0					&		p'_{ex} &= ? \\
+	p_{ey} &= 0					&		p'_{ey} &= ?
+\end{align*}
+and considering each component in turn:
+\begin{align*}
+	\frac{h}{λ} + 0 &= \frac{h}{λ'}\cos θ + p'_{ex}
+		& 0 &= \frac{h}{λ'}\sin θ + p'_{ey}
+	\\
+	p'_{ex} &= \frac{h}{λ} - \frac{h}{λ'}\cos θ
+		& p'_{ey} &= -\frac{h}{λ'}\sin θ
+\end{align*}
+The total momentum of the electron is then
+\begin{align}
+	p²_e &= \left( \frac{h}{λ} - \frac{h}{λ'}\cos θ \right)² +
+		\left( -\frac{h}{λ'}\sin θ \right)²
+		\nonumber
+	\\
+	{} &= \frac{h²}{λ²} - \frac{2h²}{λλ'}\cos θ + \frac{h²}{λ'^2}\cos ²θ +
+		\frac{h²}{λ'^2}\sin ²θ
+		\nonumber
+	\\
+	p²_e &= h² \left( \frac{1}{λ²} + \frac{1}{λ'^2} \right) -
+		\frac{2h²}{λλ'}\cos θ
+\end{align}
+
+Then consider energy conservation, with initial values
+\begin{align*}
+	E_γ &= \frac{hc}{λ}			&		E'_γ &= \frac{hc}{λ'} \\
+	E_e &= mc²					&		E'_e &= \frac{{p'_e}²}{2m} + mc²
+\end{align*}
+leading to the equation
+\begin{align*}
+	\frac{hc}{λ} + mc² &= \frac{hc}{λ'} + \frac{{p'_e}²}{2m} + mc²
+	\\
+	\frac{hc}{λ} &= \frac{hc}{λ'} + \frac{h²}{2m} \left( \frac{1}{λ²} +
+		\frac{1}{λ'^2} \right) - \frac{2h²}{2mλλ'}\cos θ
+	\\
+	\frac{hc}{λ} - \frac{hc}{λ'} &= \frac{h²}{2m} \left( \frac{1}{λ²} +
+		\frac{1}{λ'^2} \right) - \frac{2h²}{2mλλ'}\cos θ
+	\\
+	\frac{λ' - λ}{λλ'} &= \frac{h}{2mc} \frac{λ'^2 + λ²}{λ²{λ'}^2} -
+		\frac{h}{mcλλ'}\cos θ
+	\\
+	λ' - λ &= \frac{h}{2mc} \left( \frac{(λ' - λ)² + 2λλ'}{λλ'} \right) -
+		\frac{h}{mc}\cos θ
+	\\
+	λ' - λ &= \frac{h}{2mc} \left( \frac{(λ' - λ)²}{λλ'} + 2 \right) -
+		\frac{h}{mc}\cos θ
+	\\
+	λ' - λ &= \frac{h}{2mc} \frac{(λ' - λ)²}{λλ'} + \frac{h}{mc}(1 - \cos θ)
+\end{align*}
+The difference in the wavelengths is small, so
+\begin{align*}
+	\frac{(λ' - λ)²}{λλ'} &≈ 0
+\end{align*}
+leading to the final Compton scattering equation
+\begin{empheq}[box=\fbox]{align}
+	λ' &= λ + \frac{h}{mc}(1 - \cos θ)
+\end{empheq}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 5}
+\subsubsection{Question}
+The composition of a glass block varies as a function of the distance $x$ from
+the top surface. Thus the index of refraction $n(x)$ increases as a function of
+$x$ according to the relationship $n(x) = 1.50 - (0.20)/(x+1)²$ where $x$ is
+expressed in centimeters. A beam of light strikes the surface with an angle of
+incidence $θ_i$, measured from the vertical. What will be the direction of the
+beam deep inside the block?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 6
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 6}
+\subsubsection{Question}
+You want to measure a current when using a voltmeter and a precision resistor.
+You measure a voltage of \SI{0.85}{\V} across a \SI{10000}{\ohm} resistor and
+\SI{-0.05}{\V} when the input to the voltmeter is short-circuited. The precision
+of the voltmeter is \SI{0.001}{\V} and the resistor is rated at
+\SI{0.1}{\percent}. What is the value of the current and the precision of the
+measurement?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 7
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 7}
+\subsubsection{Question}
+Find the capacitance per unit length of two coaxial conducting cylindrical tubes
+or radii $a$ and $b$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 8
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 8}
+\subsubsection{Question}
+Suppose that the radius of the Earth were to gravitationally collapse uniformly
+by one percent, with its mass remaining the same. What would happen to the
+Earth's kinetic energy of rotatio? If it changes, how does it change and by how
+much? Assume that the Earth is a uniform sphere.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 9
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 9}
+\subsubsection{Question}
+A neutron star has a radius of \SI{10}{\km}, a mass of \SI{3e30}{\kg}. Find the
+nearest distance to the surface that a person \SI{2}{\m} tall could approach the
+pulsar without being pulled apart. Assume a uniform mass distribution, feet
+toward the pulsar and that a person starts to come apart when the force that
+each half of the body exerts on the other exceeds ten times the body weight on
+Earth. What is the period of revolution in a circular orbit about the pulsar at
+this distance?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 10
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 10}
+\subsubsection{Question}
+Given that the latent heat of fusion for water is \SI{334}{\kilo\J\per\kg} and
+the density of water and ice are \SI{1000}{\kg\per\m\cubed} and
+\SI{917}{\kg\per\m\cubed}, respectively. At what pressure will ice melt at
+\SI{-0.1}{\celsius}? It may be sueful to remember that the Gibbs free energy is
+the same across a phase boundary.
+

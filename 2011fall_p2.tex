@@ -1,0 +1,109 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Problem 1}
+
+\subsubsection{Question}
+Mass $m₁$ moves freely along a fixed, long, horizontal rod. The position of
+$m₁$ on the rod is $x$. A massless string of length $ℓ$ is attached to $m₁$
+at the end and to mass $m₂$ at the other. Mass $m₂$ executes pendulum motion
+in the vertical plane containing the rod.
+\begin{enumerate}
+	\item
+		Find the Lagrangian of the system.
+	\item
+		Derive the equations of motion and the corresponding conservation laws.
+	\item
+		Assume that $x(0)=x₀$, $\dot x(0)=0$, $φ(0)=φ₀$ $(|φ₀| ≪ 1)$,
+		and $\dot φ(0)=0$. Find $x(t)$ and $φ(t)$ for $t > 0$.
+\end{enumerate}
+
+
+\subsubsection{Answer (1)}
+For the sliding support mass $m₁$:
+\begin{align*}
+	T₁ &= \frac{1}{2}m₁ \dot{x}² \\
+	V₁ &= 0
+\end{align*}
+For the pendulum mass $m₂$:
+\begin{align*}
+	T₂ &= \frac{1}{2}m₂ \dot{y}² + \frac{1}{2}m₂(\dot x + \dot x₂)² \\
+	V₂ &= -m₂gy₂ \\
+\intertext{Then using $x₂ = ℓ\sin φ$ and $y₂ = -ℓ\cos φ$,}
+	T₂ &= \frac{1}{2}m₂ \left( ℓ²\dot φ² + \dot x² + 2ℓ\dot φ\dot x \cos φ
+		\right) \\
+	V₂ &= -m₂ g y₂
+\end{align*}
+Putting the Lagrangian together equals the first line. Applying the small
+angle approximation gives the second line where the kinetic energy term
+involving $\cos φ$ can be simply expanded as $\cos φ ≈ 1$, but the potential
+energy term must be expanded to second order so that $\cos φ ≈ 1 -
+\frac{1}{2}φ²$.
+
+\begin{empheq}[box=\fbox]{align}
+	\sL &= \frac{1}{2} (m₁ + m₂)\dot x² + \frac{1}{2} m₂ \left(
+		ℓ²\dot φ² + 2ℓ\dot φ\dot x\cos φ \right) + m₂gℓ\cos φ
+	\\
+	\sL &≈ \frac{1}{2} (m₁ + m₂)\dot x² + \frac{1}{2} m₂ \left(
+		ℓ²\dot φ² + 2ℓ\dot φ\dot x \right) + m₂gℓ - \frac{1}{2}m₂gℓφ²
+\end{empheq}
+
+\subsubsection{Answer (2)}
+Constructing the Euler-Lagrange equations for $x$ and $\dot x$:
+\begin{align*}
+	\frac{∂\sL}{∂x} &= 0 &
+		\frac{∂\sL}{∂\dot x} &= (m₁ + m₂)\dot x + m₂ℓ\dot φ
+	\\
+	{}&{}&
+	\frac{d}{dt}\left[ \frac{∂\sL}{∂\dot x} \right]
+		&= (m₁ + m₂)\ddot x + m₂ℓ\ddot φ
+\end{align*}
+\begin{align}
+	(m₁ + m₂)\ddot x + m₂ℓ\ddot φ = 0
+\end{align}
+and for $φ$ and $\dot φ$:
+\begin{align*}
+	\frac{∂\sL}{∂φ} &= -m₂gℓφ &
+		\frac{∂\sL}{∂\dot φ} &= m₂ℓ²\dot φ + m₂ℓ\dot x
+	\\
+	{}&{}&
+	\frac{d}{dt}\left[ \frac{∂\sL}{∂\dot φ} \right]
+		&= m₂ℓ²\ddot φ + m₂ℓ\ddot x
+\end{align*}
+\begin{align}
+	-m₂gℓφ - m₂ℓ²\ddot φ + m₂ℓ\ddot x = 0
+\end{align}
+
+The equations of motion are:
+\begin{empheq}[box=\fbox]{align}
+	\ddot x + \frac{m₂}{m₁+m₂} ℓ \ddot φ &= 0 \\
+	\ddot φ + \frac{1}{ℓ}\ddot x + \frac{g}{ℓ}φ &= 0
+\end{empheq}
+
+\subsubsection{Answer (3)}
+Solve for $\ddot x$ and substitute into the other differential equation
+\begin{align}
+	\ddot φ - \frac{1}{ℓ}\frac{m₂}{m₁+m₂} ℓ \ddot φ + \frac{g}{ℓ}φ &= 0\nonumber
+	\\
+	\frac{m₁}{m₁+m₂} \ddot φ + \frac{g}{ℓ}φ &= 0\nonumber
+	\\
+	\ddot φ + \frac{g}{ℓ}\frac{m₁+m₂}{m₁} φ &= 0
+\end{align}
+This is just the differential equation for a simple harmonic oscillator, so
+considering the given boundary conditions,
+\begin{empheq}[box=\fbox]{align}
+	\begin{split}
+		φ(t) ={}& φ₀\cos(ωt) \\
+		{}&\text{where } ω² = \frac{g}{ℓ}\frac{m₁+m₂}{m₁}
+	\end{split}
+\end{empheq}
+
+Then differentiating $φ(t)$ twice and substituting into the first equation,
+\begin{align*}
+	\ddot x &= ℓφ₀ω²\frac{m₂}{m₁+m₂}\cos(ωt)
+\end{align*}
+Then integrating twice and applying the boundary conditions,
+\begin{empheq}[box=\fbox]{align}
+	x(t) &= x₀ - \frac{g}{ω²}\frac{m₂}{m₁}\cos(ωt)
+\end{empheq}
+
