@@ -1,31 +1,72 @@
 \documentclass[10pt]{article}
+\input{defaults}
 
-\usepackage{amsmath,amssymb}
-\usepackage[
-		exponent-product     = \cdot,
-		load-configurations  = abbreviations,
-		inter-unit-separator = {}\cdot{},
-		per-mode             = symbol-or-fraction,
-		separate-uncertainty = true,
-		math-micro           = \text{μ},
-		text-micro           = μ
-	]{siunitx}
-\usepackage{empheq}
-\usepackage{xcolor}
+\title{University of Minnesota Physics GWE Solutions}
+\author{%
+	Justin Willmert%
+}
+
+% For boxing the final answer in a solution:
+	\usepackage{empheq}
+% Multicolumn pages
+	\usepackage{multicol}
+
+% Generate an index of all the GWE problems
+\usepackage{makeidx}
+	\makeindex
+	% Change the index printing so that multicol can balance the columns
+	\let\origtheindex\theindex
+	\let\origendtheindex\endtheindex
+	\def\theindex{%
+		\def\twocolumn{\begin{multicols}{2}}%
+		\def\onecolumn{}%
+		%~ \clearpage
+		\origtheindex
+	}
+	\def\endtheindex{%
+		\end{multicols}%
+		\origendtheindex
+	}
+
 \usepackage[parfill]{parskip}
-\usepackage[margin=1in]{geometry}
-\usepackage{fontspec}
-\usepackage{unicode-math}
 
-\usepackage{hyperref}
+%% Setup page styles
+	% Plain pages
+	\pagestyle{empty}
+	% Don't number the sections explicitly, but still use \section, etc
+	% (non-starred) so that the TOC is still generated
+	\setcounter{secnumdepth}{0}
+	% Then have the TOC only show the year and problem numbers without also
+	% listing the Question and Answer sections
+	\setcounter{tocdepth}{2}
 
-\pagestyle{empty}
+%% Convenience macros
+	% Script L used for Lagrangian
+	\newcommand{\sL}{\ensuremath{\mathcal L}}
+
+
 \begin{document}
 
-\tableofcontents
-\clearpage
+\begingroup
+	% Use smaller fonts for the TOC and index
+	\small
+	% Patch the table of contents to use double columns. Needs to be done here
+	% because something else redefines \@starttoc when the document begins
+	% (probably hyperref...)
+	\makeatletter
+	\let\origstarttoc\@starttoc
+	\renewcommand*{\@starttoc}[1]{%
+		\begin{multicols}{2}%
+			\origstarttoc{#1}%
+		\end{multicols}%
+	}
+	\makeatother
+	\tableofcontents
 
-\newcommand{\sL}{\ensuremath{\mathscr L}}
+	% Print the Index
+	\printindex
+	\clearpage
+\endgroup
 
 \section{Fall 2011 Part I}
 \input{2011fall_p1}
