@@ -73,6 +73,89 @@
 	% listing the Question and Answer sections
 	\setcounter{tocdepth}{2}
 
+%% Make some GWE-specific heading commands
+	\makeatletter
+	% First, create the requisite counters
+	\newcounter{gwe@year}
+	\newcounter{gwe@part}
+	\newcounter{gwe@prob}[gwe@part]
+	% Also an if that signals the first problem in a new exam
+	\newif\ifgwe@firstproblem
+	% Then add an internal macro which will make the GWE Exam headings
+	\newcommand{\gwe@examname}{\relax}
+	\newcommand{\gwe@examsymb}{\relax}
+	\newcommand{\gwe@exam}[4]{%
+		\renewcommand{\gwe@examname}{#1}%
+		\renewcommand{\gwe@examsymb}{#2}%
+		\setcounter{gwe@year}{#3}%
+		\setcounter{gwe@part}{#4}
+		\setcounter{gwe@prob}{0}
+		{%
+			% Generate the title for the command
+			\def\gwe@title{%
+				\gwe@examname{}~\arabic{gwe@year} Part~\Roman{gwe@part}%
+			}
+			% Update the marks so that the headers show which exam we're in,
+			% and add ourselves to the TOC
+			\markboth{\scshape\gwe@title}{}
+			\addcontentsline{toc}{section}{\gwe@title}
+			% Set the style for the title
+			\sffamily\Huge\bfseries%
+			% Each exam starts on its own page and is its own paragraph
+			\clearpage%
+			\hspace{-0.25in}\gwe@title\par%
+			% Generate some space below the title
+			\vspace*{0.75em}
+		}%
+		% Signal to \problem that it is the first after a new exam
+		\gwe@firstproblemtrue
+	}
+	% Next, add convenience wrappers to quickly define the Spring and Fall
+	% exams.
+	\newcommand{\fallexam}[2]{\gwe@exam{Fall}{F}{#1}{#2}}
+	\newcommand{\springexam}[2]{\gwe@exam{Spring}{F}{#1}{#2}}
+	% Finally, provide a heading for each problem
+	\newcommand{\problem}[1]{%
+		\setcounter{gwe@prob}{#1}%
+		% Reset the equation numbering counter
+		\setcounter{equation}{0}%
+		{%
+			% Generate the title for the command
+			\def\gwe@title{%
+				Problem~\arabic{gwe@prob}%
+			}%
+			\def\gwe@fulltitle{%
+				\gwe@examname{}~\arabic{gwe@year} Part~\Roman{gwe@part}, %
+				\gwe@title%
+			}%
+			% Add the problem to the TOC
+			\addcontentsline{toc}{subsection}{\gwe@title}
+			% Set the style for the title and print it out
+			\sffamily\Large\bfseries
+			% New problems also start on their own pages if it's not the first
+			\ifgwe@firstproblem%
+				\global\gwe@firstproblemfalse%
+			\else%
+				\clearpage%
+			\fi%
+			\par\hspace{-0.125in}\gwe@title\par%
+			% Automatically generate a label for every problem of the form
+			%     prob:SYYYYPNN
+			% where S is either S or F for spring and fall, respectively,
+			%       YYYY is the exam year
+			%       P is the part number (I or II)
+			%       NN is the problem number including leading zero
+			\edef\nn{\ifnum\value{gwe@prob}<10 0\fi\thegwe@prob}%
+			\edef\@currentlabelname{\gwe@fulltitle}
+			\label{prob:\gwe@examsymb\arabic{gwe@year}\Roman{gwe@part}\nn}
+		}%
+	}
+	% Set the equation numbering system:
+	\renewcommand{\theequation}{%
+		\gwe@examsymb\arabic{gwe@year} \Roman{gwe@part} \arabic{gwe@prob}.\arabic{equation}%
+	}
+	\makeatother
+
 %% Convenience macros
 	% Script L used for Lagrangian
 	\newcommand{\sL}{\ensuremath{\mathcal L}}
@@ -103,20 +186,16 @@
 	\clearpage
 \endgroup
 
-\section{Fall 2011 Part I}
+\fallexam{2011}{1}
 \input{2011fall_p1}
-\clearpage
 
-\section{Fall 2011 Part II}
+\fallexam{2011}{2}
 \input{2011fall_p2}
-\clearpage
 
-\section{Spring 2012 Part I}
+\springexam{2012}{1}
 \input{2012spring_p1}
-\clearpage
 
-\section{Fall 2012 Part I}
+\fallexam{2012}{1}
 \input{2012fall_p1}
-\clearpage
 
 \end{document}
