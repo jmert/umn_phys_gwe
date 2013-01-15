@@ -34,8 +34,38 @@
 \usepackage[parfill]{parskip}
 
 %% Setup page styles
-	% Plain pages
-	\pagestyle{empty}
+	% Fancy headers
+	\usepackage{fancyhdr}
+	\fancypagestyle{plain}{%
+		\fancyhf{}	% Clear all headers and footers
+		\renewcommand{\headrulewidth}{0pt}
+		\renewcommand{\footrulewidth}{0pt}
+		\fancyhfoffset{0.25in}
+		% Add the page number on the outside of each page and the current
+		% exam (section) on the inner header
+		\fancyhead[LE,RO]{\sffamily\textbf\thepage}
+		\fancyhead[RE,LO]{\sffamily\textbf\leftmark}
+		% Also add some information about where to find the source for these
+		% solutions in the footer
+		\cfoot{%
+			\color{black!30!white}
+			These solutions are compiled in a \texttt{git} repository available
+			at \href{https://github.com/jmert/umn_phys_gwe}
+			{https://github.com/jmert/umn\_phys\_gwe}.
+		}
+	}
+	\pagestyle{plain}
+	% Since we've added headers and footers which aren't accounted for in the
+	% default layout for geometry, setup the new page styles
+	\newgeometry{
+		twoside     = true,
+		includehead = true,
+		includefoot = true,
+		top         = 0.5in,
+		bottom      = 0.5in,
+		inner       = 1in,
+		outer       = 1in
+	}
 	% Don't number the sections explicitly, but still use \section, etc
 	% (non-starred) so that the TOC is still generated
 	\setcounter{secnumdepth}{0}
