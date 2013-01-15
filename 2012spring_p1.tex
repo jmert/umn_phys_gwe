@@ -1,0 +1,324 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Problem 1}
+\subsubsection{Question}
+% Keywords
+	\index{quantum!Significance in limits}
+
+For a many particle system of weekly interacting particles, will quantum 
+effects be more important for (a) high densities or low densities and (b) 
+high temperatures or low temperatures for a system. Explain your answers in 
+terms of the de Broglie wavelength $λ$ defined as $λ² ≡ h²⁄(3mk_BT)$ where 
+$m$ is the mass of the particles and $k_b$ Boltzmann's constant.
+
+\subsubsection{Answer}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+	\item
+		High density — The de Broglie wavelength gives a ``size'' of the 
+		particle, and in the high density limit, the wavefunctions overlap 
+		significantly so quantum effects and interactions are critical to 
+		the behavior of the system.
+	\item
+		Low temperature — Since $λ² \propto T^{-1}$, as $T → 0$, $λ$ increases
+		so that again the wavefunctions overlap and quantum effects are
+		significant.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 2}
+\subsubsection{Question}
+% Keywords
+	\index{quantum!Helium ionization}
+
+The ground state energy of Helium is \SI{-79}{\eV}. What is its ionization
+energy, which is the energy required to remove just one electron?
+
+\subsubsection{Answer}
+Using the Hydrogen solution with modifications for single-electron atoms of
+higher $Z$, we know that the ground state energy of singly ionized Helium is
+\begin{align*}
+	E_{He}^{1} = 2² (\SI{-13.6}{\eV}) = \SI{-54.4}{\eV}
+\end{align*}
+Therefore, the difference between the singly-ionized and neutral ground state
+energies gives the first ionization energy of the Helium atom.
+\begin{empheq}[box=\fbox]{align}
+	E_i &= \SI{-24.6}{\eV}
+\end{empheq}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 3}
+\subsubsection{Question}
+% Keywords
+	\index{dimensional analysis!Vacuum (Casimir) force}
+
+It is known that the force per unit area ($F/A$) between two neutral 
+conducting plates due to polarization fluctuations of the vacuum (namely, 
+the Casimir force) is a function of $h$ (Planck's constant), $c$ (speed of 
+light), and $z$ (distance between the plates) only. Using only dimensional 
+analysis, obtain $F/A$ as a function of $h$, $c$, and $z$.
+
+\subsubsection{Answer}
+The units of $F/A$ are
+\begin{align*}
+	\frac{F}{A} &= \left[ \frac{\si{\kg}}{\si{\m\s\squared}} \right]
+\end{align*}
+The \si{\kg} suggests a factor proportional to $h$, making the equation
+\begin{align*}
+	\frac{F}{A} &\sim \left[ \frac{1}{\si{\m\cubed\s}} \right] h \\
+\intertext{Accounting for the factor of seconds requires a $c$:}
+	\frac{F}{A} &\sim \left[ \frac{1}{\si{\m\tothe{4}}} \right] hc \\
+\intertext{Finally, account for all the factors of distance:}
+	\frac{F}{A} &\sim \frac{hc}{z⁴} \\
+\end{align*}
+Therefore,
+\begin{empheq}[box=\fbox]{align}
+	\frac{F}{A} &\sim \frac{hc}{z⁴}
+\end{empheq}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 4}
+\subsubsection{Question}
+% Keywords
+	\index{circuits!Parallel capacitors with switches}
+
+In the circuit diagram opposite, initially the two identical capacitors with 
+capacitance $C$ are uncharged. The connections between the components are 
+all made with short copper wires. The battery is an ideal EMF and supplies a 
+voltage $V$.
+\begin{enumerate}
+	\item
+		At first Switch A is closed and Switch B is kept open. What is the 
+		final sotred energy on capacitor $C_a$?
+	\item
+		Switch A is opened and afterwards Switch B is closed. What is the 
+		final energy stored in both capacitors?
+	\item
+		Provide a physical explanation for any difference between the 
+		results of parts (a) and (b), if there is one.
+\end{enumerate}
+\begin{center}
+	\begin{circuitikz}
+		\draw
+			% Draw the battery
+			(0,-1) to [battery=$V$] ++(0,2)
+			% and then the switches
+			to [cspst=$A$] ++(2,0)
+				coordinate (between)
+			to [cspst=$B$] ++(2,0)
+			% then down through capacitor B
+			to [capacitor=$C_b$] ++(0,-2)
+			% And complete the outer loop
+			to [short] (0,-1);
+		;
+		% Go back and draw capacitor A
+		\draw (between) to [capacitor=$C_a$] ++(0,-2);
+	\end{circuitikz}
+\end{center}
+
+\subsubsection{Answer}
+\begin{enumerate}
+	\item
+		Initially, the right side of the circuit with $C_b$ can be ignored, 
+		so the total energy is simply the energy stored within $C_a$.
+		\begin{empheq}[box=\fbox]{align}
+			E &= \frac 12 CV²
+		\end{empheq}
+	\item
+		The system is now effectively just the two capacitors on the right.
+		Because the voltage difference is supported across both capacitors,
+		the system can be modeled as an effective capacitor in parallel
+		\begin{align*}
+			C_{eff} &= 2C
+		\end{align*}
+		The total charge stored by the capacitors must remain the same when
+		switching from Switch A being closed to Switch B. Initially,
+		\begin{align*}
+			Q &= CV_i
+		\end{align*}
+		and afterwards it is
+		\begin{align*}
+			Q &= C_{eff}V = 2CV_f
+		\end{align*}
+		so the final voltage across the capacitors is
+		\begin{align*}
+			V_f &= \frac 12 V_i
+		\end{align*}
+		This means the total energy is
+		\begin{align*}
+			E &= \frac 12 C_{eff} {V_f}²
+		\end{align*}
+		\begin{empheq}[box=\fbox]{align}
+			E &= \frac 14 CV²
+		\end{empheq}
+	\item
+		The energy is dissipated (heat, fields, etc).
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 5}
+\subsubsection{Question}
+% Keywords
+	\index{orbits!Angular momentum of a planet}
+	\index{mechanics!Angular momentum of a planet}
+
+A planet of mass $m$ moves around the sun, mass $M$, in an elliptical orbit 
+with minimum and maximum distances of $r₁$ and $r₂$, respectively. Find the 
+angular momentum of the planet relative to the center of the sun in terms of 
+these quantities and the gravitational constant $G$.
+
+\subsubsection{Answer}
+We solve the problem using conservation of energy since we know that stable
+elliptical orbits have constant energy. The generic equation is
+\begin{align*}
+	E &= \frac{L²}{2I} - \frac{GMm}{r}
+\end{align*}
+where $L$ is the angular momentum and $I$ the moment of inertia. Substituting
+for the values at both $r₁$ and $r₂$ and equating,
+\begin{align*}
+	\frac{L²}{2m{r₁}²} - \frac{GMm}{r₁} &= \frac{L²}{2m{r₂}²} - \frac{GMm}{r₂}\\
+	\frac{L²}{2m}(\frac{1}{{r₁}²} - \frac{1}{{r₂}²}) &=
+		GMm(\frac{1}{r₁} - \frac{1}{r₂})
+\end{align*}
+which leads to the solution
+\begin{empheq}[box=\fbox]{align}
+	L &= \sqrt{ \frac{2GMm² r₁ r₂}{r₁ + r₂} }
+\end{empheq}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 6
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 6}
+\subsubsection{Question}
+% Keywords
+	\index{mechanics!Central Forces}
+	\index{Lagrangian!Central Forces}
+	\index{orbits!Central Forces}
+
+A particle moves in a circular orbit under the influence of a central force
+that varies as the $n$-th power of the distance. Show that this motion is
+unstable if $n < -3$. (Hint: Consider the centrifugal potential.)
+
+\subsubsection{Answer}
+See solution for Fall 2011 Part I, Problem 2 with the condition inverted so
+that \emph{in}stability is $n < -3$ rather than stability requiring $n > -3$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 7
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 7}
+\subsubsection{Question}
+% Keywords
+	\index{thermodynamics!Isentropic compression}
+	
+A classical, ideal, monatomic gas of $N$ particles is reversibly compressed 
+\emph{isentropically}, i.e.~with the entropy kept constant, from an initial 
+temperature $T₀$ and pressure $P$ to a pressure $2P$. Find (a) the work done 
+on the system, and (b) the net change in entropy of the system and its 
+surroundings.
+
+\begin{enumerate}
+	\item
+		An isentropic process is the same as an adiabatic process since no
+		heat can be exchanged ($T\dd S = Q = 0$), so we begin with the relation
+		that $PV^{γ}$ is a constant. Combining this with the ideal gas law, 
+		we can determine that
+		\begin{align*}
+			P^{1-γ}T^{γ} = \mathrm{const}
+		\end{align*}
+		where $γ = C_p/C_v$ is the ratio of heat capacities with $C_p =
+		\frac 52 Nk_B$ and $C_v = \frac 32 Nk_B$ for a monatomic ideal gas. 
+		Using this, we solve for the final temperature of the system after 
+		compressions as
+		\begin{align*}
+			T_f &= 2^{2/5} T₀ ≈ 1.32T₀
+		\end{align*}
+		Combining both of
+		\begin{align*}
+			ΔU &= C_v ΔT \\
+			ΔU &= Q + W
+		\end{align*}
+		where $Q = 0$, we get that
+		\begin{empheq}[box=\fbox]{align}
+			W &= \frac 32 Nk_B T₀ (2^{2/5} - 1)
+		\end{empheq}
+	\item
+		Because the compression is done reversibly, by definition, $ΔS = 0$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 8
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 8}
+\subsubsection{Question}
+% Keywords
+	\index{thermodynamics!Fermi gas properties}
+	\index{statistical mechanics!Fermi gas properties}
+
+For an idea Fermi gas of $N$ neutral spin-$\frac 12$ particles in a volume 
+$V$ at $T = 0$, calculate the following:
+\begin{enumerate}
+	\item The chemical potential
+	\item The average energy per particle
+	\item The pressure
+\end{enumerate}
+
+\subsubsection{Answer}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 9
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 9}
+\subsubsection{Question}
+% Keywords
+	\index{}
+
+A transparent spherical lens, with a uniform index of refraction $n$ has the 
+image of a distant object on the opposite surface of the lense when it is in 
+a vacuum. What is the index of refraction $n$?
+
+\subsubsection{Answer}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 10
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Problem 10}
+\subsubsection{Question}
+% Keywords
+	\index{electrostatics!Hall effect}
+	\index{solid state!Hall effect}
+
+A piece of $p$-doped silicon has a carrier density 
+$n=\SI{e15}{\per\cm\cubed}$ and dimensions of $Δx = \SI{10}{\mm}$, $Δy = 
+\SI{2}{\mm}$, and $Δz = \SI{1}{\mm}$. A magnetic field of $B_z = \SI{1}{T}$ 
+is applied in the $z$-direction and a current $I_x = \SI{1}{\A}$ flows in 
+the $x$-direction, and the voltage $V_y$ is measured.
+\begin{enumerate}
+	\item
+		Express the current density $j_x$ in terms of the carrier density $n$
+		and the carrier velocity $v_x$.
+	\item
+		Write down the equilibrium force condition that determins $V_y$.
+	\item
+		Find $V_y$ in volts.
+\end{enumerate}
+
+\subsubsection{Answer}

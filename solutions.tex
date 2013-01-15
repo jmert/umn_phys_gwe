@@ -1,5 +1,6 @@
 \documentclass[10pt]{article}
 \input{defaults}
+\input{defaults-drawing}
 
 \title{University of Minnesota Physics GWE Solutions}
 \author{%
@@ -10,6 +11,8 @@
 	\usepackage{empheq}
 % Multicolumn pages
 	\usepackage{multicol}
+% Circuit drawing
+	\usepackage[american,siunitx]{circuitikz}
 
 % Generate an index of all the GWE problems
 \usepackage{makeidx}
@@ -43,6 +46,8 @@
 %% Convenience macros
 	% Script L used for Lagrangian
 	\newcommand{\sL}{\ensuremath{\mathcal L}}
+	% Derivative shortcut
+	\newcommand{\dd}{\ensuremath{\,\mathrm{d}}}
 
 
 \begin{document}
@@ -74,6 +79,10 @@
 
 \section{Fall 2011 Part II}
 \input{2011fall_p2}
+\clearpage
+
+\section{Spring 2012 Part I}
+\input{2012spring_p1}
 \clearpage
 
 \section{Fall 2012 Part I}
