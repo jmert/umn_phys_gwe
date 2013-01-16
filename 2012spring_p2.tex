@@ -1,0 +1,218 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{1}
+\subsubsection{Question}
+% Keywords
+	\index{quantum!Expectation values}
+
+An electron in a hydrogen atom occupies a state:
+\begin{align*}
+	\ket{ψ} &= \sqrt{\frac 13}\ket{3,1,0,+} + \sqrt{\frac 23} \ket{2,1,1,-}
+\end{align*}
+where the properly normalized states are specified by the quantum numbers 
+$\ket{n,ℓ,m,±}$ and the $±$ specifies whether the spin is up or down.
+
+\makeatletter
+\newcommand{\interitemtext}[1]{%
+	\begin{list}{}
+		{
+			\itemindent=0mm\labelsep=0mm
+			\labelwidth=0mm\leftmargin=0mm
+			\addtolength{\leftmargin}{-\@totalleftmargin}
+		}
+		\item #1
+	\end{list}
+}
+\makeatother
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+	\item
+		What is the expectation value of the energy in terms of the ground
+		state energy?
+	\item
+		If you meausred the expectation values of the orbital momentum squared
+		$\expect{L²}$, the square of the spin $\expect{S²}$, and their
+		$z$-components $\expect{L_z}$ and $\expect{S_z}$, what would be the
+		result?
+	\item
+		Show that if you measure the position of the electron, the probability
+		density for finding it an an angle specified by $θ$ and $ϕ$
+		integrated over all values of $r$ is independent of $θ$ and $ϕ$. Note,
+		for this part you will need $Y_1^0 = \sqrt{3/4π}\cos θ$ and $Y_1^1 =
+		-\sqrt{3/8π} \sin θ \exp(iϕ)$. You do \emph{not}, however, need to
+		know the radial functions, only that they are properly normalized and
+		orthogonal to each other.
+	\item
+		List all additional possible states that are degenerate with the first
+		state in the linear combination above. Note: this part can be done
+		even if you have not answered the previous parts.
+\interitemtext{Assume now that the state $\ket{ψ}$, given above, is the 
+initial state of an electron in a hydrogen atom.}
+	\item
+		Write down the elctron's state as a function of time for all $t>0$.
+	\item
+		go through the results you obtained in parts (a) through (c) and
+		determine which of them are time independent.
+\end{enumerate}
+
+\subsubsection{Answer}
+\begin{enumerate}
+	\item
+		Calculate the energy by sandwhiching the Hamiltonian between the
+		wavefunction:
+		\begin{align*}
+			\expect{E} &= \braopket{ψ}{H}{ψ} \\
+			{} &= (\sqrt{\frac 13}\bra{3,1,0,+} + \sqrt{\frac 23}
+				\bra{2,1,1,-})H(\sqrt{\frac 13}\ket{3,1,0,+} + \sqrt{\frac 23}
+				\ket{2,1,1,-}) \\
+			\begin{split}
+			{} &= \frac 13 \braopket{3,1,0,+}{H}{3,1,0,+} + \frac{\sqrt{2}}{3}
+				\braopket{2,1,1,-}{H}{3,1,0,+} \\
+				&\quad + \frac{\sqrt{2}}{3} \braopket{3,1,0,+}{H}{2,1,1,-} + 
+				\frac 23 \braopket{2,1,1,-}{H}{2,1,1,-}
+			\end{split}\\
+		\intertext{For every term, the wavefunctions are eigenstates of the
+		Hamiltonian, so we extract the appropriate energy term from every
+		bra-ket sandwhich. Then the middle two terms integrate to zero since
+		states with different $n$ are orthogonal while the first and last terms
+		integrate to unity since they are properly normalized.}
+			\expect{E} &= \frac 13 E₃ + 0 + 0 + \frac 23 E₂ \\
+		\intertext{Each energy is related to the ground state energy by
+		$E_n = E₀/n²$, so}
+			{} &= \frac 13 \frac{E₀}{9} + \frac 23 \frac{E₀}{4}
+		\end{align*}
+		\begin{empheq}[box=\fbox]{align}
+			\expect{E} &= \frac{11}{54} E₀ ≈ \SI{-2.77}{\eV}
+		\end{empheq}
+	\item
+		For each of the other expectation values, the process is very
+		similar with an appropriate change for eigenvalues; specifically,
+		\begin{align*}
+			L²\ket{n,ℓ,m,±} &= ℓ(ℓ+1)ℏ²\ket{n,ℓ,m,±} \\
+			S²\ket{n,ℓ,m,±} &= \frac 12(\frac 12 + 1)ℏ²\ket{n,ℓ,m,±} \\
+			L_z\ket{n,ℓ,m,±} &= ℓℏ\ket{n,ℓ,m,±} \\
+			S_z\ket{n,ℓ,m,±} &= ±\frac 12 ℏ\ket{n,ℓ,m,±}
+		\end{align*}
+		The same restrictions that the middle terms integrate to zero because
+		of orthogonality and the first and last terms integrate to unity still
+		applies, so we can almost immediately conclude that
+		\begin{empheq}[box=\fbox]{align}
+			\expect{L²} &= 2ℏ² \\
+			\expect{S²} &= \frac{3ℏ²}{4} \\
+			\expect{L_z} &= \frac{2ℏ}{3} \\
+			\expect{S_z} &= -\frac{ℏ}{6}
+		\end{empheq}
+	\item
+		In the $\ket{r,θ,ϕ}$ basis,
+		\begin{align*}
+			\ket{3,1,0} &= R_{3,1}(r) Y_1^0(θ,ϕ) = R_{31}(r)
+				\sqrt{\frac{3}{4π}}\cos θ \\
+			\ket{2,1,1} &= R_{2,1}(r) Y_1^1(θ,ϕ) = -R_{21}(r)
+				\sqrt{\frac{3}{8π}} e^{iϕ} \sin θ \\
+		\end{align*}
+		This means that the probability density is
+		\begin{align*}
+			\braket{ψ}{ψ} &= \frac 13 \braket{3,1,0}{3,1,0} +
+				\frac{\sqrt{2}}{3} \braket{2,1,1}{3,1,0} +
+				\frac{\sqrt{2}}{3} \braket{3,1,0}{2,1,1} +
+				\frac 23 \braket{2,1,1}{2,1,1} \\
+			{} &= \frac{1}{4π}\cos² θ R_{31}²(r) - \frac{1}{π} \sin θ \cos θ
+				(e^{iϕ} + e^{-iϕ}) R_{21}(r) R_{31}(r) + \frac{1}{4π}
+				\sin² θ R_{21}²(r)
+		\end{align*}
+		Integrating over $r$,
+		\begin{align*}
+			\begin{split}
+				∫_0^∞ \braket{ψ}{ψ} \dd r &=
+					∫_0^∞ \frac{1}{4π}\cos² θ R_{31}²(r) -
+					\frac{1}{π} \sin θ\cos θ (e^{iϕ} + e^{-iϕ})
+					R_{21}(r)R_{31}(r)\\
+					&\quad + \frac{1}{4π} \sin² θ R_{21}²(r) \dd r
+			\end{split}\\
+		\intertext{Integrating over all $r$, we know that $R_{nℓ}R_{n'ℓ'}$
+		are orthonormal, so again the first and last terms' $R$ integrates to
+		unity and the middle term integrates to zero.}
+			{} &= \frac{1}{4π}(\cos² θ + \sin² θ)
+		\end{align*}
+		Therefore we find that the probability density is constant in $θ$ and
+		$ϕ$ when integrated over all $r$.
+		\begin{empheq}[box=\fbox]{align}
+			∫_0^∞ \braket{ψ}{ψ} \dd r &= \frac{1}{4π}
+		\end{empheq}
+	\item
+		The states degenerate with the first term in $ψ$ are all combinations
+		of allowed $ℓ$, $m$, and $±$: $n$ must remain at $n=3$ since it is the
+		$n$ quantum number which determines the energy of the state. The
+		angular momentum number $ℓ$ has to be in the range $[0, n-1]$, so there
+		are at least 3 cases.
+		\begin{align*}
+			\ket{3,0,m,±} \\
+			\ket{3,1,m,±} \\
+			\ket{3,2,m,±}
+		\end{align*}
+		Then for each $ℓ$, the projection $m$ can take a range of values
+		$m ∈ [-ℓ,ℓ]$ so using $\{...,-1,0,-1,...\}$ to denote a set of options,
+		\begin{align*}
+			\ket{3,0,m,±} &\rightarrow \ket{3,0,\{0\},±}
+				& \text{2 states} \\
+			\ket{3,1,m,±} &\rightarrow \ket{3,1,\{-1,0,1\},±}
+				& \text{6 states} \\
+			\ket{3,2,m,±} &\rightarrow \ket{3,2,\{-2,-1,0,1,2\},±}
+				& \text{10 states}
+		\end{align*}
+		\begin{center}
+			\framebox{In total, there are 18 degenerate states}
+		\end{center}
+	\item
+		To get the time evolution, we simply use the fact that for each basis
+		eigenstate, we can add the time evolution component
+		\begin{align*}
+			\exp (-\frac{iE_nt}{ℏ})
+		\end{align*}
+		to get (in terms of the ground state energy $E₀$)
+		\begin{empheq}[box=\fbox]{align}
+			\ket{ψ(t)} &= \sqrt{\frac 13}\ket{3,1,0,+} e^{-iE₀t/9ℏ} +
+				\sqrt{\frac 23} \ket{2,1,1,-} e^{-iE₀t/4ℏ}
+		\end{empheq}
+	\item
+		From Ehrenfest's Theorem, we can quickly find the answers to most of
+		the question without worrying about the wavefunction. Ehrenfest's
+		Theorem is
+		\begin{align*}
+			\frac{\dd}{\dd t}\expect{E} &= -\frac iℏ \expect{[Ω,H]} +
+				\expect{\frac{∂Ω}{∂t}}
+		\end{align*}
+		None of the operators $L²$, $S²$, $L_z$, and $S_z$ are explicit in
+		time, so the second term on the right can be dropped. Then because
+		each of these operators commute with the Hamiltonian, the first term
+		on the right is also dropped. Therefore, the expectation values are
+		constant in time, so
+		\begin{empheq}[box=\fbox]{align}
+			\expect{L²} &\quad\text{Time independent} \\
+			\expect{S²} &\quad\text{Time independent} \\
+			\expect{L_z} &\quad\text{Time independent} \\
+			\expect{S_z} &\quad\text{Time independent}
+		\end{empheq}
+		For the probabilty density, we return to the integral in part (c) and
+		insert the appropriate exponential terms. The first and last terms'
+		exponentials cancel each other out, leaving
+		\begin{align*}
+			\begin{split}
+				∫_0^∞ \braket{ψ}{ψ} \dd r &=
+					∫_0^∞ \frac{1}{4π}\cos² θ R_{31}²(r) -
+					\frac{1}{π} \sin θ\cos θ (e^{iϕ} + e^{-iϕ})
+					R_{21}(r)R_{31}(r) \\
+					&\quad · \left[ \exp(\frac{i(E₂-E₃)t}{ℏ}) + 
+					\exp(-\frac{i(E₂-E₃)t}{ℏ}) \right] \\
+					&\quad + \frac{1}{4π} \sin² θ R_{21}²(r) \dd r
+			\end{split}
+		\end{align*}
+		The integral is unaffected by the new time factors, though, so
+		integrating over $r$, the middle term still goes to zero and we're
+		left with the same result previously of $1/4π$, therefore
+		\begin{empheq}[box=\fbox]{align}
+			∫_0^∞ \braket{ψ}{ψ} \dd r &\quad\text{Time independent}
+		\end{empheq}		
+\end{enumerate}

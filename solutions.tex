@@ -161,7 +161,21 @@
 	\newcommand{\sL}{\ensuremath{\mathcal L}}
 	% Derivative shortcut
 	\newcommand{\dd}{\ensuremath{\,\mathrm{d}}}
-
+	% Quantum bra-ket notation can be annoying, so make that more convenient
+	% to type
+	% · First, have macros for lone bras and kets
+	\newcommand{\bra}[1]{\ensuremath{\left\langle #1 \right|}}
+	\newcommand{\ket}[1]{\ensuremath{\left| #1 \right\rangle}}
+	% · Next, make a bra-ket pair so that all three < | > are the same sizes
+	\newcommand{\braket}[2]{\ensuremath{%
+		\left\langle #1 \middle| #2 \right\rangle%
+	}}
+	% · Also have one that can sandwich an operator expression in the middle.
+	\newcommand{\braopket}[3]{\ensuremath{%
+		\left\langle #1 \middle| #2 \middle| #3 \right\rangle
+	}}
+	% · Finally, expectation values
+	\newcommand{\expect}[1]{\ensuremath{\left\langle #1 \right\rangle}}
 
 \begin{document}
 
@@ -194,6 +208,9 @@
 
 \springexam{2012}{1}
 \input{2012spring_p1}
+
+\springexam{2012}{2}
+\input{2012spring_p2}
 
 \fallexam{2012}{1}
 \input{2012fall_p1}
