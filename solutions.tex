@@ -88,32 +88,40 @@
 		\renewcommand{\gwe@examname}{#1}%
 		\renewcommand{\gwe@examsymb}{#2}%
 		\setcounter{gwe@year}{#3}%
-		\setcounter{gwe@part}{#4}
-		\setcounter{gwe@prob}{0}
+		\setcounter{gwe@part}{#4}%
+		\setcounter{gwe@prob}{0}%
 		{%
 			% Generate the title for the command
 			\def\gwe@title{%
 				\gwe@examname{}~\arabic{gwe@year} Part~\Roman{gwe@part}%
-			}
+			}%
 			% Update the marks so that the headers show which exam we're in,
 			% and add ourselves to the TOC
-			\markboth{\scshape\gwe@title}{}
-			\addcontentsline{toc}{section}{\gwe@title}
+			\markboth{\scshape\gwe@title}{}%
+			\addcontentsline{toc}{section}{\gwe@title}%
 			% Set the style for the title
 			\sffamily\Huge\bfseries%
 			% Each exam starts on its own page and is its own paragraph
 			\clearpage%
 			\hspace{-0.25in}\gwe@title\par%
 			% Generate some space below the title
-			\vspace*{0.75em}
+			\vspace*{0.75em}%
+			% Automatically generate a label for every exam of the form
+			%     exam:SYYYYP
+			% where S is either S or F for spring and fall, respectively,
+			%       YYYY is the exam year
+			%       P is the part number (I or II)
+			\edef\@currentlabelname{\gwe@title}%
+			\edef\gwe@label{\gwe@examsymb\arabic{gwe@year}\Roman{gwe@part}}%
+			\label{exam:\gwe@label}%
 		}%
 		% Signal to \problem that it is the first after a new exam
-		\gwe@firstproblemtrue
-	}
+		\gwe@firstproblemtrue%
+	}%
 	% Next, add convenience wrappers to quickly define the Spring and Fall
 	% exams.
-	\newcommand{\fallexam}[2]{\gwe@exam{Fall}{F}{#1}{#2}}
-	\newcommand{\springexam}[2]{\gwe@exam{Spring}{F}{#1}{#2}}
+	\newcommand{\fallexam}[2]{\gwe@exam{Fall}{F}{#1}{#2}}%
+	\newcommand{\springexam}[2]{\gwe@exam{Spring}{F}{#1}{#2}}%
 	% Finally, provide a heading for each problem
 	\newcommand{\problem}[1]{%
 		\setcounter{gwe@prob}{#1}%
@@ -129,9 +137,9 @@
 				\gwe@title%
 			}%
 			% Add the problem to the TOC
-			\addcontentsline{toc}{subsection}{\gwe@title}
+			\addcontentsline{toc}{subsection}{\gwe@title}%
 			% Set the style for the title and print it out
-			\sffamily\Large\bfseries
+			\sffamily\Large\bfseries%
 			% New problems also start on their own pages if it's not the first
 			\ifgwe@firstproblem%
 				\global\gwe@firstproblemfalse%
@@ -146,8 +154,9 @@
 			%       P is the part number (I or II)
 			%       NN is the problem number including leading zero
 			\edef\nn{\ifnum\value{gwe@prob}<10 0\fi\thegwe@prob}%
-			\edef\@currentlabelname{\gwe@fulltitle}
-			\label{prob:\gwe@examsymb\arabic{gwe@year}\Roman{gwe@part}\nn}
+			\edef\@currentlabelname{\gwe@fulltitle}%
+			\edef\gwe@label{\gwe@examsymb\arabic{gwe@year}\Roman{gwe@part}\nn}%
+			\label{prob:\gwe@label}%
 		}%
 	}
 	% Set the equation numbering system:

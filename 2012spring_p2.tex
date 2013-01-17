@@ -10,7 +10,7 @@ An electron in a hydrogen atom occupies a state:
 \begin{align*}
 	\ket{ψ} &= \sqrt{\frac 13}\ket{3,1,0,+} + \sqrt{\frac 23} \ket{2,1,1,-}
 \end{align*}
-where the properly normalized states are specified by the quantum numbers 
+where the properly normalized states are specified by the quantum numbers
 $\ket{n,ℓ,m,±}$ and the $±$ specifies whether the spin is up or down.
 
 \makeatletter
@@ -48,7 +48,7 @@ $\ket{n,ℓ,m,±}$ and the $±$ specifies whether the spin is up or down.
 		List all additional possible states that are degenerate with the first
 		state in the linear combination above. Note: this part can be done
 		even if you have not answered the previous parts.
-\interitemtext{Assume now that the state $\ket{ψ}$, given above, is the 
+\interitemtext{Assume now that the state $\ket{ψ}$, given above, is the
 initial state of an electron in a hydrogen atom.}
 	\item
 		Write down the elctron's state as a function of time for all $t>0$.
@@ -70,7 +70,7 @@ initial state of an electron in a hydrogen atom.}
 			\begin{split}
 			{} &= \frac 13 \braopket{3,1,0,+}{H}{3,1,0,+} + \frac{\sqrt{2}}{3}
 				\braopket{2,1,1,-}{H}{3,1,0,+} \\
-				&\quad + \frac{\sqrt{2}}{3} \braopket{3,1,0,+}{H}{2,1,1,-} + 
+				&\quad + \frac{\sqrt{2}}{3} \braopket{3,1,0,+}{H}{2,1,1,-} +
 				\frac 23 \braopket{2,1,1,-}{H}{2,1,1,-}
 			\end{split}\\
 		\intertext{For every term, the wavefunctions are eigenstates of the
@@ -204,7 +204,7 @@ initial state of an electron in a hydrogen atom.}
 					∫_0^∞ \frac{1}{4π}\cos² θ R_{31}²(r) -
 					\frac{1}{π} \sin θ\cos θ (e^{iϕ} + e^{-iϕ})
 					R_{21}(r)R_{31}(r) \\
-					&\quad · \left[ \exp(\frac{i(E₂-E₃)t}{ℏ}) + 
+					&\quad · \left[ \exp(\frac{i(E₂-E₃)t}{ℏ}) +
 					\exp(-\frac{i(E₂-E₃)t}{ℏ}) \right] \\
 					&\quad + \frac{1}{4π} \sin² θ R_{21}²(r) \dd r
 			\end{split}
@@ -214,5 +214,171 @@ initial state of an electron in a hydrogen atom.}
 		left with the same result previously of $1/4π$, therefore
 		\begin{empheq}[box=\fbox]{align}
 			∫_0^∞ \braket{ψ}{ψ} \dd r &\quad\text{Time independent}
-		\end{empheq}		
+		\end{empheq}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{5}
+\subsubsection{Question}
+% Keywords
+	\index{thermodynamics!Magnetic moments}
+	\index{statistical mechanics!Magnetic moments}
+
+Coinsider $N$ non-interacting, stationary particles, each with magnetic
+moment $\vec μ$ at temperature $T$ in a uniform external magnetic field
+$\vec B$. Their energy is $-\vec μ · \vec B$. Calculate the partition
+function $Z$, the internal energy, and magnetization for two distinct cases
+(a and b below):
+\begin{enumerate}
+	\item
+		The mgnetic moment of each particle can be oriented only parallel or
+		anti-parallel to the magnetic field.
+	\item
+		The magnetic moment of each particle can rotate freely.
+	\item
+		Show that, in both cases, the total magnetization $\vec M$ can be
+		written as a derivative of the parition function.
+	\item
+		In each case, calculate the fluctuations of magnetization
+		$\expect{(Δ\vec u)²}$.
+\end{enumerate}
+
+\subsubsection{Question}
+\begin{enumerate}
+	\item
+		Begin by constructing the partition function for a single particle.
+		Since there are only two energy states, the sum is simply over the
+		two Boltzmann factors:
+		\begin{align*}
+			Z₁ &= e^{μB/kT} + e^{-μB/kT}
+		\end{align*}
+		This can be simplified using trigonometric identities to
+		\begin{align*}
+			Z₁ &= 2 \cosh (\frac{μB}{kT})
+		\end{align*}
+		For fixed site particles, the partition function for $N$ particles
+		is simply $Z = Z^N$, so
+		\begin{empheq}[box=\fbox]{align}
+			Z &= 2^N \cosh^N (\frac{μB}{kT})
+		\end{empheq}
+		The total energy can be calculated either by finding the expectation
+		energy per particle $\expect{ε}$ and multiplying by $N$ using the
+		Boltzmann factors directly, or by using the thermodynamic identity
+		\begin{align*}
+			 U &= kT² \frac{∂\ln Z}{∂T}
+		\end{align*}
+		Doing so,
+		\begin{align*}
+			U &= kT² \frac{N}{2\cosh(\frac{μB}{kT})} · 2\sinh(\frac{μB}{kT})
+				· (-\frac{μB}{kT²})
+		\end{align*}
+		\begin{empheq}[box=\fbox]{align}
+			U &= -NμB \tanh (\frac{μB}{kT})
+		\end{empheq}
+		To find the Magnetization, we use the Boltzmann factors directly since
+		we don't know a thermodynamic relation. Let
+		\begin{align*}
+			\expect{m} &= \sum_μ μ \frac{e^{-ε_μ/kT}}{Z₁} \\
+			{} &= \frac{1}{Z₁}( -μ e^{μB/kT} + μ e^{-μB/kT} ) \\
+			{} &= -μ \frac{2\sinh(\frac{μB}{kT})}{2\cosh(\frac{μB}{kT})}
+		\end{align*}
+		So knowing that $\expect{M} = N\expect{m}$,
+		\begin{empheq}[box=\fbox]{align}
+			\expect{M} &= -Nμ \tanh(\frac{μB}{kT})
+		\end{empheq}
+	\item
+		In the continuous case, the sum needs to be changed into an integral,
+		remembering to keep $Z$ unitless. This requires dividing by the volume
+		of the energy state, which in this case is $μB$. (Justification: think
+		of the energy vector $\vec μ · \vec B = μB\cos θ$ on the unit circle
+		of length $μB$. From geometry, the unitless $\dd θ$ is related to
+		$\dd ε$ by the factor $μB$.)
+		\begin{align*}
+			Z₁ &= ∫_{-μB}^{μB} e^{-ε/kT} \frac{\dd ε}{μB} \\
+		\intertext{Letting $u = -\frac{ε}{kT}$,}
+			Z₁ &= -\frac{kT}{μB} ∫_{μB/kT}^{-μB/kT} e^u \dd u \\
+			{} &= 2 \frac{kT}{μB} \sinh (\frac{μB}{kT})
+		\end{align*}
+		Therefore the partition function for all $N$ particles is
+		\begin{empheq}[box=\fbox]{align}
+			Z &= (\frac{2kT}{μB})^N \sinh^N(\frac{μB}{kT})
+		\end{empheq}
+		The total energy is found in the same way as the previous case, giving
+		\begin{empheq}[box=\fbox]{align}
+			U &= NkT - NμB \coth (\frac{μB}{kT})
+		\end{empheq}
+		For the magnetization, we also calculate the expectation value from
+		integrating the probability distribution, again making sure to keep
+		the correct units. This time we work with the relevant projection of
+		the magnetic moment $m = μ\cos θ$ so that when combined with the energy
+		$ε = -μB\cos θ$, the magnetization per particle in each state is $m =
+		-ε/B$.
+		\begin{align*}
+			\expect{m} &= ∫_{-μB}^{μB} -\frac{ε}{B} \frac{e^{-ε/kT}}{Z₁}
+				\frac{\dd ε}{μB} \\
+			{} &= \frac{1}{μZ₁}(\frac{kT}{B})² ∫_{-μB/kT}^{μB/kT} e^u \dd u \\
+			{} &= \frac{kT}{B} \frac{2\sinh(\frac{μB}{kT})}
+				{2\sinh(\frac{μB}{kT})} \\
+			{} &= \frac{kT}{B}
+		\end{align*}
+		The total magnetization $\expect{M} = N\expect{m}$ is
+		\begin{empheq}[box=\fbox]{align}
+			\expect{M} &= \frac{NkT}{B}
+		\end{empheq}
+		Note that this is to be expected for the continuous case limit which
+		corresponds to the classical limit. We'd expect the total energy to
+		be related to the magnetization by $U = MB$. Rearranging the terms,
+		\begin{align*}
+			\expect{M}B &= NkT \\
+			U &= NkT
+		\end{align*}
+		which is the expected result from the equipartition theorem for a
+		stationary particle with two rotational degrees of freedom.
+	\item
+		Proving the discrete case only differs from the continuous case
+		proof by the obvious substitutions, so only the continuous case will
+		be presented here. Begin by writing the first starting integral
+		from the previous problem
+		\begin{align*}
+			\expect{m} &= ∫_{-μB}^{μB} m \frac{e^{-ε/kT}}{Z₁}
+				\frac{\dd ε}{μB}
+		\end{align*}
+		The $Z₁$ can be pulled outside the integral since it is a constant.
+		Then note that per our definition $ε = -mB$, it follows that
+		\begin{align*}
+			\frac{∂ε}{∂B} &= -m
+		\end{align*}
+		We identify the integral above to be a result of using the chain
+		rule, so we undo that and get
+		\begin{align*}
+			\expect{m} &= \frac{1}{Z₁} ∫_{-μB}^{μB} \frac{∂}{∂B}( -e^{-ε/kT} )
+				\frac{\dd ε}{μB}
+		\intertext{Changing the order of integration and differentiation,}
+			{} &= \frac{1}{Z₁} \frac{∂}{∂B}( ∫_{-μB}^{μB} -e^{-ε/kT}
+				\frac{\dd ε}{μB} )
+		\intertext{The term within the brackets is simply the definition of
+		the partition function, so}
+			\expect{m} &= \frac{1}{Z₁} \frac{∂Z₁}{∂B} = \frac{∂\ln Z₁}{∂B}
+		\end{align*}
+		To then get the total magnetization $\expect{M}$, we use several
+		properties of differentiation and logarithms:
+		\begin{align*}
+			\expect{M} &= N\expect{m} \\
+			{} &= N \frac{∂\ln Z₁}{∂B} \\
+			{} &= \frac{∂ (N\ln Z₁)}{∂B} \\
+			{} &= \frac{∂\ln (Z₁)^N}{∂B}
+		\end{align*}
+		Giving us the final expression
+		\begin{empheq}[box=\fbox]{align}
+			\expect{M} &= \frac{∂\ln Z}{∂B}
+		\end{empheq}
+	\item
+		Using the definition
+		\begin{align*}
+			\expect{(Δμ)²} &= \expect{μ²} - \expect{μ}²
+		\end{align*}
+		we already know $\expect{μ}²$ for both cases from the previous
+		problems, so we must only calculate $\expect{μ²}$.
 \end{enumerate}
