@@ -1,0 +1,343 @@
+\documentclass[avery5371,grid]{flashcards}
+\usepackage{etoolbox}
+
+\usepackage{amsmath,amssymb}
+%% Make some amsmath fixes
+%
+% As of 2012-12-23 (XeTeX version 3.1415926-2.4-0.9998, TeXLive 2012), XeTeX
+% does not properly handle parentheses when using the TeX primitives
+%   \overwithdelims
+%   \atopwithdelims
+%   \abovewithdelims
+% Because of this, the macro \binom which internally uses these these commands
+% creates a binomial with the wrong size of brackets (too small). Patch around
+% this issue by using \left( and \right) around a bracket-less binomial.
+% LuaTeX doesn't seem to suffer from this.
+	\renewrobustcmd{\binom} [2]{\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)}
+	\renewcommand  {\dbinom}[2]{\left(\genfrac{}{}{0pt}{0}{#1}{#2}\right)}
+	\renewcommand  {\tbinom}[2]{\left(\genfrac{}{}{0pt}{1}{#1}{#2}\right)}
+	
+\usepackage[
+	exponent-product     = \cdot,
+	load-configurations  = abbreviations,
+	inter-unit-separator = {}\cdot{},
+	per-mode             = symbol-or-fraction,
+	separate-uncertainty = true,
+	math-micro           = \text{µ},
+	text-micro           = µ
+]{siunitx}
+
+\XeTeXinputnormalization=1
+\usepackage{fontspec}
+\usepackage{unicode-math}
+	% Set font features which should be true for all fonts loaded by default
+	\defaultfontfeatures{
+		% Permit using TeX-style ligatures (i.e. --- for em-dash)
+		Ligatures = TeX
+	}
+
+	% Also allow math to input using Unicode by default
+	\usepackage{unicode-math}
+	% Use the XITS Math font by default
+	\setmathfont[
+			% Use italic fonts at all times
+			math-style = ISO,
+			bold-style = ISO,
+			% Force \epsilon,\varepsilon and \phi,\varphi match the unicode
+			% character ε,ϵ and φ,ϕ
+			vargreek-shape = unicode
+		]{XITS Math}
+	% Additionally, use an alternate stylistic set for caligraphic letters so
+	% that they are different from the script letters
+	\setmathfont[range={\mathcal,\mathbfcal},StylisticSet=1]{XITS Math}
+	% Finally, request that certain symbols be provided by Latin Modern
+	% Math instead of XITS Math since I think the LM ones looks much nicer.
+	\setmathfont[range={"220F}]{Latin Modern Math}	% Product
+	\setmathfont[range={"2210}]{Latin Modern Math}	% Coproduct
+	\setmathfont[range={"2211}]{Latin Modern Math}	% Summation
+
+	% Have the Linux Libertine family of fonts provide the default serif and
+	% sans-serif fonts
+	\setmainfont{Linux Libertine O}
+	\setsansfont{Linux Biolinum O}
+
+%% Make all parentheses stretchy
+%
+% By default, all parentheses are just normal parentheses in math mode. This
+% to me doesn't seem to make sense since I almost always want them to be
+% stretchy.
+%
+% Adapted from http://tex.stackexchange.com/questions/7359/how-to-make-a-real-backslash-escape-character/7372#7372
+	% Start by defining a macro to quickly reset the default behavior if we
+	% decide that a given environment shouldn't use the active definition. We
+	% need the \edef so that the \the\mathcode is immediately expanded before
+	% we change things.
+	\edef\resetparens{%
+			\mathcode`(=\the\mathcode`(
+			\mathcode`)=\the\mathcode`)
+		}
+	% Now we actually do the magic like this:
+	%   1) Start a local group so that we can temporarily define a lowercase
+	%      tilde to be the left paranetheses and not affect anything later in
+	%      the document.
+	%      a) We use the tilde because it is already defined to be an active
+	%         character. This saves a step since to define a character to
+	%         execute a macro sequence, it first needs to be active. The
+	%         \lowercase command does for us since the lowercase tilde (i.e.
+	%         paren) is made to have the same category code as its uppercase
+	%         counterpart.
+	%   2) \lccode assigns the lowercase tilde to be the left paren
+	%   3) Then use \lowercase to cause us to define the macro of active left
+	%      paren (without explicitly changing category codes).
+	%      a) The \endgroup ends the local group we just started, but not
+	%         before lowercase has already learned how to convert the tilde
+	%         This lets the next \edef to be at the current global scope,
+	%         avoiding use of \global
+	%   4) Then define the active left paren to be the sequence \left( so that
+	%      we invoke the stretchy code
+	%   5) Finally change the mathcode of the left paren to be active within
+	%      math environments, meaning we don't have to worry about the
+	%      character being active in normal text mode.
+	\begingroup%
+			\lccode`~=`(%
+			\lowercase{\endgroup\edef~}{\left(}
+		\mathcode`(="8000
+	% Do it again for the right paren
+	\begingroup%
+			\lccode`~=`)%
+			\lowercase{\endgroup\edef~}{\right)}
+		\mathcode`)="8000
+	% Finally, this change of math codes breaks some changes the amsmath
+	% package makes to the definitions of \left( and \right), so we fix this
+	% by patching the internal amsmath macro which breaks to be prepended with
+	% the \resetparens command
+	\makeatletter
+		\preto{\resetMathstrut@}{\resetparens}
+		\makeatother
+
+\usepackage[bookmarks,pagebackref=false]{hyperref}
+	\usepackage[all]{hypcap}
+	\hypersetup{
+		,bookmarksopen  = false%
+		,pdfborder      = false%
+		,colorlinks     = false%
+	%	,colorlinks     = true%
+	%	,urlcolor       = blue%
+	%	,linkcolor      = black%
+	%	,citecolor      = black%
+	%	,filecolor      = black%
+		,setpagesize    = false%
+		,pdfstartview   = {XYZ null null 1}%
+		,pdfprintscaling= None%
+		,pdfpagelayout  = TwoPageLeft%
+		,verbose        = true%
+	}
+	\hypersetup{ pdfauthor = {Justin Willmert} }%
+
+\begin{document}
+
+\cardfrontstyle{headings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Electrodynamics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cardfrontfoot{Electrodynamics}
+
+\begin{flashcard}{Maxwell's Equations (Guassian)}
+	\begin{align*}
+		\vec ∇ · \vec D &= 4πρ_f
+			& \vec ∇ × \vec E &= -\frac 1c \frac{∂\vec B}{∂t}
+		\\
+		\vec ∇ · \vec B &= 0
+			& \vec ∇ × \vec H &= \frac 1c ( \frac{∂\vec D}{∂t} + 4π \vec{J_f} )
+	\end{align*}
+\end{flashcard}
+
+\begin{flashcard}{Maxwell's Equations (SI)}
+	\begin{align*}
+		\vec ∇ · \vec D &= ρ_f
+			& \vec ∇ × \vec E &= -\frac{∂\vec B}{∂t}
+		\\
+		\vec ∇ · \vec B &= 0
+			& \vec ∇ × \vec H &= \frac{∂\vec D}{∂t} + \vec{J_f}
+	\end{align*}
+\end{flashcard}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% General Math
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cardfrontfoot{General Math}
+
+\begin{flashcard}{Gaussian Integrals}
+	\begin{align*}
+		I_n(x) = \!\! ∫_0^∞ \!\! x^n e^{-ax²} dx &=
+			\begin{cases}
+				\displaystyle
+				\frac{1}{2} \sqrt{\frac{π}{a^{m+1}}} \frac{(2m)!}{4^m m!}
+					& \text{$n = 2m$} \\
+				\displaystyle
+				\frac{1}{2} \frac{1}{a^{k+1}} k!
+					& \text{$n = 2k + 1$}
+			\end{cases}
+	\end{align*}
+	\vspace{-\baselineskip}
+	\begin{align*}
+		I₀(x) &= \frac 12 \sqrt{\frac π a}
+			& I₁(x) &= \frac 1 {2a} \\
+		I₂(x) &= \frac{1}{4a} \sqrt{\frac π a}
+			& I₃(x) &= \frac 1 {2a²}
+	\end{align*}
+\end{flashcard}
+
+\begin{flashcard}{Stirling's Approximation}
+	\[ n! ≈ (\frac ne)^n \sqrt{2πn} \] \\
+	\[ \ln n! ≈ n\ln n - n \]
+\end{flashcard}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% THERMODYNAMICS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cardfrontfoot{Thermodynamics}
+
+\begin{flashcard}{Adiabatic Process}
+	Also called \emph{isentropic}. $ΔS = 0$ in the process. Use the
+	thermodynamic identity at constant volume and a systems internal energy
+	equation to derive properties about the entropy of the system.
+\end{flashcard}
+
+\begin{flashcard}{Adiabatic Properties of Ideal Gas}
+	\begin{align*}
+		T₁ {V₁}^{γ-1} &= \text{const} \\
+		{T₁}^{γ/(1-γ)} P₁ &= \text{const} \\
+		P₁ {V₁}^γ &= \text{const}
+	\end{align*}
+\end{flashcard}
+
+\begin{flashcard}{Bose-Einstein Distribution}
+	\[ f(ε) = \frac{1}{e^{(ε-μ)/k_B T} - 1} \]
+\end{flashcard}
+
+\begin{flashcard}{Carnot Efficiency}
+	\[ η = 1 - \frac{T_l}{T_h} \]
+\end{flashcard}
+
+\begin{flashcard}{Carnot Cycle}
+	Characterized by alternating stages of isothermal and isentropic expansion
+	and compression. Work done is
+	\[ W = (T_h - T_l)(S_H - S_L) \]
+	where $T_l$ and $T_h$ are the low and high temperatures reached during the
+	cycle and $S_L$ and $S_H$ are the low and high entropies of the working
+	substance.
+\end{flashcard}
+
+\begin{flashcard}{Equipartition Theorem}
+	A classical gas's energy gains $\frac 12 k_B T$ for each degree of
+	freedom. An ideal monotomic gas has
+		$ U = \frac 32 k_B T $
+	from three translational degrees of freedom, while an ideal diatomic gas
+	has
+		$ U = \frac 52 k_B T $
+	from an additional two degrees of rotational freedom.
+\end{flashcard}
+
+\begin{flashcard}{Fermi Gasses}
+	\begin{enumerate}
+		\item High kinetic energy
+		\item Low heat capacity
+		\item Low magnetic susceptibility
+		\item Low interparticle collision rate
+		\item High pressure
+	\end{enumerate}
+\end{flashcard}
+
+\begin{flashcard}{Fermi-Dirac Distribution}
+	\[ f(ε) = \frac{1}{e^{(ε-μ)/k_B T} + 1} \]
+\end{flashcard}
+
+\begin{flashcard}{Gibbs Free Energy}
+	\[ G ≡ U + PV - TS \]
+\end{flashcard}
+
+\begin{flashcard}{Helmholtz Free Energy}
+	Acts as effective energy in isothermal changes of volume.
+	\[ F ≡ U - TS \]
+	\[ dF = dU - S dT \]
+\end{flashcard}
+
+\begin{flashcard}{Ideal Gasses}
+	\[ PV = nRT \]
+	\[ PV = N k_B T \]
+	\[ Z_N = \frac{Z₁^N}{N!} \]	
+\end{flashcard}
+
+\begin{flashcard}{Ideal Gas (RMS Average Speed)}
+	Derived by considering a single particle. For translation in three
+	dimensions $KE = \frac 32 k_B T$  and also $KE = \frac 12 mv²$ so that
+	when combined,
+	\begin{align*}
+		\frac 12 mv² &= \frac 32 k_B T \\
+		v &= \sqrt{\frac{3 k_B T}{m}}
+	\end{align*}
+\end{flashcard}
+
+\begin{flashcard}{Ideal Monoatomic Gas}
+	\begin{align*}
+		C_V &= \frac 32 Nk_B
+			& C_P &= \frac 52 Nk_B \\
+		U &= \frac 32 Nk_B T
+			& γ &= \frac 53
+	\end{align*}
+\end{flashcard}
+
+\begin{flashcard}{Maxwell Speed Distribution}
+	\[ f(v) = \sqrt{ (\frac{m}{2π k_B T})³ } 4πv² \exp(-\frac{mv²}{2k_B T}) \]
+	\begin{align*}
+		v_\mathrm{rms} &= \sqrt{\frac{3k_B T}{m}}
+			& ⟨v⟩ &= \sqrt{\frac{8k_B T}{πm}}
+	\end{align*}
+\end{flashcard}
+
+\begin{flashcard}{Partition Function}
+	\[ Z = \sum_n e^{-ε_n / k_B T} \]
+	\begin{align*}
+		U &= k_B T² \frac{∂ \ln Z}{∂T}
+			& F = -k_B T \ln Z
+	\end{align*}
+\end{flashcard}
+
+\begin{flashcard}{Photon Gasses}
+	\[ U = σ_b VT⁴ \]
+	\[ P = \frac 13 σ_b VT⁴ \]
+	\[ μ = 0 \]
+\end{flashcard}
+
+\begin{flashcard}{Planck Distribution function}
+	\[ ⟨s⟩ = \frac{1}{e^{ℏω/k_B T} - 1} \]
+\end{flashcard}
+
+\begin{flashcard}{Planck Spectral Density (frequency)}
+	\[ u_ω = \frac{ℏ}{π²c³} \frac{ω³}{e^{ℏω/k_B T} - 1} \]
+\end{flashcard}
+
+\begin{flashcard}{Radiant Energy Flux (blackbody)}
+	\[ J_u = \frac{π²{k_B}⁴}{60ℏ³c²} T⁴ \]
+	\[ J_u = \frac{c}{4} u \]
+\end{flashcard}
+
+\begin{flashcard}{Stefan-Boltzmann Law (energy density)}
+	\begin{align*}
+		\frac{U}{V} = u &= \frac{π²{k_B}³}{15ℏ³c³} T⁴ \\
+			u &= σ_B T⁴
+	\end{align*}
+	\[ u = \frac{4}{c} J_u \]
+\end{flashcard}
+
+\begin{flashcard}{Thermodynamic Identity}
+	\[ dU = T dS - P dV + μ dN \]
+	\begin{align*}
+		C_V &= (\frac{∂U}{∂T})_V = T (\frac{∂S}{∂T})_V
+			& P = -(\frac{∂U}{∂V})_S
+	\end{align*}
+\end{flashcard}
+
+\end{document}
