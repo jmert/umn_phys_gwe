@@ -1,0 +1,59 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 8
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{8}
+\subsubsection{Question}
+% Keywords
+	\index{thermodynamics!Nitrogen velocity}
+
+Estimate (a) the average speed (in \si{\m\per\s}) and (b) the mean free path
+(in \si{\m}) of a nitrogen molecule in this room.
+
+\subsubsection{Answer}
+
+\begin{enumerate}[(a)]
+	\item
+		We relate the kinetic energy of an $N_2$ molecule with the thermal
+		energy by the equipartition theorem. Since there are 3 translational
+		degrees of freedom,
+		\begin{align*}
+			\frac 12 mv² &= \frac 32 k_B T \\
+			v &= \sqrt{\frac{3 k_B T}{m}}
+		\end{align*}
+		The mass of the molecule is twice that of a single nitrogen atom
+		which is itself about 14 proton masses. Therefore
+		\begin{empheq}[box=\fbox]{align}
+			v &≈ \sqrt{\frac{3 k_B T}{28 m_p}} \\
+			v &≈ \SI{515}{\m\per\s}
+		\end{empheq}
+	\item
+		Two particles collide if they come within $2r₀$ of each other where
+		$r₀$ is the typical radius of the particle. For diatomic nitrogen,
+		we assume $r₀ ≈ 2a₀$ where $a₀$ is the Bohr radius. Then in the time
+		$τ$ that the particle is moving at velocity $⟨v⟩$, the particle can
+		collide with any other particle within the swept-out volume
+		\begin{align*}
+			\mathcal V &= π(2r₀)² ⋅ ⟨v⟩τ
+		\end{align*}
+		Since there are $n$ particles per unit volume, there are $\mathcal N$
+		atoms to collide with:
+		\begin{align*}
+			\mathcal N &= n\mathcal V = 4πn{r₀}² ⟨v⟩τ
+		\end{align*}
+		On average then, there are $\mathcal N$ collisions per length $⟨v⟩τ$
+		traversed, or in its reciprocal form, the mean free path $λ$ is
+		\begin{align*}
+			λ &= \frac{1}{4πn{r₀}²}
+		\end{align*}
+		To estimate the particle density, consider the ideal gas law
+		$PV=Nk_BT$. We can assume atmospheric pressure at room temperature,
+		so the density is
+		\begin{align*}
+			n &= \frac N V = \frac{P}{k_B T}
+		\end{align*}
+		Putting it all together,
+		\begin{empheq}[box=\fbox]{align}
+			λ &≈ \frac{k_B T}{4π{r₀}²P} \\
+			{}&≈ \SI{2.90e-7}{\m}
+		\end{empheq}
+\end{enumerate}
