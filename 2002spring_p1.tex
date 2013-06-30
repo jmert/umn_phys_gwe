@@ -1,4 +1,45 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{3}
+\subsubsection{Question}
+% Keywords
+	\index{thermodynamics!Mean free path of helium}
+
+The cross-section for collisions between helium atoms is about \SI{e-16}{
+\cm\squared}. Estimate the mean free path of helium atoms in helium gas at
+atmospheric pressure and temperature.
+
+\subsubsection{Answer}
+
+Consider the path traced out by a helium atom as it travels a path length $L$,
+colliding with other helium atoms along the way. Given that the cross section
+of helium is $σ$, than we can estimate the volume that contains probable
+interactions with our atom of interest as $\mathcal V = σL$. To get the number
+of interactions, we make use of the fact that we're treating the gas as an
+ideal gas. From the ideal gas law,
+\begin{align*}
+    PV &= NkT
+\intertext{so that solving for the number density}
+    n = \frac{N}{V} &= \frac{P}{k_B T}
+\end{align*}
+Combining the density with the volume, we get the number of other [point
+particle] helium atoms that are contained within the given helium atom's
+interaction volume. If we then assume that the atom interacts with all other
+atoms within the volume, and that the collisions are spaced out equally in
+time, we just have to normalize the value by the trajectory's path length to
+get an estimate of the mean free path of helium in a helium gas:
+\begin{align*}
+    λ &= \frac{n\mathcal V}{L} = \frac{σP}{k_B T}
+\end{align*}
+Plugging in $σ = \SI{e-16}{\cm\squared}$, $P = \SI{1.013e5}{\Pa}$, $k_B =
+\SI{1.38e-23}{\J\per\K}$, and $T = \SI{298}{\K}$, we get
+\begin{empheq}[box=\fbox]{align}
+    λ &= \SI{4.06}{\micro\m}
+\end{empheq}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Problem 9
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \problem{9}
