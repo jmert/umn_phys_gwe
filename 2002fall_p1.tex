@@ -1,0 +1,72 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 10
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{10}
+\subsubsection{Question}
+% Keywords
+	\index{thermodynamics!Freezing ice}
+
+Ice on a pond is \SI{10}{\cm} thick and the water temperature just below the
+ice is \SI{0}{\celsius}. If the air temperature is \SI{-20}{\celsius}, by
+how much will the ice thickness increase in 1 hour? Assuming that the air
+temperature stays the same over a long period, how will the ice thickness
+increase with time? Comment on any approximation that you make in your
+calculation.
+
+Density of ice ${}= \SI{0.9}{\g\per\cm\cubed}$
+
+Thermal conductivity of ice ${}= \SI{0.0005}{\cal\per\cm\per\s\per\celsius}$
+
+Latent heat of fusion of water ${}= \SI{80}{\cal\per\g}$
+
+\subsubsection{Answer}
+
+Since the thermal heat flow is a one dimensional problem, immediately
+consider everything with respect to a small area element with its normal
+perpendicular to the ice-water interface $dA$. Then we want to know how much
+ice is generated on the surface of the ice. This small ice element's mass is
+simply
+\begin{align*}
+    dm &= ρ\,dA\,dz
+\end{align*}
+where $dz$ is the thickness of the new ice layer. To generate this ice, the
+latent heat of fusion must be conducted away, so the energy released is,
+\begin{align*}
+    dE_f &= L_f\,dm \\
+    {} &= L_f ρ \,dA\,dz
+\end{align*}
+
+The energy flow is through the ice, and we expect this to increase with the
+temperature differential across the ice sheet, suggesting that the thermal
+conductivity $κ$ be multiplied by the temperature difference $ΔT$. Furthermore,
+the ice will decrease the rate of heat flow as it becomes thicker, so the
+quantity should also be divided by the thickness $z$. This gives
+\begin{align*}
+    \frac{κ ΔT}{z} &= \left[ \si{\cal\per\cm\squared\per\s}
+	\right]
+\end{align*}
+This energy is flowing through a surface element $dA$, giving the power flow
+due to heat as
+\begin{align*}
+    \frac{κΔT\,dA}{z} &= \left[ \si{\cal\per\s} \right]
+\end{align*}
+
+This power can be matched in units with the energy released from the ice
+calculated above by taking the time derivative of $dE_f$, so equating the two
+we have
+\begin{align*}
+    L_f ρ \,dA\frac{dz}{dt} &= \frac{κΔT\,dA}{z} \\
+    ∫_{z₀}^{z₀+δz} z\,dz &= ∫_0^t \frac{κΔT}{L_f ρ}\,dt \\
+    2z₀ δz + (δz)² &= \frac{κΔT}{L_f ρ}t
+\end{align*}
+Solving for the length the ice grows $δz$,
+\begin{align*}
+    δz &= \frac{-2z₀ ± \sqrt{4{z₀}² - 4(\frac{κΔT}{L_f ρ})t} }{2} \\
+    δz &= z₀(1 ± \sqrt{1 - \frac{κΔT}{L_f ρ {z₀}²} t})
+\end{align*}
+The two roots give solutions $δz = \{ \SI{0.0501}{\cm}, \SI{19.950}{\cm} \}$.
+Since the second root is unrealistic, we know that the solution must then be
+\begin{empheq}[box=\fbox]{align}
+	δz &= \SI{0.0501}{\cm} \quad\text{in an hour}
+\end{empheq}
+
