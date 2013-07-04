@@ -1,4 +1,107 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{5}
+\subsubsection{Question}
+% Keywords
+	\index{mechanics!Elastic collision on spring-connected blocks}
+	\index{Lagrangian!Elastic collision on spring-connected blocks}
+
+Blocks of mass $m$ and $2m$ are free to slide without friction on a
+horizontal wire. They are connected by a massless spring of equilibrium
+length $L$ and force constant $k$. A projectile of mass $m$ is fired with
+velocity $v$ into the block with mass $m$ and sticks to it. If the blocks
+are initially at rest, what is the maximum displacement between them in the
+subsequent motion?
+
+\subsubsection{Answer}
+
+Take time $t=0$ to be the moment the projectile collides with the mass $m$,
+and let the subsequent transfer of momentum be instantaneous. In this case,
+the initial conditions of the problem are then:
+\begin{align*}
+    x₁(0) &= 0			& \dot x₁(0) &= u \\
+    x₂(0) &= L			& \dot x₂(0) &= 0
+\end{align*}
+where $u$ is the initial velocity of the combined project-mass system. We get
+$u$ from conservation of mometum:
+\begin{align*}
+    2mu &= mv + 0 \\
+    u &= \frac 12 v
+\end{align*}
+
+Now solve the mechanics problem using the Lagrangian approach. Both masses have
+kinetic energy, and the spring stores potential energy, so
+\begin{align*}
+    T &= m{\dot x₁}² + m{\dot x₂}² \\
+    V &= \frac 12 m (x₂ - x₁)² \\
+    L &= m ({\dot x₁}² + {\dot x₂}²) - \frac 12 k({x₁}² + {x₂}² + 2x₁x₂)
+\end{align*}
+Setting up the differential equation, we get
+\begin{align*}
+    \frac{∂L}{∂x₁} &= -kx₁ + kx₂	& \frac{d}{dt}
+	\left[\frac{∂L}{∂\dot x₁}\right] &= 2m \ddot x₁ \\
+    \frac{∂L}{∂x₂} &=  kx₁ - kx₂	& \frac{d}{dt}
+	\left[\frac{∂L}{∂\dot x₁}\right] &= 2m \ddot x₂ \\
+\end{align*}
+Leading to the system of equations where $ω² = k/2m$,
+\begin{align*}
+    \begin{bmatrix} \ddot x₁ \\ \ddot x₂ \end{bmatrix} &=
+	\begin{bmatrix} -ω² & ω² \\ ω² & -ω² \end{bmatrix}
+	\begin{bmatrix} x₁ \\ x₂ \end{bmatrix}
+\end{align*}
+Solving the eigensystem, we find the eigenfrequencies to be $λ = \{0, -2ω²\}$.
+Letting ${ω'}² = 2ω²$, the eigenfunction equations are then
+\begin{align*}
+    \ddot ψ₁ &= 0
+	& \rightarrow&&
+	ψ₁ &= A₁t + B₁ \\
+    \ddot ψ₂ &= -2ω² ψ₂
+	& \rightarrow&&
+	ψ₂ &= A₂\cos(ω't) + B₂\sin(ω't)
+\end{align*}
+From the eigenvectors, we express the solutions of $x₁$ and $x₂$ in terms of
+$ψ₁$ and $ψ₂$:
+\begin{align*}
+    \begin{bmatrix} x₁ \\ x₂ \end{bmatrix} &=
+	\begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}
+	\begin{bmatrix} ψ₁ \\ ψ₂ \end{bmatrix}
+\end{align*}
+\begin{align*}
+    x₁ &= A₁t + B₁ + A₂\cos(ω't) + B₂\sin(ω't) \\
+    x₂ &= A₁t + B₁ - A₂\cos(ω't) - B₂\sin(ω't)
+\end{align*}
+Applying the boundary conditions, we find that
+\begin{align*}
+    x₁(t) &= \frac 14 vt + \frac 12 L - \frac 12 L\cos(ω't) +
+	\frac{v}{4ω'}\sin(ω't) \\
+    x₂(t) &= \frac 14 vt + \frac 12 L + \frac 12 L\cos(ω't) -
+	\frac{v}{4ω'}\sin(ω't)
+\end{align*}
+The distance $ℓ(t) = x₂(t) - x₁(t)$ between the two masses maximizes when
+\begin{align*}
+    \frac{dℓ}{dt} = 0 &= \frac{d}{dt} \left[ L\cos(ω't) -
+	\frac{v}{2ω'}\sin(ω't) \right] \\
+    t &= -\frac{1}{ω'} \arctan (\frac{v}{2Lω'})
+\end{align*}
+Plugging back into the function $ℓ(t)$,
+\begin{align*}
+    ℓ &= L\cos \left[ -\arctan (\frac{v}{2Lω'}) \right] - \frac{v}{2ω'}
+	\sin \left[ -\arctan (\frac{v}{2Lω'}) \right] \\
+    ℓ &= L \frac{2Lω'}{\sqrt{v² + 4L² {ω'}²}} + \frac{v}{2ω'}
+	\frac{v}{\sqrt{v² + 4L² {ω'}²}} \\
+    ℓ &= \frac{\sqrt{v² + 4L² {ω'}²}}{2ω'}
+\end{align*}
+Finally, substituting back in $ω' = \sqrt{2k/m}$ and simplifying, we get the
+final solution that maximum distance between the two masses is
+\begin{empheq}[box=\fbox]{align}
+    ℓ &= \sqrt{L² + \frac{\frac 12 mv²}{8k}}
+\end{empheq}
+which agrees qualitatively with the fact that a larger spring constant should
+stiffen the system and decrease the maximum displacement, while launching the
+projectile with a greater velocity would increase it.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Problem 10
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \problem{10}
