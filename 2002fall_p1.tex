@@ -107,6 +107,7 @@ projectile with a greater velocity would increase it.
 \problem{10}
 \subsubsection{Question}
 % Keywords
+	\index{dimensional analysis!Freezing ice}
 	\index{thermodynamics!Freezing ice}
 
 Ice on a pond is \SI{10}{\cm} thick and the water temperature just below the
@@ -170,6 +171,68 @@ Solving for the length the ice grows $δz$,
 The two roots give solutions $δz = \{ \SI{0.0501}{\cm}, \SI{19.950}{\cm} \}$.
 Since the second root is unrealistic, we know that the solution must then be
 \begin{empheq}[box=\fbox]{align}
-	δz &= \SI{0.0501}{\cm} \quad\text{in an hour}
+    δz &= \SI{0.0501}{\cm} \quad\text{in an hour}
 \end{empheq}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 11
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{11}
+\subsubsection{Question}
+% Keywords
+	\index{statistical mechanics!Carbon-14 dating}
+
+Carbon-14 is produced by cosmic rays interacting with the nitrogen in the
+Earth's atmosphere. It is eventaully incorporated into all living things,
+and since it has a half-life of \SI{5730(40)}{\year}, it is useful for
+dating archaeological specimens up to several tens of thousands of years
+old. The radioactivity of a particular specimen of wood containing \SI{3}{\g}
+of carbon was measured with a counter whose efficiency was
+\SI{18}{\percent}; a count rate of \SI{12.8(1)}{\minute^{-1}} was measured.
+It is known that in \SI{1}{\g} of living wood, there are
+\SI{16.1}{\minute^{-1}} radioactive carbon-14 decays. What is the age of
+this specimen, and its uncertainity? (Where errors are not quoted, they can
+be assumed to be negligible).
+
+\subsubsection{Answer}
+The rate $N$ after a given time is given by the exponential decay formula
+\begin{align*}
+    N(t) &+= N₀ e^{-t/τ}
+\end{align*}
+Since we have the half-life $t_{1/2}$ instead of the decay constant $τ$, we
+use the relation $t_{1/2} = τ\ln 2$ to simplify the expression instead to
+\begin{align*}
+    N(t) &= N₀ (\frac 12)^{t/t_{1/2}}
+\end{align*}
+
+The counter use has an efficiency of $ε = 0.18$, so the measured counting
+rate $N_m$ must be corrected for that. Furthermore, the sample has a mass of
+\SI{3}{\g} whereas we know the rate for a one gram sample, so we also
+normalize the count rate by the mass of the sample. Plugging this all into
+the exponential decay function above gives
+\begin{align*}
+    \frac{N_m}{3ε} &= N₀ (\frac 12)^{t/t_{1/2}}
+\end{align*}
+The only unknown left in the equation is the time, so solving for it,
+\begin{align*}
+    t &= t_{1/2} \log_{1/2} (\frac{N_m}{3εN₀}) \\
+    t &= t_{1/2} \frac{\ln (\frac{N_m}{3εN₀})}{\ln 2} \\
+    t &= \frac{t_{1/2}}{\ln 2} \ln (\frac{N_m}{3εN₀})
+\end{align*}
+
+To find the uncertainty, we note that only the quantities $N_m$ and $t_{1/2}$
+have non-negligible uncertainties, so we propagate the errors only over
+these two terms:
+\begin{align*}
+    {σ_t}² &= (-\frac{t_{1/2}}{N_m \ln 2})² {σ_{N_m}}² +
+	(\frac{1}{\ln 2} \ln(\frac{3εN₀}{N_m}))² {σ_{t_{1/2}}}² \\
+    σ_t &= \frac{t_{1/2}}{\ln 2} \sqrt{ (\frac{σ_{N_m}}{N_m})² +
+	(\frac{σ_{t_{1/2}}}{t_{1/2}})² \left[ \ln(\frac{3εN₀}{N_m}) \right]²}
+\end{align*}
+Plugging in all the numbers, we get $t = \SI{4248.8435}{\year}$ and $σ_t =
+\SI{161.717}{\year}$. The given uncertainties have a single significant digit,
+so adding an extra significant figure to the uncertainity and matching decimal
+places in the answer, we conclude that the sample has an age of
+\begin{empheq}[box=\fbox]{align}
+    t &= \SI{4250(160)}{\year}
+\end{empheq}
