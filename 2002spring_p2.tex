@@ -1,0 +1,124 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{2}
+\subsubsection{Question}
+% Keywords
+	\index{thermodynamics!Zipper partition function}
+    \index{statistical mechanics!Zipper partition function}
+
+A zipper has $N$ links; each link has a closed state with zero energy and an
+open state with energy $ε$. We require, however, that the zipper can only
+unzip from the left end, and that the link number $s$ can only open if all
+links to the left (i.e.\ $1, 2, \ldots s-1$) are already open.
+\begin{enumerate}[a.]
+    \item
+        Find an explicit expression for the partition function by doing the
+        appropriate summation.
+    \item
+        In the limit $ε≫k_B T$ find the average number of open links. This
+        model is a very simplified model of the unwinding of two-stranded
+        DNA molecules.
+\end{enumerate}
+
+\subsubsection{Answer}
+
+\begin{enumerate}[a.]
+    \item
+        Create the partion function by induction; start by assuming there is
+        only a single link. Then the partition function is a simple two-state
+        system:
+        \begin{align*}
+            Z₁ &= e^0 + e^{-ε/k_BT} = 1 + e^{-ε/k_BT}
+        \end{align*}
+        Adding a second link,
+        \begin{align*}
+            Z₂ &= \underbrace{e^{0+0}}_{\text{both closed}} +
+                \underbrace{e^{(-ε+0)/k_BT}}_{\text{1 open, 1 closed}} +
+                \underbrace{e^{(-ε-ε)/k_BT}}_{\text{both open}}
+            \\
+            {} &= 1 + e^{-ε/k_BT} + e^{-2ε/k_BT}
+        \end{align*}
+        Following, for three links:
+        \begin{align*}
+            Z₃ &= \underbrace{e^{0+0+0}}_{\text{all closed}} +
+                \underbrace{e^{(-ε+0+0)/k_BT}}_{\text{1 open, 2 closed}} +
+                \underbrace{e^{(-ε-ε+0)/k_BT}}_{\text{2 open, 1 closed}} +
+                \underbrace{e^{(-ε-ε-ε)/k_BT}}_{\text{all open}}
+            \\
+            {} &= 1 + e^{-ε/k_BT} + e^{-2ε/k_BT} + e^{-3ε/k_BT}
+        \end{align*}
+        By induction, we see that the maximum coefficient in the series of
+        exponential factors is just the number of links, so by induction we
+        conclude that
+        \begin{align*}
+            Z &= \sum_{s=0}^{N} e^{-sε/k_BT}
+        \end{align*}
+        Applying the results of a finite geometric series, the closed-form
+        solution for the partition function of the links is
+        \begin{align}
+            \boxed{
+            Z = \frac{1 - e^{-(N+1)ε/k_BT}}{1 - e^{-ε/k_BT}}
+            }
+        \end{align}
+    \item
+        To get the average number of open links, we use the standard
+        procedure for finding expectation values.
+        \begin{align*}
+            \expect{s} &= \frac{1}{Z} \sum_{s=0}^N s e^{-sε/k_BT}
+        \end{align*}
+        By making use of differentiation under the summation trick, we can
+        find the closed-form solution:
+        \begin{align*}
+            \expect{s} &= \frac{1}{Z} \sum_{s=0}^N
+                \frac{d}{d(\frac{ε}{k_BT})} \Big[ -e^{-sε/k_BT} \Big] \\
+            {} &= -\frac{1}{Z} \frac{∂}{∂(\frac{ε}{k_BT})}
+                \sum_{s=0}^N e^{-sε/k_BT} \\
+        \intertext{
+        Noting that the summation is the same as above,
+        }
+            \expect{s} &= -\frac{1}{Z} \frac{∂Z}{∂(\frac{ε}{k_BT})}
+        \end{align*}
+        First considering just the derivative part:
+        \begin{align*}
+            \frac{∂Z}{∂(\frac{ε}{k_BT})} &=
+                \frac{(N+1)e^{-(N+1)ε/k_BT}}{1 - e^{-ε/k_BT}} -
+                \frac{1 - e^{-(N+1)ε/k_BT}}{(1 - e^{-ε/k_BT})²} e^{-ε/k_BT}
+        \intertext{
+        which when combined with the factor $-1/Z$ simplifies to
+        }
+            -\frac{1}{Z} \frac{∂Z}{∂(\frac{ε}{k_BT})} &=
+                -(N+1)\frac{e^{-(N+1)ε/k_BT}}{1 - e^{-(N+1)ε/k_BT}} +
+                \frac{e^{-ε/k_BT}}{1 - e^{-ε/k_BT}}
+            \\
+            -\frac{1}{Z} \frac{∂Z}{∂(\frac{ε}{k_BT})} &=
+                \frac{1}{e^{ε/k_BT} - 1} - \frac{N+1}{e^{(N+1)ε/k_BT} - 1}
+        \end{align*}
+        Therefore the analytic solution is
+        \begin{align}
+            \boxed{
+            \expect{s} = \frac{1}{e^{ε/k_BT}-1} - \frac{N+1}{e^{(N+1)ε/k_BT}-1}
+            }
+        \end{align}
+        In the limit that $ε≫k_BT$, though, the exponentials in the denominator
+        are very large in comparison to 1, so we ignore the unity factors
+        and make the approximation that
+        \begin{align*}
+            \expect{s} &= e^{-ε/k_BT} - (N+1)e^{-(N+1)ε/k_BT}
+        \intertext{
+        Collecting like terms,
+        }
+            {} &= \left[1 - (N+1)e^{-Nε/k_BT} \right] e^{-ε/k_BT}
+        \intertext{
+            The second term in the brackets approximate zero, so
+        }
+            {} &= e^{-ε/k_BT}
+        \end{align*}
+        Therefore in the low temperature limit where the thermal energy is
+        much less than the energy of the open state,
+        \begin{align}
+            \boxed{
+            \expect{s} = e^{-ε/k_BT}
+            }
+        \end{align}
+\end{enumerate}
