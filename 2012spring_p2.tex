@@ -83,9 +83,11 @@ initial state of an electron in a hydrogen atom.}
 		$E_n = E₀/n²$, so}
 			{} &= \frac 13 \frac{E₀}{9} + \frac 23 \frac{E₀}{4}
 		\end{align*}
-		\begin{empheq}[box=\fbox]{align}
-			\expect{E} &= \frac{11}{54} E₀ ≈ \SI{-2.77}{\eV}
-		\end{empheq}
+		\begin{align}
+			\boxed{
+			\expect{E} = \frac{11}{54} E₀ ≈ \SI{-2.77}{\eV}
+			}
+		\end{align}
 	\item
 		For each of the other expectation values, the process is very
 		similar with an appropriate change for eigenvalues; specifically,
@@ -98,12 +100,12 @@ initial state of an electron in a hydrogen atom.}
 		The same restrictions that the middle terms integrate to zero because
 		of orthogonality and the first and last terms integrate to unity still
 		applies, so we can almost immediately conclude that
-		\begin{empheq}[box=\fbox]{align}
-			\expect{L²} &= 2ℏ² \\
-			\expect{S²} &= \frac{3ℏ²}{4} \\
-			\expect{L_z} &= \frac{2ℏ}{3} \\
-			\expect{S_z} &= -\frac{ℏ}{6}
-		\end{empheq}
+		\begin{align}
+			\boxed{\expect{L²} = 2ℏ²} \\
+			\boxed{\expect{S²} = \frac{3ℏ²}{4}} \\
+			\boxed{\expect{L_z} = \frac{2ℏ}{3}} \\
+			\boxed{\expect{S_z} = -\frac{ℏ}{6}}
+		\end{align}
 	\item
 		In the $\ket{r,θ,ϕ}$ basis,
 		\begin{align*}
@@ -138,9 +140,11 @@ initial state of an electron in a hydrogen atom.}
 		\end{align*}
 		Therefore we find that the probability density is constant in $θ$ and
 		$ϕ$ when integrated over all $r$.
-		\begin{empheq}[box=\fbox]{align}
-			∫_0^∞ \braket{ψ}{ψ} \dd r &= \frac{1}{4π}
-		\end{empheq}
+		\begin{align}
+			\boxed{
+			∫_0^∞ \braket{ψ}{ψ} \dd r = \frac{1}{4π}
+			}
+		\end{align}
 	\item
 		The states degenerate with the first term in $ψ$ are all combinations
 		of allowed $ℓ$, $m$, and $±$: $n$ must remain at $n=3$ since it is the
@@ -172,10 +176,12 @@ initial state of an electron in a hydrogen atom.}
 			\exp (-\frac{iE_nt}{ℏ})
 		\end{align*}
 		to get (in terms of the ground state energy $E₀$)
-		\begin{empheq}[box=\fbox]{align}
-			\ket{ψ(t)} &= \sqrt{\frac 13}\ket{3,1,0,+} e^{-iE₀t/9ℏ} +
+		\begin{align}
+			\boxed{
+			\ket{ψ(t)} = \sqrt{\frac 13}\ket{3,1,0,+} e^{-iE₀t/9ℏ} +
 				\sqrt{\frac 23} \ket{2,1,1,-} e^{-iE₀t/4ℏ}
-		\end{empheq}
+			}
+		\end{align}
 	\item
 		From Ehrenfest's Theorem, we can quickly find the answers to most of
 		the question without worrying about the wavefunction. Ehrenfest's
@@ -189,12 +195,12 @@ initial state of an electron in a hydrogen atom.}
 		each of these operators commute with the Hamiltonian, the first term
 		on the right is also dropped. Therefore, the expectation values are
 		constant in time, so
-		\begin{empheq}[box=\fbox]{align}
-			\expect{L²} &\quad\text{Time independent} \\
-			\expect{S²} &\quad\text{Time independent} \\
-			\expect{L_z} &\quad\text{Time independent} \\
-			\expect{S_z} &\quad\text{Time independent}
-		\end{empheq}
+		\begin{align}
+			\boxed{\expect{L²} \quad\text{Time independent}} \\
+			\boxed{\expect{S²} \quad\text{Time independent}} \\
+			\boxed{\expect{L_z} \quad\text{Time independent}} \\
+			\boxed{\expect{S_z} \quad\text{Time independent}}
+		\end{align}
 		For the probabilty density, we return to the integral in part (c) and
 		insert the appropriate exponential terms. The first and last terms'
 		exponentials cancel each other out, leaving
@@ -212,9 +218,11 @@ initial state of an electron in a hydrogen atom.}
 		The integral is unaffected by the new time factors, though, so
 		integrating over $r$, the middle term still goes to zero and we're
 		left with the same result previously of $1/4π$, therefore
-		\begin{empheq}[box=\fbox]{align}
-			∫_0^∞ \braket{ψ}{ψ} \dd r &\quad\text{Time independent}
-		\end{empheq}
+		\begin{align}
+			\boxed{
+			∫_0^∞ \braket{ψ}{ψ} \dd r \quad\text{Time independent}
+			}
+		\end{align}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -260,9 +268,11 @@ function $Z$, the internal energy, and magnetization for two distinct cases
 		\end{align*}
 		For fixed site particles, the partition function for $N$ particles
 		is simply $Z = Z^N$, so
-		\begin{empheq}[box=\fbox]{align}
-			Z &= 2^N \cosh^N (\frac{μB}{kT})
-		\end{empheq}
+		\begin{align}
+			\boxed{
+			Z = 2^N \cosh^N (\frac{μB}{kT})
+			}
+		\end{align}
 		The total energy can be calculated either by finding the expectation
 		energy per particle $\expect{ε}$ and multiplying by $N$ using the
 		Boltzmann factors directly, or by using the thermodynamic identity
@@ -274,9 +284,11 @@ function $Z$, the internal energy, and magnetization for two distinct cases
 			U &= kT² \frac{N}{2\cosh(\frac{μB}{kT})} · 2\sinh(\frac{μB}{kT})
 				· (-\frac{μB}{kT²})
 		\end{align*}
-		\begin{empheq}[box=\fbox]{align}
-			U &= -NμB \tanh (\frac{μB}{kT})
-		\end{empheq}
+		\begin{align}
+			\boxed{
+			U = -NμB \tanh (\frac{μB}{kT})
+			}
+		\end{align}
 		To find the Magnetization, we use the Boltzmann factors directly since
 		we don't know a thermodynamic relation. Let
 		\begin{align*}
@@ -285,9 +297,11 @@ function $Z$, the internal energy, and magnetization for two distinct cases
 			{} &= -μ \frac{2\sinh(\frac{μB}{kT})}{2\cosh(\frac{μB}{kT})}
 		\end{align*}
 		So knowing that $\expect{M} = N\expect{m}$,
-		\begin{empheq}[box=\fbox]{align}
-			\expect{M} &= -Nμ \tanh(\frac{μB}{kT})
-		\end{empheq}
+		\begin{align}
+			\boxed{
+			\expect{M} = -Nμ \tanh(\frac{μB}{kT})
+			}
+		\end{align}
 	\item
 		In the continuous case, the sum needs to be changed into an integral,
 		remembering to keep $Z$ unitless. This requires dividing by the volume
@@ -302,13 +316,17 @@ function $Z$, the internal energy, and magnetization for two distinct cases
 			{} &= 2 \frac{kT}{μB} \sinh (\frac{μB}{kT})
 		\end{align*}
 		Therefore the partition function for all $N$ particles is
-		\begin{empheq}[box=\fbox]{align}
-			Z &= (\frac{2kT}{μB})^N \sinh^N(\frac{μB}{kT})
-		\end{empheq}
+		\begin{align}
+			\boxed{
+			Z = (\frac{2kT}{μB})^N \sinh^N(\frac{μB}{kT})
+			}
+		\end{align}
 		The total energy is found in the same way as the previous case, giving
-		\begin{empheq}[box=\fbox]{align}
-			U &= NkT - NμB \coth (\frac{μB}{kT})
-		\end{empheq}
+		\begin{align}
+			\boxed{
+			U = NkT - NμB \coth (\frac{μB}{kT})
+			}
+		\end{align}
 		For the magnetization, we also calculate the expectation value from
 		integrating the probability distribution, again making sure to keep
 		the correct units. This time we work with the relevant projection of
@@ -324,9 +342,11 @@ function $Z$, the internal energy, and magnetization for two distinct cases
 			{} &= \frac{kT}{B}
 		\end{align*}
 		The total magnetization $\expect{M} = N\expect{m}$ is
-		\begin{empheq}[box=\fbox]{align}
-			\expect{M} &= \frac{NkT}{B}
-		\end{empheq}
+		\begin{align}
+			\boxed{
+			\expect{M} = \frac{NkT}{B}
+			}
+		\end{align}
 		Note that this is to be expected for the continuous case limit which
 		corresponds to the classical limit. We'd expect the total energy to
 		be related to the magnetization by $U = MB$. Rearranging the terms,
@@ -371,9 +391,11 @@ function $Z$, the internal energy, and magnetization for two distinct cases
 			{} &= \frac{∂\ln (Z₁)^N}{∂B}
 		\end{align*}
 		Giving us the final expression
-		\begin{empheq}[box=\fbox]{align}
-			\expect{M} &= \frac{∂\ln Z}{∂B}
-		\end{empheq}
+		\begin{align}
+			\boxed{
+			\expect{M} = \frac{∂\ln Z}{∂B}
+			}
+		\end{align}
 	\item
 		Using the definition
 		\begin{align*}

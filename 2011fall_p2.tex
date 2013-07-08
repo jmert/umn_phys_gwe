@@ -43,13 +43,17 @@ involving $\cos φ$ can be simply expanded as $\cos φ ≈ 1$, but the potential
 energy term must be expanded to second order so that $\cos φ ≈ 1 -
 \frac{1}{2}φ²$.
 
-\begin{empheq}[box=\fbox]{align}
-	\sL &= \frac{1}{2} (m₁ + m₂)\dot x² + \frac{1}{2} m₂ \left(
+\begin{align}
+	\boxed{
+	\sL = \frac{1}{2} (m₁ + m₂)\dot x² + \frac{1}{2} m₂ \left(
 		ℓ²\dot φ² + 2ℓ\dot φ\dot x\cos φ \right) + m₂gℓ\cos φ
+	}
 	\\
-	\sL &≈ \frac{1}{2} (m₁ + m₂)\dot x² + \frac{1}{2} m₂ \left(
+	\boxed{
+	\sL ≈ \frac{1}{2} (m₁ + m₂)\dot x² + \frac{1}{2} m₂ \left(
 		ℓ²\dot φ² + 2ℓ\dot φ\dot x \right) + m₂gℓ - \frac{1}{2}m₂gℓφ²
-\end{empheq}
+	}
+\end{align}
 
 \subsubsection{Answer (2)}
 Constructing the Euler-Lagrange equations for $x$ and $\dot x$:
@@ -78,10 +82,14 @@ and for $φ$ and $\dot φ$:
 \end{align}
 
 The equations of motion are:
-\begin{empheq}[box=\fbox]{align}
-	\ddot x + \frac{m₂}{m₁+m₂} ℓ \ddot φ &= 0 \\
-	\ddot φ + \frac{1}{ℓ}\ddot x + \frac{g}{ℓ}φ &= 0
-\end{empheq}
+\begin{align}
+	\boxed{
+	\ddot x + \frac{m₂}{m₁+m₂} ℓ \ddot φ = 0
+	} \\
+	\boxed{
+	\ddot φ + \frac{1}{ℓ}\ddot x + \frac{g}{ℓ}φ = 0
+	}
+\end{align}
 
 \subsubsection{Answer (3)}
 Solve for $\ddot x$ and substitute into the other differential equation
@@ -94,19 +102,21 @@ Solve for $\ddot x$ and substitute into the other differential equation
 \end{align}
 This is just the differential equation for a simple harmonic oscillator, so
 considering the given boundary conditions,
-\begin{empheq}[box=\fbox]{align}
-	\begin{split}
-		φ(t) ={}& φ₀\cos(ωt) \\
-		{}&\text{where } ω² = \frac{g}{ℓ}\frac{m₁+m₂}{m₁}
-	\end{split}
-\end{empheq}
+\begin{align}
+	\boxed{
+	φ(t) = φ₀\cos(ωt)
+		\quad\quad\text{where } ω² = \frac{g}{ℓ}\frac{m₁+m₂}{m₁}
+	}
+\end{align}
 
 Then differentiating $φ(t)$ twice and substituting into the first equation,
 \begin{align*}
 	\ddot x &= ℓφ₀ω²\frac{m₂}{m₁+m₂}\cos(ωt)
 \end{align*}
 Then integrating twice and applying the boundary conditions,
-\begin{empheq}[box=\fbox]{align}
-	x(t) &= x₀ - \frac{g}{ω²}\frac{m₂}{m₁}\cos(ωt)
-\end{empheq}
+\begin{align}
+	\boxed{
+	x(t) = x₀ - \frac{g}{ω²}\frac{m₂}{m₁}\cos(ωt)
+	}
+\end{align}
 
