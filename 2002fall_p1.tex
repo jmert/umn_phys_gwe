@@ -1,4 +1,71 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{1}
+\subsubsection{Question}
+% Keywords
+	\index{mechanics!Water jet distance}
+
+A cylindrical bucket is placed on the ground and filled with water to a
+height of \SI{150}{\cm}. HOw high from the ground should one punch a hole in
+the side of the bucket to make a stream of water that strikes the ground at
+the greatest distance from the bucket? What is that distance?
+
+\subsubsection{Answer}
+
+To solve and optimize the kinematic equation to determine the maximum range
+of the water jet, we first need to determine what the velocity of the water
+exiting the hole is as a function of the hole's depth below the surface of the
+water. To do this, we make use of Bernoulli's principle.
+\begin{align*}
+    \frac{v²}{2} + gz + \frac{p₀}{ρ} = \text{constant}
+\end{align*}
+We begin by determining the value of the constant by evaluating the equation
+at the surface of the water where we know all the properties. The water is
+at the ambient air pressure, the height is given in the problem statement,
+and the velocity can be assumed to be zero in the limit that the hole leaks
+at a rate too slowly to change the height of the surface. Doing so,
+\begin{align*}
+    \text{constant} = gz₀ + \frac{p₀}{ρ}
+\end{align*}
+
+Then at some height $z'$ below the surface of the water, we puncture a hole.
+Again the water is moving into a body at atmospheric pressure, so we again
+use $p₀$. That leaves the velocity we're searching for remaining, so equating
+with the surface value,
+\begin{align*}
+    gz₀ + \frac{p₀}{ρ} &= \frac 12 v² + gz' + \frac{p₀}{ρ} \\
+    v² &= 2g(z₀ - z')
+\end{align*}
+
+Now we're ready to solve the kinematic equation. Begin as usual by finding the
+time of flight from the vertical components.
+\begin{align*}
+    0 = z' - \frac 12 gt²
+	\quad\quad\rightarrow\quad\quad
+    t = \sqrt{\frac{2z'}{g}}
+\end{align*}
+Then solving the horizontal equation:
+\begin{align*}
+    ℓ &= vt = 2\sqrt{z'(z₀ - z')}
+\end{align*}
+Then finding the extrema:
+\begin{align*}
+    \frac{dℓ}{dz'} &= 0 = \frac{z₀ - 2z'}{\sqrt{z'(z₀-z')}} \\
+    z' &= \frac 12 z₀
+\end{align*}
+That height that maximizes distance, and that distance, is
+\begin{align}
+    \boxed{
+    z' = \SI{75}{\cm}
+    }
+    &&
+    \boxed{
+    ℓ  = \SI{150}{\cm}
+    }
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Problem 5
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \problem{5}
