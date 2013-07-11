@@ -1,4 +1,55 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{1}
+\subsubsection{Question}
+% Keywords
+	\index{mechanics!Vehicle's resonant bouncing}
+
+A \SI{1000}{\kg} automobile has ground clearance of \SI{18}{\cm} but when
+loaded with an extra \SI{500}{\kg} from its 4 passengers it only clears the
+ground by \SI{12}{\cm}. The car's shock absorbers are ineffective. At what
+speed (in miles per hour) will the car bounce in resonance when it travels
+along a smooth road containing transverse tar patches every \SI{15}{\m}?
+Assume that the front and rear suspensions have the same bouncing frequency.
+
+\subsubsection{Answer}
+
+To find the natural resonant frequency of the vehicle, we use the two data
+points about it's clearance to obtain the spring constant $k$. We know that
+a constant force on a spring system does not change the dynamics, so it's
+only the change in mass and distance which are relevant. Therefore by simple
+equilibrium requirements,
+\begin{align*}
+    k ΔL &= mg \\
+    k &= \frac{mg}{ΔL}
+\end{align*}
+where $m$ and $M$ are the masses of the passengers and empty car respectively
+and $ΔL$ is the difference in the clearance between the unloaded and loaded
+car.
+
+Next, we know that the resonant frequency of a simple harmonic oscillator is
+given by $ω = \sqrt{k/m_\mathrm{tot}}$, so
+\begin{align*}
+    ω &= \sqrt{\frac{mg}{(M+m)ΔL}} \\
+    f &= \frac{1}{2π} \sqrt{\frac{mg}{(M+m)ΔL}}
+\end{align*}
+where the second line has converted from angular to linear frequency. We then
+simply relate that to how often the car hits a tar patch and solve for the
+velocity. Letting $v$ be the velocity of the car and $d$ be the separation
+distance between tar patches,
+\begin{align*}
+    \frac{v}{d} &= f \\
+    v &= \frac{d}{2π} \sqrt{\frac{mg}{(M+m)ΔL}}
+\end{align*}
+Plugging in the numbers,
+\begin{align}
+    \boxed{
+    v = \SI{17.62}{\m\per\s} = \SI{39.42}{mph}
+    }
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Problem 3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \problem{3}
