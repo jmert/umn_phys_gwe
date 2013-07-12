@@ -171,6 +171,46 @@ stiffen the system and decrease the maximum displacement, while launching the
 projectile with a greater velocity would increase it.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 7
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{7}
+\subsubsection{Question}
+% Keywords
+	\index{quantum mechanics!Average $x$ and $y$ momenta}
+
+In the state $ψ_{ℓ,m}$ with angular momentum $ℓ$ and its projection $m$,
+determine the average values ${l_x}²$ and ${l_y}²$.
+
+\subsubsection{Answer}
+
+Begin by noting that the angular momentum operators are related as,
+\begin{align*}
+    L² &= {L_x}² + {L_y}² + {L_z}²
+\end{align*}
+If we assume that the average $x$ and $y$ components will be equal based on
+symmetry where only the $z$ direction is identifiable, then we can let
+$L_x = L_y$ and rearrage the equation to get
+\begin{align*}
+    {L_x}² &= \frac 12 (L² - {L_z}²)
+\end{align*}
+
+The expectation value is then found by the standard method:
+\begin{align*}
+    \braopket{ψ_{ℓ,m}}{L_x²}{ψ_{ℓ,m}} &= \braopket{ψ_{ℓ,m}}
+	{\frac 12 (L² - {L_z}²)}{ψ_{ℓ,m}} \\
+    {} &= \frac 12 (\braopket{ψ_{ℓ,m}}{L²}{ψ_{ℓ,m}} -
+	\braopket{ψ_{ℓ,m}}{{L_z}²}{ψ_{ℓ,m}}) \\
+\intertext{Then because we know these quantum numbers}
+    \braopket{ψ_{ℓ,m}}{L_x²}{ψ_{ℓ,m}} &= \frac 12 (ℓ - m²)
+\end{align*}
+
+Therefore with both q ${ℓ_x}²$ and ${ℓ_y}²$ being assumed equation, we conclude
+that
+\begin{align}
+    \expect{{ℓ_x}²} = \expect{{ℓ_y}²} = \frac 12 (ℓ - m²)
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Problem 10
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \problem{10}
