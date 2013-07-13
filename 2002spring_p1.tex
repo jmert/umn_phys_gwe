@@ -92,6 +92,323 @@ Plugging in $σ = \SI{e-16}{\cm\squared}$, $P = \SI{1.013e5}{\Pa}$, $k_B =
     }
 \end{align}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 6
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{6}
+\subsubsection{Question}
+% Keywords
+	\index{mechanics!Tension in a supported rope}
+
+A single closed loop of chain with mass $m$ and length $L$ rests
+horizontally on a smooth frictionless con with half-angle $α$. What is the
+tension in the chain?
+
+\subsubsection{Answer}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+	\centering
+	\begin{tikzpicture}
+	    % Draw the triangle
+	    \draw (0,0) -- (0,6) -- (4,0) -- cycle;
+
+	    % Add the arc and label to the given angle
+	    \draw (0,5.2) arc (-90:-56.31:0.8) coordinate (angle end);
+	    \node [anchor=north west] at ($(0,5.2)!0.25!(angle end)$) {$α$};
+
+	    % Pic an arbitrary point along the surface of the cone to represent
+	    % the chain length element.
+	    \coordinate (point) at ($(0,6)!0.6!(4,0)$);
+	    \draw (point) node [fill,black,circle,inner sep=2pt] {};
+
+	    % Draw the gravitational vector from the point
+	    \draw [thick,->] (point) -- ++(0,-1)
+		node [anchor=north] {$\vec F_g$};
+
+	    % And the normal vector
+	    \path [name path=Ny proj] ($(point)+(0,1)$) -- ($(point)+(2,1)$);
+	    \path [name path=N vec] (point) -- ($(point)!1!90:(4,0)$);
+	    \draw [name intersections={of=Ny proj and N vec, by=x}]
+		[thick,->] (point) -- (x)
+		node [anchor=south west] {$\vec N$}
+		coordinate (norm end);
+
+	    % Draw projections of the normal vector
+	    \draw [thick,dashed] (point) -- ++(0,1) -- (norm end);
+	\end{tikzpicture}
+	\caption{Side View}
+    \end{subfigure}
+    \hfil
+    \begin{subfigure}[b]{0.49\textwidth}
+	\centering
+	\begin{tikzpicture}
+	    % Setup some coordinates:
+	    \def\alpha{20}
+	    \def\r{5cm}
+	    \def\dr{0.2cm}
+	    \def\Nr{1cm}
+	    
+	    \coordinate (center left)  at ($(90+\alpha:\r)$);
+	    \coordinate (center mid)   at (90:\r);
+	    \coordinate (center right) at ($(90-\alpha:\r)$);
+
+	    \coordinate (outer left)   at ($(90+\alpha:\r+\dr)$);
+	    \coordinate (outer mid)    at ($(90:\r+\dr)$);
+	    \coordinate (outer right)  at ($(90-\alpha:\r+\dr)$);
+
+	    \coordinate (inner left)   at ($(90+\alpha:\r-\dr)$);
+	    \coordinate (inner mid)    at ($(90:\r-\dr)$);
+	    \coordinate (inner right)  at ($(90-\alpha:\r-\dr)$);
+	    
+	    % Draw the radii
+	    \draw [dashed] (0,0) -- (center left);
+	    \draw [dashed] (0,0) -- (center mid);
+	    \draw [dashed] (0,0) -- (center right);
+	    % And label them
+	    \node [anchor=west] at ($(0,0)!0.5!(center mid)$)   {$r$};
+	    \node [anchor=west] at ($(0,0)!0.5!(center right)$) {$r$};
+
+	    % Draw the chain
+	    \draw [thick] (inner left) -- (outer left)
+		arc (90+\alpha:90-\alpha:\r+\dr) -- (inner right)
+		arc (90-\alpha:90+\alpha:\r-\dr);
+
+	    % Draw the normal force
+	    \draw (center mid) node [fill,black,circle,inner sep=2pt] {}
+		node [anchor=west] {$ds$}
+		[very thick,->] -- ++(0,\Nr)
+		node [anchor=south] {$\vec N_r$};
+
+	    % Finally, draw the tension vectors
+	    \path [name path=Nr] ($(center mid)+(-4,-\Nr)$) -- ++(8,0);
+	    \path [name path=Tl]
+		(center left) -- ($(center left)!2.5cm!-90:(0,0)$);
+	    \path [name path=Tr]
+		(center right) -- ($(center right)!2.5cm!90:(0,0)$);
+
+	    \draw [name intersections={of=Nr and Tl, by=x}]
+		[very thick,->] (center left) -- (x)
+		coordinate (left T end)
+		node [anchor=north east] {$\vec T$};
+	    \draw [name intersections={of=Nr and Tr, by=x}]
+		[very thick,->] (center right) -- (x)
+		coordinate (right T end)
+		node [anchor=north west] {$\vec T$};
+	    \draw [dashed] (left T end) -- (right T end);
+
+	    % Add the known angles
+	    \draw ($(0,0)!1cm!(center left)$) arc (90+\alpha:90-\alpha:1cm);
+	    \node [anchor=south] at (0,1) {$dφ$};
+	    \draw ($(left T end)!1cm!(center left)$) arc (\alpha:0:1cm)
+		node [anchor=north] {$\frac 12 dφ$};
+	\end{tikzpicture}
+	\caption{Top View}
+    \end{subfigure}
+\end{figure}
+
+Consider just a small element of the chain of arc length $ds$. It will have
+a corresponding mass $dm = λ\,ds$ where $λ = m/L$. Knowing that it's a statics
+problem, we can easily determine the normal force by balancing the vertical
+component with that of gravity.
+\begin{align*}
+    F_g &= N \sin α \\
+    N &= \frac{λg\,ds}{\sin α}
+\end{align*}
+This leaves the horizontal component of the normal force to be balanced with
+the tension within the chain.
+
+Now switching to the top view, we consider the short chain segment $ds$, shown
+above with an exagerated curvature. We note that the radial part of the
+normal force must be opposed by the sum of the radial components of the two
+tensions $T$ acting on the end of the chain segment. By geometry, we know that
+the angle with respect to the midpoint's tangent is one half the differential
+angle change $dφ = ds/r$. This means we balance the forces as
+\begin{align*}
+    2T\sin(\frac 12 dφ) &= N \cos α \\
+    2T\sin(\frac 12 dφ) &= λg\,ds \cot α
+\end{align*}
+By the small angle approximation, $\sin (\frac 12 dφ) ≈ \frac 12 dφ$, so after
+substituting for the fact that $dr = L/2π$ and $λ = M/L$,
+\begin{align}
+    \boxed{
+    T = \frac{Mg}{2π} \cot α
+    }
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 8
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{8}
+\subsubsection{Question}
+% Keywords
+	\index{electrodynamics!LR circuit}
+
+In the figure below, $\mathcal E = \SI{100}{\V}$, $R₁ = \SI{5}{\ohm}$,
+$R₂ = \SI{10}{\ohm}$, $R₃ = \SI{15}{\ohm}$, and $L = \SI{1.0}{\henry}$. Find
+the values of the currents $I₁$ and $I₂$
+\begin{enumerate}[a)]
+    \item immediately after the switch $S$ is closed,
+    \item a long time later,
+    \item immediately after switch $S$ is opened again,
+    \item and then how long must you wait, after the switch is opened, before
+	$I₂$ falls by a factor of $e$?
+\end{enumerate}
+
+\begin{center}
+    \vspace{\baselineskip}
+    \begin{circuitikz}
+	\draw
+	    (0,0)
+		to[battery,l_=$\mathcal E$]
+	    ++(0,3)
+		to[closing switch,l_=$S$]
+	    ++(3,0)
+		to[resistor,l_=$R₁$]
+	    ++(3,0)
+		coordinate (I2 I3 break)
+		to[resistor,l_=$R₃$,i=$I₃$]
+	    ++(3,0)
+		to[inductor,l_=$L$]
+	    ++(0,-3)
+		--
+	    ++(-3,0)
+		coordinate (I2 I3 combine)
+		to[short,i=$I₁$]
+	    (0,0)
+	;
+	\draw
+	    (I2 I3 break)
+		to[resistor,l_=$R₂$,i=$I₂$]
+	    (I2 I3 combine)
+	;
+    \end{circuitikz}
+    \vspace{\baselineskip}
+\end{center}
+
+\subsubsection{Answer}
+
+Start by applying Kirchoff's rules to the circuit: current is conserved and
+the voltage changes must sum to zero around each loop, so
+\begin{align}
+    I₁ &= I₂ + I₃
+	\label{eqn:sp2002p1.8:kirchoff_current} \\
+    0 &= \mathcal E - I₁R₁ - I₂R₂
+	\label{eqn:sp2002p1.8:kirchoff_leftloop} \\
+    0 &= -I₃R₃ - L \frac{dI₃}{dt} + I₂R₂
+	\label{eqn:sp2002p1.8:kirchoff_rightloop}
+\end{align}
+
+Since only (\ref{eqn:sp2002p1.8:kirchoff_rightloop}) has a term involving
+a time derivative, we choose to first solve for the current $I₃$. By solving
+for $I₂R₂$ in (\ref{eqn:sp2002p1.8:kirchoff_leftloop}) and substituting,
+we eliminate $I₂$ and have
+\begin{align}
+    0 &= -I₃R₃ - L\frac{dI₃}{dt} + \mathcal E - I₁R₁
+    \label{eqn:sp2002p1.8:right_noI2}
+\end{align}
+Furthermore, by also substituting the value of $I₂$ into
+(\ref{eqn:sp2002p1.8:kirchoff_current}):
+\begin{align}
+    I₁ &= \frac{\mathcal E}{R₁+R₂} + \frac{R₂}{R₁+R₂} I₃
+    \label{eqn:sp2002p1.8:current_noI2}
+\end{align}
+Then by combining (\ref{eqn:sp2002p1.8:right_noI2}) and
+(\ref{eqn:sp2002p1.8:current_noI2}), we can produce a differential equation
+for $I₃$:
+\begin{align*}
+    -I₃R₃ - L\frac{dI₃}{dt} + \mathcal E - \frac{R₁}{R₁+R₂}\mathcal E -
+	\frac{R₁R₂}{R₁+R₂}I₃ = 0
+    \\
+    -\underbrace{\frac{R₁R₂ + R₁R₃ + R₂R₃}{R₁+R₂}}_{R'}I₃ = L\frac{dI₃}{dt}
+	- \frac{R₂}{R₁+R₂} \mathcal E
+\end{align*}
+\begin{align}
+    \frac{dI₃}{dt} = -\frac{R'}{L} I₃ + \frac{1}{L}\frac{R₂}{R₁+R₂}\mathcal E
+	\label{eqn:sp2002p1.8:diffeq_I3}
+\end{align}
+Considering just the homogenous part, we easily solve it to find the standard
+exponential solution
+\begin{align*}
+    I_{3h}(t) &= I_{30} e^{-R't/L}
+\end{align*}
+And using the ansatz $I_{3p}(t) = At + B$ for the inhomogenous part,
+\begin{align*}
+    A &= -\frac{R'}{L}At - \frac{R'}{L}B + \frac 1L\frac{R₂}{R₁+R₂}\mathcal E
+    \\
+    A &= 0 \\
+    B &= \frac{1}{R'}\frac{R₂}{R₁+R₂}\mathcal E
+\end{align*}
+At $t = 0$, the inductor has no current passing through it, so when the switch
+is closed, the current must remain continuous. This gives us the initial
+condition necessary to solve for the unknown $I_{30}$, and after doing so
+and simplifying, the total solution is
+\begin{align}
+    I₃(t) &= \frac{\mathcal E}{R'}\frac{R₂}{R₁+R₂}(1 - e^{-R't/L})
+	\label{eqn:sp2002p1.8:I3_charging}
+\end{align}
+
+Then by substiting this solution back into (\ref{eqn:sp2002p1.8:current_noI2})
+we get the solution for $I₁$:
+\begin{align}
+    I₁(t) &= \frac{\mathcal E}{R₁+R₂} \left[ 1 + \frac{1}{R'}
+	\frac{{R₂}²}{R₁+R₂} (1 - e^{-R't/L}) \right]
+	\label{eqn:sp2002p1.8:I1_charging}
+\end{align}
+Finally, combining both inserting both solutions for $I₁$ and $I₃$ into
+(\ref{eqn:sp2002p1.8:kirchoff_current}), the solution for $I₂$ is
+\begin{align}
+    I₂(t) &= \frac{\mathcal E}{R₁+R₂} \left[ 1 - \frac{1}{R'}
+	\frac{R₁R₂}{R₁+R₂} (1 - e^{-R't/L}) \right]
+	\label{eqn:sp2002p1.8:I2_charging}
+\end{align}
+
+Plugging in all of the given values, we find that the currents at the instant
+the switch is closed are
+\begin{align}
+    \boxed{I₁(0) = \SI{6.66}{\A}\quad\quad\text{$S$ is closed}} \\
+    \boxed{I₂(0) = \SI{6.66}{\A}\quad\quad\text{$S$ is closed}}
+\end{align}
+For a long time later, we can let $t \rightarrow ∞$ and find that
+\begin{align}
+    \boxed{I₁(∞) = \SI{9.09}{\A}\quad\quad\text{$S$ is closed}} \\
+    \boxed{I₂(∞) = \SI{5.54}{\A}\quad\quad\text{$S$ is closed}}
+\end{align}
+
+Right after the switch is opened, the left loop is taken out of the circuit,
+so we immediately know that the value of $I₁$ is zero.
+\begin{align}
+    \boxed{I₁(0) = 0\quad\quad\text{$S$ is open	}}
+\end{align}
+For the right loop, we start by noting that the steady state current through
+the inductor will be needed. Taking the limit of (\ref
+{eqn:sp2002p1.8:I3_charging}), we have that the new initial condition is
+\begin{align*}
+    I₃(0) &= \frac{\mathcal E}{R'}\frac{R₂}{R₁+R₂}
+\end{align*}
+$I₂$ now is equal to $-I₃$ since there is no other path for the current to
+traverse. This loop's differential equation is then
+\begin{align*}
+    -(R₂+R₃)I₃ - L\frac{dI₃}{dt} = 0
+\end{align*}
+Solving for the exponential and using the initial condition above, the time
+solution is
+\begin{align*}
+    I₃(t) &= \frac{\mathcal E}{R'}\frac{R₂}{R₁+R₂} e^{-(R₂+R₃)t/L} \\
+    I₂(t) &= -\frac{\mathcal E}{R'}\frac{R₂}{R₁+R₂} e^{-(R₂+R₃)t/L}    
+\end{align*}
+Therefore the current in $I₂$ just after the switch is opened reverses
+direction
+\begin{align}
+    \boxed{I₂(0) = \SI{-3.64}{\A}}
+\end{align}
+Then by simple exponential relations, we know that the time time to decay by
+a factor of $e$ is given by the reciprocal of the coefficient of $t$, so
+inserting the appropriate numbers
+\begin{align}
+    \boxed{t_\mathrm{decay} = \SI{0.04}{\s}}
+\end{align}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Problem 9

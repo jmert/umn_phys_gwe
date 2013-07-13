@@ -1,6 +1,7 @@
 \documentclass[10pt]{article}
 \input{defaults}
 \input{defaults-drawing}
+\usetikzlibrary{intersections}
 
 \title{University of Minnesota Physics GWE Solutions}
 \author{%
@@ -13,9 +14,12 @@
 	\usepackage{multicol}
 % Circuit drawing
 	\usepackage[american,siunitx]{circuitikz}
+% Include more unit types
 	\DeclareSIUnit{\cal}{cal}
 	\DeclareSIUnit{\minute}{min}
 	\DeclareSIUnit{\year}{yr}
+% Allow subfigures
+	\usepackage{subcaption}
 
 % Generate an index of all the GWE problems
 \usepackage{makeidx}
