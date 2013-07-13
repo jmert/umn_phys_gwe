@@ -502,3 +502,54 @@ Plugging in the given values, we find the efficency to be
     }
 \end{align}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 10
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{10}
+\subsubsection{Question}
+% Keywords
+	\index{mechanics!Friction and a rolling hoop}
+
+A thin circular hoop rolls down an inclined plane under the influence of
+gravity. What minimum coefficient of friction is required to ensure that it
+rolls rather than slides?
+
+\subsubsection{Answer}
+
+Begin first by finding the motion that describes the rolling without slipping
+state. We do this by solving the system's Lagrangian:
+\begin{align*}
+    \mathcal L &= (\frac 12 m{\dot x}² + \frac 12 I{\dot θ}²) - (mgx\sin α)
+\end{align*}
+where $x$ is the length along the ramp with $x=0$ at the bottom, $I$ is the
+moment of inertia of the hoop, $m$ is its mass, $θ$ is the angle of rotation
+of the hoop about its center, and $α$ is the angle of the incline plane. By
+noting that rolling without slipping requires that $r\dot θ = \dot x$, we
+can reduce the problem to the single variable $x$. The result is the following
+differential equation, where $I = mr²$ has been substituted in:
+\begin{align*}
+    2m \ddot x &= -mg\sin α \\
+    \ddot x &= -\frac 12 g\sin α
+\end{align*}
+Therefore we know the linear acceleration will be $a = -\frac 12 g\sin α$ in
+the non-slipping case.
+
+To find what coefficient of friction produces this motion, we consider the
+forces acting on the hoop with the coordinate system still oriented along and
+perpendicular to the plane. In the perpendicular direction, the normal force
+$N$ is canceled by the perpendicular component of gravity, so
+\begin{align*}
+    N &= mg\cos α
+\end{align*}
+In the parallel direction, the frictioanl force and the parallel component of
+gravity must sum to give the requisitve force, namely $ma$.
+\begin{align*}
+    μN - mg\sin α &= a = -\frac 12 mg\sin α \\
+    μmg\cos α &= \frac 12 mg\sin α \\
+    μ &= \frac 12 \tan α
+\end{align*}
+
+\fbox{
+Therefore we find that the coefficient of friction must be equal to half of
+the tangent of the inclined plane's angle.
+}
