@@ -553,3 +553,53 @@ gravity must sum to give the requisitve force, namely $ma$.
 Therefore we find that the coefficient of friction must be equal to half of
 the tangent of the inclined plane's angle.
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 12
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{12}
+\subsubsection{Question}
+% Keywords
+	\index{mechanics!Deep-water gravity waves}
+	\index{waves!Deep-water gravity waves}
+
+The frequency $f$ of a deep water gravity wave (i.e. an ordinary ocean wave)
+is given by
+\begin{align*}
+    f =\sqrt{\frac{1}{2π}} ρ^a g^b λ^c
+\end{align*}
+where $ρ$, $g$, and $λ$ are the water density, gravitational acceleration, and
+wavelength of the wave, respectively. What are the values of the exponents
+$a$, $b$, and $c$, and what is the ratio of the wave group velocity to phase
+velocity?
+
+\subsubsection{Answer}
+
+We proceed by dimesional analysis. Immediately we know that $a = 0$ since a
+frequency does not have a mass component, and neither $g$ nor $λ$ have a
+mass term to cancel the one in $ρ$. Furthermore, $g$ is the only one with a
+time term, so it's exponent must then by $b = \frac 12$ in order to give $f$
+its $[\si{\s^{-1}}]$ unit. That leaves $c = \frac 12$ in order to cancel
+the $\sqrt{\si{\m}}$ dimensin left over from $g$.
+
+\begin{align*}
+    \boxed{
+    f = \sqrt{\frac{gλ}{2π}}
+	\quad\quad\text{ with }\quad a = 0,\, b = \frac 12,\, c = \frac 12
+    }
+\end{align*}
+
+The phase velocity can be derived from the frequency given by noting that
+$v_g = ω/k$ together with $k^{-1} = 2πλ$ and $ω = 2πf$. Put together, this
+gives
+\begin{align*}
+    v_p &= \frac{1}{k}\sqrt{\frac{g}{k}}
+\end{align*}
+The group velocity is given by $v_g = dω/dk$, so
+\begin{align*}
+    v_g &= -\frac{1}{2k}\sqrt{\frac{g}{k}}
+\end{align*}
+Taking only the absolute values and finding the ratio
+\begin{align}
+    \boxed{\frac{v_g}{v_p} = \frac 12}
+\end{align}
