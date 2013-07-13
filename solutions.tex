@@ -80,6 +80,21 @@
 	% listing the Question and Answer sections
 	\setcounter{tocdepth}{2}
 
+%% Change the heading styles
+	\usepackage[sf,bf,compact]{titlesec}
+	% Allow use of unstarred sectioning commands without worrying about them
+	% adding an unnecessary label before the title. Do this so that the entries
+	% are added to the table of contents automatically.
+	\titlelabel{}
+	\titlespacing*{\section}%
+		{-0.25in}		% Create a hanging indent
+		{0pt}			% No extra space above the section title
+		{0.75em}		% Small amount of space below
+	\titlespacing*{\subsection}%
+		{-0.125in}		% Create a hanging indent
+		{0pt}			% No extra space above the section title
+		{0.75em}		% Small amount of space below
+
 %% Make some GWE-specific heading commands
 	\makeatletter
 	% First, create the requisite counters
@@ -98,6 +113,8 @@
 		\setcounter{gwe@part}{#4}%
 		\setcounter{gwe@prob}{0}%
 		{%
+			% Each exam starts on its own page and is its own paragraph
+			\clearpage%
 			% Generate the title for the command
 			\def\gwe@title{%
 				\gwe@examname{}~\arabic{gwe@year} Part~\Roman{gwe@part}%
@@ -105,14 +122,7 @@
 			% Update the marks so that the headers show which exam we're in,
 			% and add ourselves to the TOC
 			\markboth{\scshape\gwe@title}{}%
-			\addcontentsline{toc}{section}{\gwe@title}%
-			% Set the style for the title
-			\sffamily\Huge\bfseries%
-			% Each exam starts on its own page and is its own paragraph
-			\clearpage%
-			\hspace{-0.25in}\gwe@title\par%
-			% Generate some space below the title
-			\vspace*{0.75em}%
+			\section{\gwe@title}
 			% Automatically generate a label for every exam of the form
 			%     exam:SYYYYP
 			% where S is either S or F for spring and fall, respectively,
@@ -135,6 +145,13 @@
 		% Reset the equation numbering counter
 		\setcounter{equation}{0}%
 		{%
+			% New problems also start on their own pages if it's not the first
+			% in the exam (still want to share the page with exam title)
+			\ifgwe@firstproblem%
+				\global\gwe@firstproblemfalse%
+			\else%
+				\clearpage%
+			\fi%
 			% Generate the title for the command
 			\def\gwe@title{%
 				Problem~\arabic{gwe@prob}%
@@ -143,17 +160,7 @@
 				\gwe@examname{}~\arabic{gwe@year} Part~\Roman{gwe@part}, %
 				\gwe@title%
 			}%
-			% Add the problem to the TOC
-			\addcontentsline{toc}{subsection}{\gwe@title}%
-			% Set the style for the title and print it out
-			\sffamily\Large\bfseries%
-			% New problems also start on their own pages if it's not the first
-			\ifgwe@firstproblem%
-				\global\gwe@firstproblemfalse%
-			\else%
-				\clearpage%
-			\fi%
-			\par\hspace{-0.125in}\gwe@title\par%
+			\subsection{\gwe@title}
 			% Automatically generate a label for every problem of the form
 			%     prob:SYYYYPNN
 			% where S is either S or F for spring and fall, respectively,
