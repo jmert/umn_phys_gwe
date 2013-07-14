@@ -50,6 +50,124 @@ Plugging in the numbers,
 \end{align}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{2}
+\subsubsection{Question}
+% Keywords
+	\index{quantum mechanics!Bound state energy threshold}
+
+Suppose a particle of mass $m$ moves in a 1-dimensional square potential
+well of width $L$ and depth $V$. What is the minimum depth of the well such
+that the particle will have two bound states?
+
+\subsubsection{Answer}
+
+Divide the problem into three regions according to the diagram below:
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+	% Draw the potential and the axes
+	\draw (0,0) -- (3,0) -- (3,-2) -- (5,-2) -- (5,0) -- (8,0);
+	\draw [dashed] (4,-3) -- (4,1);
+	\draw [dashed] (0,-2) -- (8,-2);
+
+	% Then add a few labels
+	\node at (3,0) [anchor=west] {$V$};
+	\node at (3,-2) [anchor=north] {$-\frac L2$};
+	\node at (5,-2) [anchor=north] {$\frac L2$};
+
+	% Now add the region labels
+	\node at (1.5,-1) {\Large I};
+	\node at (4.0,-1) {\Large II};
+	\node at (6.5,-1) {\Large III};
+    \end{tikzpicture}
+\end{figure}
+
+From the Schrödinger equation, we know that there will be two different types
+of solutions. Within region II, no potential exists, so the solution has
+the form
+\begin{align*}
+    ψ &= A\cos (kx) + B\sin (kx) \\
+    k² &= \frac{2mE}{ℏ²}
+\end{align*}
+For regions I and III, we assume that the energy $E < V$ since we are only
+interested in the bound solutions and not ones where the particle is free.
+This gives the following exponential solution form:
+\begin{align*}
+    ψ &= Ae^{κx} + Be^{-κx} \\
+    κ² &= \frac{2m(V-E)}{ℏ²}
+\end{align*}
+We immediately know that for regions I and III, the wavefunction must go to
+zero at $±∞$, so that immediately removes two terms in the solution. This
+leaves us with the complete set of solutions
+\begin{align*}
+    ψ_{I}   &= Ae^{κx} \\
+    ψ_{II}  &= B\cos(kx) + C\sin(kx) \\
+    ψ_{III} &= De^{-κx}
+\end{align*}
+
+We make a further simplification by noting that in this situation where there
+is a symmetric potential, the solution can also be divided into symmetric
+and antisymmetric solutions, corresponding to keeping either the $\sin$ or
+the $\cos$ solutions in region II. To solve the problem, we want to know the
+threshold potential for $V$ that will maintain a second bound state. The first
+bound state is the symmetric case (which heuristically is true by its virtue
+of having only a single ``hump'' within region II), so the first excited
+state/second state is the antisymmetric case (heuristically expected since
+the sine solution will have two ``humps'' within region II). This lets us
+simplify the problem and immediately set $B = 0$ to isolate just the
+antisymmetric solution.
+
+To continue, we make use of the fact that the wavefunction must be continuous
+and differentiably continuous at the boundaries between regions I-II and
+II-III. This means we find that:
+\begin{align*}
+    Ae^{-κL/2} &= B\sin(-\frac{kL}{2})
+    & B\sin(\frac{kL}{2}) &= De^{-κL/2}
+    \\
+    Aκe^{-κL/2} &= Bk\cos(-\frac{kL}{2})
+    & Bk\cos(\frac{kL}{2}) &= -Dκe^{-κL/2}
+\end{align*}
+Dividing the lower equation by the upper equation in both cases leads to the
+condition
+\begin{align*}
+    κ &= -k\cot(\frac{kL}{2})
+\end{align*}
+
+If we perform a variable substitution where $v = kL/2$ and $u = κL/2$, the
+equation above takes the slightly simpler form
+\begin{align}
+    u = -v\cot v
+	\label{eqn:sp2002p1.2:transcendental}
+\end{align}
+This transformation comes in more useful when we consider the energy equations
+that defined $k$ and $κ$. Substituting into the equation for $k$ and solving
+for $E$ we have that
+\begin{align*}
+    E &= \frac{2v²ℏ²}{mL²}
+\end{align*}
+And doing the same for $κ$,
+\begin{align*}
+    V - E &= \frac{2u²ℏ²}{mL²}
+\end{align*}
+which combined gives the equation of a circle:
+\begin{align*}
+    u² + v² &= \frac{mL²}{2ℏ²}V
+	\label{eqn:sp2002p1.2:circle}
+\end{align*}
+Therefore, the only valid solutions occur when both
+(\ref{eqn:sp2002p1.2:transcendental}) and (\ref{eqn:sp2002p1.2:circle}) are
+satisfied. The minimum value for a given cotangent line occurs at the roots
+which occur when $v = (2n+1)π/2$ for any integer $n$. The first excited state
+for $n=1$ then occurs at $v = π/2$ and consequently $u = 0$. Substiting this
+into the equation above and solving for $V$, we find that the threshold energy
+for a second bound state corresponds to a potential depth of
+\begin{align}
+    \boxed{ V = \frac{π²ℏ²}{2mL²} }
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Problem 3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \problem{3}
@@ -236,6 +354,22 @@ substituting for the fact that $dr = L/2π$ and $λ = M/L$,
     T = \frac{Mg}{2π} \cot α
     }
 \end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 7
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{7}
+\subsubsection{Question}
+% Keywords
+	\index{mechanics!Relativistic collision of electron and photon}
+
+A laser beam (photon energy \SI{1}{\eV}) collides head-on with a \SI{50}{\GeV}
+ultra-relativistic electron beam. What is the energy of the photons reflected
+backwards in the collision?
+
+\subsubsection{Answer}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Problem 8
@@ -553,6 +687,59 @@ gravity must sum to give the requisitve force, namely $ma$.
 Therefore we find that the coefficient of friction must be equal to half of
 the tangent of the inclined plane's angle.
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 11
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{11}
+\subsubsection{Question}
+% Keywords
+	\index{quantum mechanics!Probability to stay in ground state}
+
+A particle is confined within a cubical box with sides of length $L$ and is
+initially in the ground state. If the length of one side of the box (along
+the $x$-direction) is abruptly increased to a length $2L$, what is the
+probability that the particle remains in the ground state?
+
+\subsubsection{Answer}
+
+We start by recalling the solution for a particle in a box. In a 1D box with is
+left edge at the origin, the properly normalized wavefunction is given by
+\begin{align*}
+    ψ(x) &= \sqrt{\frac{2}{L}} \sin (\frac{nπx}{L})
+\end{align*}
+where $L$ is the size of the box. The Cartesian extension into 3D is simple
+and is respectively for the $L×L×L$ and $2L×L×L$ boxes:
+\begin{align*}
+    ψ(x,y,z) &= (\frac{2}{L})^{3/2} \sin(\frac{n_x πx}{L})
+	\sin(\frac{n_y πy}{L}) \sin(\frac{n_y πy}{L}) \\
+    ψ'(x,y,z) &= \frac{1}{\sqrt 2}(\frac{2}{L})^{3/2} \sin(\frac{n_x πx}{2L})
+	\sin(\frac{n_y πy}{L}) \sin(\frac{n_y πy}{L})
+\end{align*}
+
+To find the probability of remaining in the ground state, we simply must
+take the inner product of both wavefunctions in the ground state over an
+appropriate domain; this means that the initial, unexanded box's wavefunction
+is 0 within the new region.
+\begin{align*}
+    \mathscr P &= \braket{ψ_{111}}{ψ'_{111}} \\
+    {} &= \frac{1}{\sqrt{2}} (\frac{2}{L})³ (\int_0^L \sin(\frac{πx}{L})
+	\sin(\frac{πx}{2L}) \,dx) (\int_0^L \sin(\frac{πy}{L})
+	\sin(\frac{πy}{L}) \,dy) (\int_0^L \sin(\frac{πz}{L})
+	\sin(\frac{πz}{L}))
+\end{align*}
+The integrals over $y$ and $z$ are simple and simply evaluate to $L/2$ as
+we'd expect from the normalization factor. To evaluate the integral over $x$,
+use the trigonometric identity $\sin 2θ = 2\sin θ \cos θ$ and a change of
+variables with $u = \sin(πx/2L)$ to arrive at the integral
+\begin{align*}
+    \mathscr P &= \frac{2\sqrt 2}{L} \int_0^1 u² ⋅ \frac{2L}{π}\,du \\
+\end{align*}
+Evaluating this, we find the probability of remaining the ground state after
+the box is expanded suddenly to be
+\begin{align}
+    \boxed{\mathscr P = \frac{4\sqrt 2}{3π} ≈ 0.15}
+\end{align}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Problem 12
