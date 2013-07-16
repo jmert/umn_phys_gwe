@@ -1,0 +1,213 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{1}
+\subsubsection{Question}
+% Keywords
+	\index{mechanics!Energy loss in orbital descent}
+
+A satellite of mass $m = \SI{500}{\kg}$ is in a circular orbit at an
+altitude $h = \SI{150}{\km}$ above the Earth's surface. As a result of air
+friction, the satellite's orbit degrades. Protected by a heat shield, the
+satellite eventually impacts with a velocity of $\SI{2}{\km\per\s}$. How
+much energy (in Joules) was released as heat in the process?
+
+\subsubsection{Answer}
+
+The soltuion method will be a simple energy balance equation. In its initial
+state, the satellite had gravitation potential energy that contributed to
+its energy equal to
+\begin{align*}
+    V₀ &= \frac{GM_E m}{R_E + h}
+\end{align*}
+where $M_E$ and $R_E$ are the mass and radius of the Earth. The kinetic energy
+can be determined by making use of simple circle relations. The centriptal
+force must be provided by the gravitation force, so
+\begin{align*}
+    \frac{{v₀}²}{R_E + h} &= \frac{GM_E}{(R_E + h)²} \\
+    v₀ &= \sqrt{\frac{GM_E}{R_E + h}}
+\end{align*}
+making the initial kinetic energy
+\begin{align*}
+    T₀ &= \frac{GM_E m}{2(R_E + h)}
+\end{align*}
+
+In it's final state, the satellite consists of it's final given velocity's
+kinetic energy and more gravitational potential energy (with respect to the
+center of the Earth). They are given by
+\begin{align*}
+    T_f &= \frac 12 m{v_f}² \\
+    V_f &= \frac{GM_E m}{R_E}
+\end{align*}
+By conservation of energy, any energy different must result from the loss
+of energy between the intial and final states, so the lost energy
+$E_\mathrm{loss}$ is
+\begin{align*}
+    E_\mathrm{loss} &= T₀ + V₀ - T_f - V_f \\
+    {} &= \frac{GM_E m}{R_E(R_E + h)}(R_E - 2h) - \frac 12 m{v_f}²
+\end{align*}
+Plugging in all given quantities and constants, we have that
+\begin{align}
+    \boxed{
+    E_\mathrm{loss} = \SI{2.816e10}{\J} = \SI{28.16}{\giga\J}
+    }
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{2}
+\subsubsection{Question}
+% Keywords
+    \index{mechanics!Recoiling iron}
+
+What is the velocity of recoil of an ${}^{57}\mathrm{Fe}$ nucleus that emits
+a \SI{100}{\keV} photon, both in units of the speed of light in vacuum and in
+meters per second.
+
+\subsubsection{Answer}
+
+In the initial state observed from the iron atom's rest frame, the momentum
+is zero. After the emission, the photon has a momentum of $p_γ = E_γ/c$ and
+consequently, the nucleus must recoil with momentum $p_{Fe} = -p_γ$. Knowing
+that the energy is non-relativistic, then
+\begin{align*}
+    m_{Fe}v_{Fe} &= \frac{E_γ}{c} \\
+    v_{Fe} &= \frac{E_γ}{75m_p c}
+\end{align*}
+where we've approximate the mass of the iron atom by a multiple of the proton
+mass. Plugging in the numbers
+\begin{align}
+    \boxed{ v_{Fe} = \SI{561.4}{\m\per\s} }
+\end{align}
+or in units of $c$
+\begin{align}
+    \boxed{ v_{Fe} = \SI{1.87e-6}{c} }
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{4}
+\subsubsection{Question}
+% Keywords
+    \index{electrodynamics!Flux through a loop}
+
+Find the magnetic flux through a square loop of side $a$ due to current $I$ in
+a long straight wire. The geometry is as follows: the wire is coplanar with the
+loop and runs parallel to the loop's closest side, at a distance $b$ away.
+Write your result as a formula in SI units.
+
+\subsubsection{Answer}
+
+By Ampère's law in integral form, the magnetic field at a radial distance $r$
+away from the wire is given by
+\begin{align*}
+    \vec B = \frac{μ₀I}{2πr} \hat ϕ
+\end{align*}
+The flux is then the total magnetic field through the loop. Integrating by
+lines of length $a$,
+\begin{align*}
+    Φ = a \int_b^{a+b} \frac{μ₀I}{2πr} dr \\
+    \boxed{Φ = \frac{μ₀Ia}{2π}\ln(\frac{a+b}{a})}
+\end{align*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 6
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{6}
+\subsubsection{Question}
+% Keywords
+    \index{mathematics!Complex contour integration}
+
+By actually evaluating the integral, show that
+\begin{align*}
+    \int_0^∞ \frac{\cos x}{1 + x²}\,dx &= \frac{π}{2e}
+\end{align*}
+
+\subsubsection{Answer}
+
+Note that the integrand, so start by changing the limits of integration
+\begin{align*}
+    \int_0^∞ \frac{\cos x}{1 + x²}\,dx &=
+	\frac 12 \int_{-∞}^∞ \frac{\cos x}{1 + x²}\,dx
+\intertext{Then expand the cosine into is complex exponential definition}
+    {} &= \frac 14 (\int_{-∞}^∞ \frac{e^{ix}}{1 + x²}\,dx +
+	\int_{-∞}^∞ \frac{e^{-ix}}{1 + x²}\,dx) \\
+    {} &= \frac 14 (\int_{-∞}^∞ \frac{e^{ix}}{(x+i)(x-i)}\,dx +
+	\int_{-∞}^∞ \frac{e^{-ix}}{(x+i)(x-i)}\,dx)
+\intertext{Complex contour integration lets us evaluate the integrals as
+limits of the coefficient of a pole as it approaches the pole, so}
+    {} &= \frac 14 (2πi ⋅ \lim_{z→i}(\frac{e^{iz}}{z+i}) - 2πi ⋅
+	\lim_{z→-i}(\frac{e^{-iz}}{z-i}))
+\end{align*}
+After simplifying,
+\begin{align}
+    \boxed{
+    \int_0^∞ \frac{\cos x}{1 + x²}\,dx = \frac{π}{2e}
+    }
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 7
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{7}
+\subsubsection{Question}
+% Keywords
+    \index{dimensional analysis!High-velocity drag force}
+
+The drag force on a very high speed object of area $A$, passing through a gas
+of density $ρ$ at a velocity $v$ is expected to be of the form
+\begin{align*}
+    \text{Force} \sim A^r ρ^s v^t
+\end{align*}
+Determine the value of the exponents $r$, $s$, and $t$.
+
+\subsubsection{Answer}
+
+Force needs to have a unit of inverse time squared, therefore $v$ as the only
+variable with a time unit sets $t = 2$. Similarly, $ρ$ is the only one with
+a mass term, so we also immediately know that $s = 1$. That leaves
+\begin{align*}
+    \left[ \frac{\text{mass}⋅\text{distance}}{\text{time}²} \right]
+	&= \left[ \frac{\text{mass}}{\text{distance}⋅\text{time}²} \right]
+	\left[ \text{distance} \right]^r
+\end{align*}
+Therefore to have the two side have compatible units, $r = 2$.
+\begin{align*}
+    \boxed{ r = 2,\quad s = 1,\quad t = 2}
+\end{align*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 9
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{9}
+\subsubsection{Question}
+% Keywords
+    \index{mechanics!Shallow-water wave group velocity}
+    \index{waves!Shallow-water wave group velocity}
+
+For waves in shallow water, the relation between frequence $ν$ and wavelength
+$λ$ is
+\begin{align*}
+    ν &= (\frac{2πT}{ρλ³})^{1/2}
+\end{align*}
+where $ρ$ and $T$ are the density and surface tension of water. What is the
+group velocity of these waves?
+
+\subsubsection{Answer}
+
+Transforming relation given to use the angular frequency $ω = 2πν$ and
+wave number $k = 2π/λ$,
+\begin{align*}
+    ω &= \sqrt{ \frac{k³T}{ρ} }
+\end{align*}
+Then the group velocity is simply the partial derivative with respect to $k$:
+\begin{align*}
+    v_g &= \frac{∂ω}{∂k} = \frac 32 \sqrt{\frac{kT}{ρ}}
+\end{align*}
+Putting this back into the form which involves only $ν$ and $λ$, we arrive at
+the answer
+\begin{align}
+    \boxed{ v_g = \sqrt{\frac{2πT}{ρλ}} }
+\end{align}
