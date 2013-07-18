@@ -211,3 +211,74 @@ the answer
 \begin{align}
     \boxed{ v_g = \sqrt{\frac{2πT}{ρλ}} }
 \end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 10
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{10}
+\subsubsection{Question}
+% Keywords
+    \index{mathematics!Eigenvalues and eigenvectors}
+
+Find the eigenvalues and corresponding eigenvectors (which need \emph{not} be
+normalized) of the following matrix:
+\begin{align*}
+    M = \begin{bmatrix}
+	1 & 0 & -i \\
+	0 & 2 & 0 \\
+	i & 0 & -1
+    \end{bmatrix}
+\end{align*}
+
+\subsubsection{Answer}
+
+The eigenvalue equation is found from the standard procedure of adding a
+parameter $λ$ into the matrix and taking the determinant equal to zero:
+\begin{align*}
+    \det ( \begin{bmatrix}
+	1-λ & 0   & -i   \\
+	0   & 2-λ & 0    \\
+	i   & 0   & -1-λ
+    \end{bmatrix} ) = 0 &= (1-λ)(2-λ)(-1-λ) - i(-i)(2-λ) \\
+    0 &= -(1-λ)(1+λ)(2-λ) - (2-λ) \\
+    0 &= -(2-λ)\left[ (1-λ)(1+λ) + 1 \right]
+\end{align*}
+Solving the two equations $0 = (2 - λ)$ and $(1-λ)(1+λ) = -1$ gives the three
+eigenvalues
+\begin{align}
+    \boxed{
+    λ = \left\{ -\sqrt 2, \sqrt 2, 2 \right\}
+    }
+\end{align}
+
+Starting with the eigenvalue $λ=2$, we solve for its eigenvector using the
+usual Gaussian elimination approach:
+\begin{align*}
+    \det ( \begin{bmatrix}
+	-1  & 0   & -i   \\
+	0   & 0   & 0    \\
+	i   & 0   & -3
+    \end{bmatrix} )
+\end{align*}
+The second variable is completely unconstrained, so we can set that component
+of the vector to 1. The first and last rows are incompatible, so that means
+that both the first and third variables must be zero. This gives us the
+eigenvector
+\begin{align*}
+    v₃ &= \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}
+\end{align*}
+In a similar manner for the eignevalues $λ = ±\sqrt 2$, we perform Gaussian
+elimination. When all free parameters have been set arbitrarily to 1 and other
+constraints considered, we end up with the three eigen vectors:
+\begin{align}
+    \boxed{ λ = -\sqrt 2 \quad\rightarrow\quad v₁ =
+	\begin{bmatrix} 1 \\ 0 \\ -i(1+\sqrt 2) \end{bmatrix} }
+\end{align}
+\begin{align}
+    \boxed{ λ = \sqrt2 \quad\rightarrow\quad v₂ =
+	\begin{bmatrix} 1 \\ 0 \\ -i(1-\sqrt 2) \end{bmatrix} }
+\end{align}
+\begin{align}
+    \boxed{ λ = 2 \quad\rightarrow\quad v₃ =
+	\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} }
+\end{align}
