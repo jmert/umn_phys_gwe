@@ -282,3 +282,34 @@ constraints considered, we end up with the three eigen vectors:
     \boxed{ λ = 2 \quad\rightarrow\quad v₃ =
 	\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} }
 \end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 12
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{12}
+\subsubsection{Question}
+% Keywords
+    \index{quantum mechanics!Spin-$\frac 32$ electron}
+
+Suppose the electron were to have spin $\frac 32$ instead of spin $\frac 12$.
+What would then be the atomic numbers $Z$ of the \emph{three} lowest-mass
+nobel gases, i.e.~the equivalents of helium, neon, and argon?
+
+\subsubsection{Answer}
+
+In a spin $\frac 32$ particle, there are 4 possible spin configurations
+corresponding to the spin projections $s_z = \{ -\frac 32, -\frac 12, \frac 12,
+\frac 32\}$. Because of thise, each projection of the orbital angular momentum
+can hold 4 electrons instead of just two. This means we can make use of
+spectroscopic notation to easily count up to the atoms of interest.
+\begin{align*}
+    ℓ &= 0 → \text{1 $ℓ_z$ state}	& & 1s⁴ \\
+    ℓ &= 1 → \text{3 $ℓ_z$ states}	& & 1s⁴2p¹²2s⁴ \\
+    ℓ &= 2 → \text{5 $ℓ_z$ states}	& & 1s⁴2p¹²2s⁴3d²⁰3p¹²3s⁴
+\end{align*}
+
+Since all shells are filled at each level, we just have to sum the number of
+electrons in each line above to get the $Z$ number of the new noble gases.
+\begin{align}
+    \boxed{ Z = \{4, 20, 56 \} }
+\end{align}
