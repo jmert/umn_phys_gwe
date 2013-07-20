@@ -1,0 +1,200 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{2}
+\subsubsection{Question}
+% Keywords
+	\index{mechanics!Impulse on a rod}
+
+If an impulse is delivered to the end of a uniform rod of length $ℓ$, lying on
+a frictionless plane, how far will it travel while making one revolution? The
+impulse is in the plane of the table and perpendicular to the rod.
+
+\subsubsection{Answer}
+
+For a given impulse $\vec J$, the change in the motion is $\vec J = Δ\vec p$.
+If the rod start at rest, then the final momentum must be $\vec p = \vec J$.
+This means the rod is moving laterally with a velocity
+\begin{align*}
+    V = \frac 1m \vec J
+\end{align*}
+which when integrated over a time $t$ gives the distance it has moved $\vec x$.
+\begin{align*}
+    \vec x = \frac 1m \vec J t
+\end{align*}
+
+The impulse also imparts a rotation on the rod because the force was not
+applied at the rod's center of mass. The torque $\vec τ$ relates the force
+to the angular momentum $\vec L$ by
+\begin{align*}
+    \vec r × \vec F &= \vec τ = \dot{\vec L}
+\end{align*}
+Integrating both sides of the equation, we can write the equation in terms of
+the given impulse:
+\begin{align*}
+    \vec r × \int \vec F \,dt &= \int \dot{\vec L} \,dt \\
+    \vec r × \vec J &= Δ\vec L
+\end{align*}
+Again, since the rod starts at rest, we know that the final angular momentum
+must be
+\begin{align*}
+    \vec L = \vec r × \vec J
+\end{align*}
+The rotation about the rod's center of mass  occurs at a rate $\vec ω$
+dependent on the moment of inertia $I = \frac{1}{12} mℓ²$, so
+\begin{align*}
+    \vec ω = \frac{12}{mℓ²} \vec r × \vec J
+\end{align*}
+We know that the impulse is applied perpendicular to the rod, so we can easily
+integrate the expression in time and solve for the time it takes to revolve
+$2π$ radians:
+\begin{align*}
+    θ = 2π &= \frac{12}{mℓ²} rJt \\
+    t &= \frac{πmℓ²}{6 rJ}
+\end{align*}
+
+Plugging this back into the linear motion equation, the rod travels
+\begin{align*}
+    \vec x = \frac{1}{m} \vec J ⋅ \frac{πmℓ²}{6 rJ}
+\end{align*}
+where we can set $r = \frac 12 ℓ$ and therefore simplifies to
+\begin{align}
+    \boxed{
+    \vec x = \frac{πℓ}{3} \hat J
+    }
+\end{align}
+where $\hat J$ is the direction of the applied impulse.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{3}
+\subsubsection{Question}
+% Keywords
+	\index{electrodynamics!Properties of a magnetic field}
+
+A time-indpendent magnetic field is given by $\vec B = 2bxy \,\hat ı +
+ay² \,\hat ȷ$.
+\begin{enumerate}[a)]
+    \item
+        What is the relationship between the constants $a$ and $b$?
+    \item
+        Determine the steady current density $J$ that gives rise to this field.
+\end{enumerate}
+
+\subsubsection{Answer}
+For part (a), we realize that all magnetic fields must be divergenceless.
+Therefore we can find the requirements on the constants $a$ and $b$ by
+constraining the divergence to be zero.
+\begin{align*}
+    \vec ∇ ⋅ \vec B = 0 &= \frac{∂}{∂x}(2bxy) + \frac{∂}{∂y}(ay²) \\
+    0 &= 2by + 2ay \\
+    b &= -a
+\end{align*}
+Therefore the relation between the constants is that
+\begin{align}
+    \boxed {b = -a}
+\end{align}
+
+For the second part, we make use of Maxwell's equations. Assuming that none of
+the field is due to a time-varying electric field, we make use of
+\begin{align*}
+    \vec ∇ × \vec B &= μ₀ \vec J
+\end{align*}
+to calculate the current that generates the field. Doing so, we find that the
+solution is
+\begin{align}
+    \boxed{ \vec J = \frac{2a}{μ₀} x \,\hat k }
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{4}
+\subsubsection{Question}
+% Keywords
+	\index{electrodynamics!Determining charges from multipole moments}
+
+A set of four point charges $q₁$, $q₂$, $q₃$, and $q₄$ are arranged
+collinearly along the $z$-axis at $z₁ = 0$, $z₂ = a$, $z₃ = 2a$, $z₄ = 4a$,
+respectively and the resulting electric field at a distant point $\vec r$ ($r
+≫ a$) decays \emph{faster} than $1/r³$. Determine the values of $q₁$ and $q₄$
+which $q₂ = +2$ and $q₃ = +4$. Units for all charges are Coulombs.
+
+\subsubsection{Answer}
+
+Given that the electric field must fall off faster than $1/r³$, this
+corresponds to a potential which drops off faster than $1/r²$. We know that
+the monopole moment drops off like $1/r$ and the dipole like $1/r²$, so we
+conclude that the first configuration which could satisfy the given
+requirement is that of a quadrupole moment.
+
+Making use of the fact that he monopole and dipole moments are vanishing, we
+can use them to generate constraint equations for what the charges must be:
+we have two unknown charges and the two equations will allow us to solve them.
+
+For the monopole, the sum of all charges must simply equal zero. Therefore
+we immediately know that
+\begin{align*}
+    0 &= q₁ + q₄ + 6 \\
+    -6 &= q₁ + q₄
+\end{align*}
+
+The dipole moment (where we take the dipole considered at the origin) is given
+by
+\begin{align*}
+    \vec p = \sum_i \vec{r_i} q_i
+\end{align*}
+This gives us the equation
+\begin{align*}
+    0 &= 10a + 4aq₄ \\
+    q₄ &= -\frac 52
+\end{align*}
+The charge $q₁$ does not show up in the equation since it is located at the
+origin. This lets us very simply then solve for $q₁$ as
+\begin{align*}
+    -6 &= q₁ - \frac 52
+\end{align*}
+Therefore, the solution is that the charges have values of
+\begin{align}
+    \boxed{ q₁ = -\frac 72 } \\
+    \boxed{ q₄ = -\frac 52 }
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{5}
+\subsubsection{Question}
+% Keywords
+	\index{quantum mechanics!Spectral emission line width}
+
+The Lyman-α transition in atomic hydrogen has a wavelength $λ =
+\SI{121.5}{\nm}$, and a transition rate of \SI{0.6e9}{\s^{-1}}. Estimate the
+minimum value of $Δλ/λ$.
+
+\subsubsection{Answer}
+
+We can make an estimate of the spread $Δλ$ by making use of the Heisenberg
+uncertainty relation for energy-time. Starting with the variation in
+wavelength,
+\begin{align*}
+    Δλ &= λ - λ' \\
+    {} &= \frac{hc}{E} - \frac{hc}{E'} \\
+    {} &= \frac{hc(E' - E)}{E E'}
+\intertext{Making use of the approximation that $E ≈ E'$,}
+    {} &= \frac{hcΔE}{E²}
+\end{align*}
+Dividing by the frequency and substituting in the uncertainty relation $ΔEΔt =
+\frac{ℏ}{2}$,
+\begin{align*}
+    \frac{Δλ}{λ} &= \frac{hc}{λ} ⋅ \frac{1}{E²}\frac{ℏ}{2Δt} \\
+    {} &= \frac{λ}{4πcΔt}
+\end{align*}
+For the time, we estimate the transition rate is occuring as fast as it can
+within the limits of the uncertainty relation, so we can let $Δt ≈ \SI{0.6e9}
+{\s^{-1}}$. Plugging in the other values, we find the fractional line width
+to be estimated as
+\begin{align}
+    \boxed{ \frac{Δλ}{λ} ≈ \num{1.935e-8} ≈ \text{1 part in 50 million} }
+\end{align}
