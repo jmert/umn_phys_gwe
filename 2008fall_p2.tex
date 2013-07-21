@@ -1,0 +1,153 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{1}
+\subsubsection{Question}
+% Keywords
+	\index{mechanics!Bead on a hoop}
+
+A particle of mass $m$ is constrained to move without friction on a circular
+wire of radius $R$ rotating with constant angular frequency $ω$ about a
+vertical diameter. Gravity can not be neglected.
+\begin{enumerate}[a)]
+    \item
+        Write down the Lagrangian for the system and the equations of motion.
+    \item
+        Find the equilibrium position(s) of the particle and determine
+        whether this position is stable.
+    \item
+        Calculate the frequency of small oscillations about any stable points.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        % The axis
+        \draw [dashed,->] (0,-1) -- (0,4);
+        % The hoop
+        \draw (0,1.5) circle (1.5);
+        % The bead
+        \draw ($(0,1.5)!1.5cm!30:(0,0)$)
+            node[circle,fill=black,anchor=center,inner sep=2pt] {}
+            coordinate (bead);
+        % Label the angle
+        \draw [dashed] (0,1.5) -- (bead);
+        \draw ($(0,1.5)!0.5cm!(0,0)$)
+            coordinate (arc start)
+            arc (-90:-60:0.5cm)
+            coordinate (arc end);
+        \draw ($(arc start)!0.5!(arc end)$)
+            node [anchor=north] {$\,\,θ$};
+    \end{tikzpicture}
+\end{figure}
+
+\subsubsection{Answer}
+
+To start constructing the Lagrangian and equations of motion, we first specify
+the kinetic and potential energies. For the kinetic energy, there is an energy
+associated with the rotation about the axis and one along the bead. These
+combined to give
+\begin{align*}
+    T &= \frac 12 m (Rω\sin θ)² + \frac 12 m (R\dot θ)² \\
+    {} &= \frac 12 m R² ω² \sin² θ + \frac 12 m R² {\dot θ}²
+\end{align*}
+The potential energy is all gravitational, so
+\begin{align*}
+    V &= -mgR\cos θ
+\end{align*}
+where the zero point was taken to be at the center of the hoop to avoid adding
+extra constant terms to the Lagrangian. Combining the two, we get
+\begin{align}
+    \boxed{
+    \mathcal L = \frac 12 mR²ω²\sin² θ + \frac 12 mR²{\dot θ}² + mgR\cos θ
+    }
+\end{align}
+Taking the appropriate derivatives in $θ$, the equation of motion is
+\begin{align}
+    \boxed{
+    \ddot θ = ω² \sin θ \cos θ - \frac{g}{R}\sin θ
+    }
+\end{align}
+
+In order to determine any possible stable points, we note that a stable point
+is a place where the angle does not change in time. Since this also equates to
+$\ddot θ = 0$, we set the equation above equal to zero and solve for the angles
+which satisfy this condition. They end up being the trivial $θ = \{0, π\}$
+where the sine function is zero as well as
+\begin{align*}
+    \cos θ₀ &= \frac{g}{Rω²}
+\end{align*}
+The three stable points are then
+\begin{align}
+    \boxed{ θ₀ = \left\{ 0, \arccos(\frac{g}{Rω²}), π \right\} }
+\end{align}
+
+To determine the stability of each, we must determine whether we get
+oscillatory or exponential solutions to the differential equation of motion.
+To do this, we suppose the angle $θ$ is composed of the equilibrium angle
+$θ₀$ and a small perturbation $δ$. Expanding the equation in terms of this,
+\begin{align*}
+    \ddot δ = ω²\sin(θ₀+δ)\cos(θ₀+δ) - \frac{g}{R}\sin(θ₀+δ)
+\end{align*}
+Using several trigonometric expansions, the equation can be expanded into the
+form
+\begin{align*}
+    \ddot δ = ω²\left[ \cos θ₀\sin θ₀ (\cos²δ - \sin²δ) + \cos δ\sin δ
+        (\cos²θ₀ - \sin²θ₀) \right] - \frac{g}{R}\left[ \sin θ₀\cos δ +
+        \cos θ₀\sin δ \right]   
+\end{align*}
+
+For the case where $θ₀ = 0$,
+\begin{align*}
+    \ddot δ &= ω² \cos δ \sin δ - \frac{g}{R} \sin δ
+\intertext{Expanding to first order in $δ ≈ 0$,}
+    \ddot δ &= -(\frac{g}{R} - ω²)δ
+\end{align*}
+Therefore, the equilibrium point $θ₀ = 0$ is only stable if $ω <
+\sqrt{\frac{g}{R}}$.
+
+Likewise for for $θ₀ = π$,
+\begin{align*}
+    \ddot δ &= (\frac{g}{R} + ω²) δ
+\end{align*}
+The coefficient on $δ$ will never be negative, so the angle $θ₀ = π$ will
+be unstable under all conditions.
+
+For the final angle where $θ₀ = \arccos(\frac{g}{Rω²})$, we must do several
+substitutions and expansions. $\cos θ₀$ is trivial. $\sin θ₀$ ends up being
+$\sqrt{Rω² - g²}/(Rω²)$ by triangle relations. If we substitute these in plus
+do an expansion to first order for small $δ$, we get the equation
+\begin{align*}
+    \ddot δ &= ω² \left[ \frac{g\sqrt{Rω²-g²}}{R²ω²} + δ \frac{2g²-Rω²}{R²ω²}
+        \right] - \frac{g}{R} \left[\frac{\sqrt{Rω²-g²}}{R²ω²} + δ
+        \frac{g}{Rω²} \right]
+\end{align*}
+If we consider only the homogeneous terms dependent on $δ$,
+\begin{align*}
+    \ddot δ &= \frac{g² - Rω²}{R²ω²} δ
+\end{align*}
+This equation is stable if and only if the coefficient on $δ$ is negative, so
+it must be that $ω > \frac{g}{\sqrt{R}}$.
+
+In summary, the equilibrium points have the following conditions:
+\begin{align}
+    \boxed{ θ₀ = 0 \quad\quad \text{Stable iff } ω < \sqrt{\frac gR} }
+\end{align}
+\begin{align}
+    \boxed{ θ₀ = \arccos(\frac{g}{Rω²}) \quad\quad \text{Stable iff }
+        ω > \frac{g}{\sqrt{R}} }
+\end{align}
+\begin{align}
+    \boxed{ θ₀ = π  \quad\quad \text{Never stable} }
+\end{align}
+
+
+About the two stable points, we simply use the coefficient that has already
+been isolated to determine the frequency of the oscillations about that point.
+\begin{align}
+    \boxed{ ω₁ = \sqrt{\frac{g}{R} - ω²} \quad\quad\text{for $θ₀ = 0$} }
+\end{align}
+\begin{align}
+    \boxed{ ω₂ = \sqrt{\frac{Rω² - g²}{R²ω²}}\quad\quad\text{for $θ₀ =
+        \arccos(\frac{g}{Rω²})$} }
+\end{align}
