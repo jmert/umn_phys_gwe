@@ -151,3 +151,115 @@ been isolated to determine the frequency of the oscillations about that point.
     \boxed{ ω₂ = \sqrt{\frac{Rω² - g²}{R²ω²}}\quad\quad\text{for $θ₀ =
         \arccos(\frac{g}{Rω²})$} }
 \end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{2}
+\subsubsection{Question}
+% Keywords
+	\index{electrostatics!Charged sphere in uniform electric field}
+    \index{Gauss' Law!Charged sphere in uniform electric field}
+
+The general solution of the Laplace's equation for an electrostatic problem
+having azimuthal symmetry can be written as
+\begin{align*}
+    V(r,θ) &= \sum_{ℓ=0}^∞ (A_ℓ r^ℓ + \frac{B_ℓ}{r^{ℓ+1}}) P_ℓ(\cos θ)
+\end{align*}
+Now consider the follwoing problem. A solid spherical conductor of radius $R$
+having charge $Q$ is placed in an otherwise uniform electric field $\vec E
+= E₀\hat z$.
+\begin{enumerate}[(a)]
+    \item
+        Qualtitatively describe the electric field inside and outside of the
+        sphere.
+    \item
+        Solve the problem and find the electric potential in th eregion outside
+        the sphere.
+\end{enumerate}
+
+\subsubsection{Answer}
+
+To provide a qualitative description, we make use of several properties of
+conductors. The electric field inside the conductor is guaranteed to be zero
+in the limit of a perfect conductor which can move its electrons anywhere
+they're needed to cancel any applied fields. For the region outside the
+sphere, it is easiest to describe the region just outside the surface and
+the region at infinitely large distances. Far away, the effects of the the
+sphere are negligible and the electric field is the external uniform field.
+Near the surface, though, all field lines are perpendicular to the surface;
+therefore, the external field's lines are curved so that any intersections
+occur perpendicular to the surface.
+
+In summary
+\par\fbox{\begin{minipage}{\textwidth}
+    \begin{enumerate}
+        \item
+            The field is uniform at large distances
+        \item
+            The field is perpendicular to the surface of the conductor at
+            the conductor's surface
+        \item
+            There is no field within the interior of the conductor
+    \end{enumerate}
+\end{minipage}}
+\vspace{\baselineskip}
+
+In order to analyze the problem analytically, we make use of the
+superposition principle to simplify the problem. Because the sphere carries
+its own charge, we treat this case as a superposition of the two simpler
+cases of a charged sphere in vacuum and that of a perfectly conducting,
+grounded sphere in a uniform electric field.
+
+Since we are only concerned with the potential outside the sphere, we can use
+Gauss' Law to get the potential due to the charge $Q$. It is
+\begin{align*}
+    V_Q(r,θ) &= \frac{Q}{4πε₀r} & r &> R
+\end{align*}
+
+The uniform field is the considered by satisfying the appropriate boundary
+conditions to solve for the coefficients $A_ℓ$ and $B_ℓ$ in the general
+solution given above. We start by converting the given electric field to a
+potential. In Cartesian coordinates,
+\begin{align*}
+    \vec E = E₀\hat z = -\vec ∇V_∞ \quad\quad\Rightarrow\quad\quad V_∞ &= -E₀z
+\end{align*}
+which when converted to spherical coordinates gives the potential as $r→∞$
+\begin{align*}
+    V_∞ &= -E₀r\cos θ
+\end{align*}
+In the infinite distance limit, $B_ℓ/r^{ℓ+1} → 0$ so the boundary condition
+equation becomes
+\begin{align*}
+    -E₀r\cos θ &= \sum_{ℓ=0}^∞ A_ℓ r^ℓ P_ℓ(\cos θ) \\
+\intertext{By the orthogonality of the Legendre polynomials, only $A₁$ is
+non-zero:}
+    -E₀r\cos θ &= A₁r\cos θ \\
+    A₁ &= -E₀
+\end{align*}
+
+The general solution has thus been simplified to
+\begin{align*}
+    V₀(r,θ) &= -E₀r\cos θ + \sum_{ℓ=0}^∞ \frac{B_ℓ}{r^{ℓ+1}}P_ℓ(\cos θ)
+\end{align*}
+By our choice of making use of the superposition principle, we have set the
+potential to be zero at the surface, so at $r = R$, the boundary conditions
+lets us solve for the values of the $B_ℓ$:
+\begin{align*}
+    0 &= -E₀R\cos θ + \sum_{ℓ=0}^∞ \frac{B_ℓ}{R^{ℓ+1}}P_ℓ(\cos θ)
+\intertext{The Legendre polynomial orthogonality again eliminates all
+coefficients except $B₁$.}
+    E₀R\cos θ &= \frac{B₁}{R²}\cos θ \\
+    B₁ &= E₀R³
+\end{align*}
+This gives us the solution to the grounded sphere as
+\begin{align*}
+    V₀(r,θ) &= -E₀r\cos θ \left[ 1 - (\frac{R}{r})³ \right]
+\end{align*}
+
+Therefore by superposition of both solutions, the potential in this situation
+at all points outside the sphere is
+\begin{align}
+    \boxed{ V(r,θ) = \frac{Q}{4πε₀r} - E₀r\cos θ \left[ 1 -
+        (\frac{R}{r})³ \right] }
+\end{align}
