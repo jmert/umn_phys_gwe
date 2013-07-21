@@ -113,7 +113,7 @@ solution is
 \problem{4}
 \subsubsection{Question}
 % Keywords
-	\index{electrodynamics!Determining charges from multipole moments}
+	\index{electrodynamics!Charges from multipole moments}
 
 A set of four point charges $q₁$, $q₂$, $q₃$, and $q₄$ are arranged
 collinearly along the $z$-axis at $z₁ = 0$, $z₂ = a$, $z₃ = 2a$, $z₄ = 4a$,
@@ -197,4 +197,52 @@ within the limits of the uncertainty relation, so we can let $Δt ≈ \SI{0.6e9}
 to be estimated as
 \begin{align}
     \boxed{ \frac{Δλ}{λ} ≈ \num{1.935e-8} ≈ \text{1 part in 50 million} }
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 11
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{11}
+\subsubsection{Question}
+% Keywords
+	\index{statistical mechanics!Radiometric dating from mass ratios}
+
+A rock is found to contain \SI{4.20}{\mg} of ${}^{238}U$ and \SI{2.00}{\mg}
+of ${}^{206}Pb$. Assume tha the rock contained no lead at the time of its
+formation, so that all the lead now present is due to th decay of the
+uranium orignally present in the rock. Find the age of the rock given that
+the half-life of ${}^{238}U$ is \SI{4.47e9}{\year}. The decay times of all
+intermediate elements are negligibly short and ignore any differences in the
+binding energies.
+
+\subsubsection{Answer}
+
+From decay processes, we know that the uranium atom count will decrease as an
+exponential according to
+\begin{align*}
+    N_U = N_{U0}e^{-t/τ}
+\end{align*}
+where $τ = t_{1/2}/\ln 2$. Likewise, the number of lead atoms will increase
+according to
+\begin{align*}
+    N_{Pb} = N_{U0} (1 - e^{-t/τ})
+\end{align*}
+Solveing for $N_{U0}$ in the first equation and substituting it into the
+second, we can solve for the time required to generate a specific number of
+uranium and lead atoms in a sample.
+\begin{align*}
+    N_{Pb} &= N_U e^{t/τ} (1 - e^{-t/τ}) \\
+    t &= τ \ln(\frac{N_{Pb}}{N_U} + 1) \\
+    t &= \frac{t_{1/2}}{\ln 2} \ln(\frac{N_{Pb}}{N_U} + 1)
+\end{align*}
+We were only given the masses, though, so we approximate the mass of each
+atom by the number of nucleons in the nucleus; each uranium atom has a mass
+of $m_U = 238m_N$ making the $N_U$ atoms have a mass of $M_U = 238 N_U m_N$,
+and similar for the lead. This gives us the final equation
+\begin{align*}
+    t &= \frac{t_{1/2}}{\ln 2} \ln(\frac{238}{206} \frac{M_{Pb}}{M_U} + 1)
+\end{align*}
+Plugging in all the numbers,
+\begin{align}
+    \boxed{ t = \SI{2.83e9}{\year} }
 \end{align}
