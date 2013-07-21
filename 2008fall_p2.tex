@@ -263,3 +263,157 @@ at all points outside the sphere is
     \boxed{ V(r,θ) = \frac{Q}{4πε₀r} - E₀r\cos θ \left[ 1 -
         (\frac{R}{r})³ \right] }
 \end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{3}
+\subsubsection{Question}
+% Keywords
+	\index{quantum!Reflection and transmission through a barrier}
+
+Consider the transmission of a beam of particles of mass $m$ and momentum $p
+= ℏk$, in one dimension, incident on a rectangular potential barrier of
+height $V₀$ and extending from $x = 0$ to $x = L$, in the special case that
+the energy $E$ of the incident particle \emph{is exactly equal} to the
+barrier height $V₀$.
+\begin{enumerate}[(a)]
+    \item
+        Calculate the transmission and reflection coefficients $T$ and $R$.
+    \item
+        Check some properties of your answers in (a): is probability
+        conserved? Do $T$ and $R$ have the expected limiting values for $L$
+        very large or very small?
+    \item
+        For what values of the de Broglie wavelength of th eparticles is th
+        etransmitted fraction equal to $1/2$?
+\end{enumerate}
+
+\subsubsection{Answer}
+
+Consider a beam of particles incident from the left as shown in the figure
+below:
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        % Make the axes
+        \draw[dashed,<->] (-1,0) -- (8,0)
+            node [anchor=west] {$\hat x$};
+        \draw[dashed,<->] (2,-1) -- (2,2.5)
+            node [anchor=south] {$V$};
+        % Draw the potential
+        \draw (0,0) -- (2,0) -- (2,1.5) -- (5,1.5) -- (5,0) -- (7,0);
+        % Label the special values of note
+        \draw (2,0) node[anchor=north] {$x = 0$};
+        \draw (5,0) node[anchor=north] {$x = L$};
+        \draw (5,1.5) node[anchor=west] {$V = V₀$};
+        % Show the indicent particle beam
+        \draw[very thick,->] (0,1.5)
+            node[anchor=east] {$E = V₀$}
+            -- (1.9,1.5);
+        % Label the regions
+        \draw (1,   0.75) node {\Large Ⅰ};
+        \draw (3.5, 0.75) node {\Large Ⅱ};
+        \draw (6,   0.75) node {\Large Ⅲ};
+    \end{tikzpicture}
+\end{figure}
+
+Ignoring normalization for a minute, we know that in regions Ⅰ and Ⅲ that
+the wavefunction is that of a free particle:
+\begin{align*}
+    ψ(x) &= Ae^{ikx} + B^{-ikx}
+        & k² &= \frac{2mE}{ℏ²}
+\end{align*}
+In region Ⅱ, the energy $E$ cancels with the potential $V$ in the Schrödinger
+equation, so the solution takes the form of a first order polynomial
+\begin{align*}
+    ψ(x) &= Ax + B
+\end{align*}
+
+We will only be concerned with the reflection and transmission coefficients,
+and knowing that they are defined in terms of a ratio of the wavefunction
+amplitude for the reflected and transmitted components with respect to the
+incident amplitude, we simplify our solution by directly setting the incident
+particle amplitude to unity. Furthermore, we know that there is no leftward
+traveling component in region Ⅲ. Assigning each component a unique and
+appropriate unknown coefficient, the three wavefunctions are
+\begin{align*}
+    ψ_{\text{Ⅰ}} &= e^{ikx} + re^{-ikx}\\
+    ψ_{\text{Ⅱ}} &= ax + b\\
+    ψ_{\text{Ⅲ}} &= te^{ikx}
+\end{align*}
+
+We find the values for $r$ and $t$ by applying continuity boundary conditions
+at the interfaces between each solution. Starting at $x = 0$,
+\begin{align*}
+    ψ_{\text{Ⅰ}}(0) &= ψ_{\text{Ⅱ}}(0)
+        & ψ_{\text{Ⅰ}}'(0) &= ψ_{\text{Ⅱ}}'(0) \\
+    1 + r &= b
+        & ik(1-r) &= a
+\end{align*}
+Then putting the values into $ψ_{\text{Ⅰ}}$ and solving the boundary conditions
+at $x = L$,
+\begin{align*}
+    ψ_{\text{Ⅱ}}(L) &= ψ_{\text{Ⅲ}}(L)
+        & ψ_{\text{Ⅱ}}'(L) &= ψ_{\text{Ⅲ}}'(L) \\
+    ik(1-r)L + 1+r &= te^{ikL}
+        & ik(1-r) &= ikte^{ikL}
+\end{align*}
+From the equation on the right, we solve for $t$ as a function of $r$ and
+insert it into the condition on the left:
+\begin{align*}
+    t &= (1-r)e^{-ikL} \\
+    ik(1-r)L + 1 + r &= ((1-r)e^{-ikL})e^{ikL} \\
+    r &= \frac{-ikL}{2-ikL}
+\intertext{Plugged back into $t$ gives}
+    t &= \frac{2}{2-ikL}e^{-ikL}
+\end{align*}
+
+We then just take the complex square of both amplitudes to get the reflection
+and transmission coefficients:
+\begin{align}
+    \boxed{ R = |r|² = \frac{k²L²}{4 + k²L²} }
+\end{align}
+\begin{align}
+    \boxed{ T = |t|² = \frac{4}{4 + k²L²} }
+\end{align}
+
+These satisfy the requisite properties: the probabilities sum to unity so all
+particles are accounted for, in the limit that the barrier vanishes no
+particles are reflected and all are transmitted, and in the limit that the
+barrier grows to infinite depth, all particles are reflected.
+\begin{align}
+    \boxed{ R + T = 1}
+\end{align}
+\begin{align}
+    \boxed{
+    T \underset{L→0}{\longrightarrow} 1 \quad\quad
+        T \underset{L→∞}{\longrightarrow} 0
+    }
+\end{align}
+\begin{align}
+    \boxed{
+    R \underset{L→0}{\longrightarrow} 0 \quad\quad
+        R \underset{L→∞}{\longrightarrow} 1
+    }
+\end{align}
+
+This system can be tuned such that half of the particles are transmitted
+through the barrier by changing the energy of the particles. To do so, we set
+the transmission probability to $\frac 12$ and solve for the particles'
+corresponding de Broglie wavelength.
+\begin{align*}
+    \frac 12 &= \frac{4}{4+k²L²} \\
+    4 &= k²L² \\
+    k² &= \frac{4}{L²}
+\intertext{Making use of the definition of $k²$ in terms of the energy,}
+    \frac{2mE}{ℏ²} &= \frac{4}{L²}
+\intertext{Then writing the energy in terms of the de Broglie wavelength:}
+    \frac{2m}{ℏ²} \frac{4π²ℏ²}{2mλ²} &= \frac{4}{L²}
+\end{align*}
+
+Therefore, the particles' incident momentum can be tuned and half the particles
+will be transmitted when
+\begin{align}
+    \boxed{ λ = πL }
+\end{align}
