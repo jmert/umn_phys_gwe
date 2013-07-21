@@ -417,3 +417,140 @@ will be transmitted when
 \begin{align}
     \boxed{ λ = πL }
 \end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{4}
+\subsubsection{Question}
+% Keywords
+	\index{quantum!Periodic array of potential wells}
+	\index{solid state!Periodic array of potential wells}
+
+Consider a one-dimensional infinite array of points labeled by an index $n$
+and separated by a fixed unit distance. At each point there is an identical
+very deep and narrow potential well. Let $\ket{n}$ denote an eigenstate of a
+\emph{single} well, with energy $E$.
+\begin{enumerate}[(a)]
+    \item
+        Argue that if the wells are so narrow that the different sites can
+        be considered uncoupled, then $\ket{n}$ is an eigenstate of the
+        total Hamiltonian $H$ with eigenvalue $E$. What is its degeneracy?
+        Then show that the state $\ket{k}$ defined as
+        \begin{align*}
+            \ket{k} = \sum_{n=-∞}^∞ e^{ink} \ket{n}
+        \end{align*}
+        with $-π < k < π$ is an eigenstate of both $H$ and the translation
+        operator $T$ defined as $T\ket{n} = \ket{n+1}$. Find the respective
+        eigenvalues.
+    \item
+        Assume now that neighboring sites are weakly coupled so that the
+        total Hamiltonian can now be written as
+        \begin{align*}
+            H = \sum_{n=-∞}^∞ ( \ket{n}E\bra{n} - \ket{n+1}D\bra{n} -
+                \ket{n}D\bra{n+1} )
+        \end{align*}
+        where the coupling parameter $D$ is real and we assume that
+        $\braket{n}{n'} = δ_{n,n'}$. Show that $\ket{n}$ is no longer an
+        eigenstate of $H$ but that $\ket{k}$ still is. Find the eigenvalue.
+\end{enumerate}
+
+\subsubsection{Answer}
+
+The only reasonable choice for the form of the total Hamiltonian $H$ is a
+superposition of the Hamiltonian of individual sites.
+\begin{align*}
+    H &= \sum_i H_i
+\end{align*}
+If we then operate on a state $\ket{n}$ with the total Hamiltonian,
+\begin{align*}
+    H\ket{n} &= (\sum_i H_i)\ket{n} \\
+    {} &= \sum_i H_i\ket{n} \\
+    H\ket{n} &= H_i δ_{i,n} \ket{n}
+\end{align*}
+Only the $n$-th Hamiltonian will operate on $\ket{n}$, so the state is in fact
+an eigenstate of the total Hamiltonian with an eigenvalue of $E$.
+\begin{align}
+    \boxed{ H\ket{n} = E\ket{n}} \\
+    \boxed{ \text{$N$-fold degeneracy} }
+\end{align}
+Because each state $n$ has the same eigenvalue of $E$, the degeneracy is
+equal to the number of sites. If there are $N$ sites in the array, then that
+is also the degeneracy of the total system.
+
+Similarly for the state $\ket{k}$ as defined will can be operated on by the
+total Hamiltonian:
+\begin{align*}
+    H\ket{k} &= H (\sum_n e^{ink}\ket{n}) \\
+    {} &= \sum_n e^{ink} H\ket{n}
+\intertext{Then because we've already shown that $\ket{n}$ is an eigenstate
+of $H$ with eigenvalue $E$}
+    {} &= \sum_n e^{ink} E\ket{n} \\
+    H\ket{k} &= E (\sum_n e^{ink}\ket{n})
+\end{align*}
+We find that $\ket{k}$ is also an eigenstate of the total Hamiltonian with
+ane eigenvalue of $E$ as well.
+\begin{align}
+    \boxed{ H\ket{k} = E\ket{k} }
+\end{align}
+
+Finally, we define a translation operator $T$ for $\ket{n}$ and determine its
+effect on the state $\ket{k}$.
+\begin{align*}
+    T\ket{k} &= T (\sum_n e^{ink}\ket{n}) \\
+    {} &= \sum_n e^{ink} T\ket{n} \\
+    {} &= \sum_n e^{ink} \ket{n+1} \\
+\intertext{We can insert a factor of unity to extract a more useful form}
+    {} &= \sum_n e^{i(n+1)k}e^{-ik} \ket{n+1} \\
+    {} &= e^{-ik} \sum_n e^{i(n+1)k} \ket{n+1} 
+\end{align*}
+and since $n ∈ (-∞,∞)$, the distinction between $n$ and $n+1$ is
+inconsequential to the definition of $\ket{k}$. Therefore
+\begin{align}
+    \boxed{ T\ket{k} = e^{-ik}\ket{k} }
+\end{align}
+The translation operator has a phase eigenvalue of $e^{-ik}$ when operating
+on the Bloch wave function $\ket{k}$.
+
+If the total Hamiltonian is then modified include nearest neighbor
+interactions, the individual site wavefunctions $\ket{n}$ are no longer
+eigenstates of the total Hamiltonian as shown by explicit calculation:
+\begin{align*}
+    H\ket{n} &= \left[ \sum_{n'} \ket{n'}E\bra{n'} - \ket{n'+1}D\bra{n'}
+        - \ket{n'}D\bra{n'+1} \right] \ket{n} \\
+    {} &= \sum_{n'} \ket{n'}E\braket{n'}{n} -
+        \ket{n'+1}D\braket{n'}{n} - \ket{n'}D\braket{n'+1}{n} \\
+    {} &= \sum_{n'} δ_{n,n'}(E\ket{n'} - D\ket{n'+1}) - Dδ_{n,n'+1}\ket{n'} \\
+    {} &= E\ket{n} - D\ket{n+1} - D\ket{n-1}
+\end{align*}
+There are now three wavefunctions left with two different coeffients, so the
+problem is not an eigenvalue problem.
+\begin{align}
+    \boxed{ E\ket{n} - D\ket{n+1} - D\ket{n-1} = H\ket{n} ≠ λ\ket{n} }
+\end{align}
+
+Operating on the Bloch wavefunction, though
+\begin{align*}
+    H\ket{k} &= \left[ \sum_{n'} \ket{n'}E\bra{n'} - \ket{n'+1}D\bra{n'}
+        - \ket{n'}D\bra{n'+1} \right] (\sum_n e^{ink}\ket{n}) \\
+    {} &= \sum_{n,n'} \ket{n'}Ee^{ink}\braket{n'}{n} -
+        \ket{n'+1}De^{ink}\braket{n'}{n} - \ket{n'}De^{ink}\braket{n'+1}{n} \\
+    {} &= \sum_{n,n'} Ee^{ink}δ_{n,n'}\ket{n'} - De^{ink}δ_{n,n'}\ket{n'+1} -
+        De^{ink}δ_{n,n'+1}\ket{n'} \\
+\intertext{Consuming the summation over $n'$ to select a non-zero term in the
+Kronecker delta leaves}
+    {} &= \sum_{n} Ee^{ink}\ket{n} - De^{ink}\ket{n+1} - De^{ink}\ket{n-1}
+\intertext{We can then separate each term into a summation:}
+    {} &= E\sum_{n}(e^{ink}\ket{n}) - D\sum_{n}(e^{ink}\ket{n+1}) -
+        D\sum_{n}(e^{ink}\ket{n-1})
+\intertext{Then using the same unity-factor trick as in demonstrating that
+$\ket{k}$ is an eigenstate of $T$,}
+    {} &= E\sum_{n}(e^{ink}\ket{n}) - De^{-ik}\sum_{n}(e^{i(n+1)k}\ket{n+1}) -
+        De^{ik}\sum_{n}(e^{i(n-1)k}\ket{n-1})
+\end{align*}
+Each of these terms is the definition of $\ket{k}$, so we find that $\ket{k}$
+is still an eigenstate of this new Hamiltonian with an eigenvalue of $E - 2D
+\cos k$.
+\begin{align}
+    \boxed{ H\ket{k} = (E - 2D\cos k)\ket{k} }
+\end{align}
