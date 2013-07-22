@@ -369,7 +369,81 @@ backwards in the collision?
 
 \subsubsection{Answer}
 
+We'll be solving the problem using conservation of 4-momentum, so we define
+the following momenta with the assumption that the electron beam is moving
+to the right, and the photons are initially moving to the left. Let the
+unprimed and primed $q^μ$ be the photon's 4-momentum before and after the
+collision respectively, and define the electron's momenta $k^μ$ similarly.
+Then in terms of the energies $E$ and 3-momenta $p$ (actually taken to be 1D
+without loss of generality) for each of the photon $γ$ and electron $e$:
+\begin{align*}
+    q^μ &= \begin{pmatrix} E_γ/c \\ -E_γ/c \end{pmatrix} &
+	q'^μ &= \begin{pmatrix} E'_γ/c \\ E'_γ/c \end{pmatrix}
+    \\
+    k^μ &= \begin{pmatrix} E_e/c \\ p_e \end{pmatrix} &
+	k'^μ &= \begin{pmatrix} E'_e/c \\ p'_e \end{pmatrix}    
+\end{align*}
+By conservation of momentum,
+\begin{align*}
+    q'^μ + k'^μ &= q^μ + k^μ \\
+    k'^μ &= q^μ - q'^μ + k^μ
+\end{align*}
+Solving for the unknown electron momentum after the collision lets us eliminate
+it from the equation; when we square the equation, the squared quantities are
+Lorentz invariant, and therefore the product can be evaluated in any frame. A
+convenient choice is the rest frame where the electron evaluates to its mass
+energy and photons vanish.
+\begin{align*}
+    \underbrace{k'^μ k'_μ}_{m_e c²} &=
+	\underbrace{q^μ q_μ}_{0}
+	- \underbrace{q'^μ q'_μ}_{0}
+	+ \underbrace{k^μ k_μ}_{m_e c²}
+	- q'^μ q_μ + q'^μ k_μ - q^μ k_μ
+\end{align*}
+This greatly simplifies the rest of the problem to
+\begin{align*}
+    q'^μ q_μ - q'^μ k_μ &= - q^μ k_μ
+\end{align*}
+Inserting the energy and 3-momentum components and performing the inner
+products,
+\begin{align*}
+    2\frac{E_γ E'_γ}{c²} - \frac{E'_γ E_e}{c²} + \frac{E'_γ p_e}{c} &=
+	-\frac{E_γ E_e}{c²} - \frac{E_γ p_e}{c}
+\end{align*}
+Isolating $E'_γ$ on the left and $E_γ$ on the right,
+\begin{align*}
+    -E'_γ (E_e - p_e c - 2E_γ) &= - E_γ(E_e - p_e c)
+\end{align*}
+which solving for the unknown photon energy gives
+\begin{align}
+    \boxed{ E'_γ = E_γ (1 - \frac{2E_γ}{E_e - p_e c})^{-1} }
+	\label{eqn:2002sp1.7:analytic_soln}
+\end{align}
 
+The solution is formally complete, but actually calculating a numerical answer
+can prove difficult because $E_e ≈ p_e c$. Therefore, we will expand the
+solution. Beginning with the definition of the momentum from Einstein's energy
+relation,
+\begin{align*}
+    p_e c &= \sqrt{{E_e}² - {m_e}²c⁴}
+\intertext{we can subtract it from $E_e$, leading to the useful form}
+    E_e - p_e c &= E_e ( 1 - \sqrt{1 - \frac{{m_e}²c⁴}{{E_e}²}} )
+\intertext{Expanding the root to first order in its argument,}
+    E_e - p_e c &= E_e ⋅ \frac 12 \frac{{m_e}²c⁴}{{E_e}²} \\
+    {} &= \frac 12 \frac{{m_e}²c⁴}{E_e}
+\end{align*}
+
+Plugging this into the solution (\ref{eqn:2002sp1.7:analytic_soln}), the
+photon energy is then approximately given by
+\begin{align}
+    \boxed{ E'_γ ≈ E_γ ( 1 - 4 \frac{E_γ E_e}{{m_e}²c⁴} )^{-1} }
+	\label{eqn:2002sp1.7:approx_soln}
+\end{align}
+The numerics are much easier to calculate in this case, and we find that the
+final energy of the reflected photon is
+\begin{align}
+    \boxed{ E'_γ = \SI{4.273}{\eV} }
+\end{align}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Problem 8
