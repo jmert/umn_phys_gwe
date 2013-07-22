@@ -554,3 +554,122 @@ is still an eigenstate of this new Hamiltonian with an eigenvalue of $E - 2D
 \begin{align}
     \boxed{ H\ket{k} = (E - 2D\cos k)\ket{k} }
 \end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{5}
+\subsubsection{Question}
+% Keywords
+	\index{thermodynamics!Mixing gases}
+
+Two monatomic ideal gases, each occupying a volume $V = \SI{1}{\m³}$, are
+separated by a removeable insulating partition. They have different
+temperatures $T₁ = \SI{350}{\K}$ and $T₂ = \SI{450}{\K}$, and different
+pressures $p₁ = \SI{e3}{\N\per\m²}$ and $p₂ = \SI{5e3}{\N\per\m²}$. The
+partition is removed, and the gases are allowed to mix while remaining
+thermally isolated from the outside.
+\begin{enumerate}[(a)]
+    \item
+        What are the final temperature $T_f$ (in \si{\K}) and pressures $p_f$
+        (in \si{\N\per\m²})?
+    \item
+        What is the net change in entropy due to mixing (in \si{\J\per\K})?
+\end{enumerate}
+
+\subsubsection{Answer}
+
+Starting with conservation of energy, the total internal energy after the
+partition is removed must be the same as the sum of the internal energies of
+both starting gases.
+\begin{align*}
+    U &= U₁ + U₂ \\
+    \frac 32 Nk_B T_f &= \frac 32 N₁k_B T₁ + \frac 32 N₂k_B T₂ \\
+    T_f &= \frac{N₁T₁ + N₂T₂}{N₁ + N₂}
+\end{align*}
+where we made use of the fact that particle number must also be a conserved
+quantity so that $N = N₁ + N₂$. The original particle numbers $N₁$ and $N₂$
+can be determined from the ideal gas law in the initial state:
+\begin{align*}
+    p₁V &= N₁k_B T₁             &   p₂V &= N₂ k_B T₂ \\
+    N₁ &= \frac{p₁V}{k_B T₁}    &   N₂ &= \frac{p₂V}{k_B T₂}
+\end{align*}
+Plugging these into the final temperature $T_f$ above and simplifying gives
+the value in terms of known quantities as
+\begin{align*}
+    T_f &= \frac{p₁ + p₂}{p₁T₂ + p₂T₁} T₁T₂
+\end{align*}
+which when the numbers are plugged in gives a final temperature of
+\begin{align}
+    \boxed{ T_f = \SI{429.55}{\K} }
+\end{align}
+We can then plug this temperature into a formulation of the ideal gas law
+for the system after the partition has been removed to get the final pressure.
+\begin{align*}
+    p_f (2V) &= (N₁+N₂) k_B T_f \\
+    p_f &= \frac{(N₁+N₂)k_B}{2V} \frac{N₁T₁ + N₂T₂}{N₁+N₂} \\
+    p_f &= \frac{k_B}{2V}(N₁T₁ + N₂T₂)
+\end{align*}
+Again substitution for $N₁$ and $N₂$ in terms of the original pressures and
+temperatures gives
+\begin{align*}
+    p_f &= \frac{p₁ + p₂}{2}
+\end{align*}
+which when the values are plugged in
+\begin{align}
+    \boxed{ p_f = \SI{3e3}{\N\per\m²} }
+\end{align}
+
+From the Sackur-Tetrode euation, we can calculate the change in the entropy
+from the beginning state to the final one. We start by simplifying the
+equation to isolate constant factors:
+\begin{align*}
+    S &= Nk_B \left\{\frac 52 + \ln\left[ \frac{V}{N}
+		(\frac{4πmU}{3Nh²})^{3/2} \right] \right\} \\
+    {} &= \frac 52 Nk_B + Nk_B \ln\left[ \frac{V}{N}
+		(\frac{4πmU}{3Nh²})^{3/2} \right] \\
+    {} &= Nk_B \left\{ \frac 52 + \frac 32 \ln(\frac{4πm}{3h²})
+        + \ln\left[ \frac{V}{N}(\frac{U}{N})^{3/2} \right] \right\}
+\end{align*}
+Then with the change in entropy defined as
+\begin{align*}
+    ΔS = S - S₁ - S₂
+\end{align*}
+we start calculating the sum term-by-term. For the first two constant terms,
+the fact that $N = N₁ + N₂$ causes these terms to cancel with those in $S₁$
+and $S₂$. That leaves us just with the last term.
+\begin{align*}
+    ΔS &= (N₁+N₂)k_B
+        \ln\left[\frac{2V}{N}(\frac{\frac 32 Nk_B T_f}{N})^{3/2}\right]
+        - N₁k_B\ln\left[\frac{V}{N₁}(\frac{\frac 32 N₁k_B T₁}{N₁})^{3/2}\right]
+        - N₂k_B\ln\left[\frac{V}{N₂}(\frac{\frac 32 N₂k_B T₂}{N₂})^{3/2}\right]
+    \\
+\intertext{By the ideal gas law, $V/N = k_BT/p$ which simplifies the expression
+to}
+    {} &= N₁k_B\ln\left[
+            \frac{2k_B T_f}{p_f}(\frac 32 k_B T_f)^{3/2} ⋅
+            \frac{p₁}{k_B T₁}(\frac{1}{\frac 32 k_B T₁})^{3/2}
+        \right] + N₂k_B\ln\left[
+            \frac{2k_B T_f}{p_f}(\frac 32 k_B T_f)^{3/2} ⋅
+            \frac{p₂}{k_B T₂}(\frac{1}{\frac 32 k_B T₂})^{3/2}
+        \right]
+    \\
+    {} &= N₁k_B\ln\left[
+            \frac{p₁}{p_f}(\frac{T_f}{T₁})^{5/2}
+        \right] + N₂k_B\ln\left[
+            \frac{p₂}{p_f}(\frac{T_f}{T₂})^{5/2}
+        \right] + (N₁+N₂)k_B \ln 2
+\end{align*}
+Using the ideal gas law again to manipulate the coefficients $Nk_B = pV/T$,
+\begin{align*}
+    ΔS &= V\left\{ \frac{p₁}{T₁}\ln\left[
+            \frac{p₁}{p_f}(\frac{T_f}{T₁})^{5/2}
+        \right] + \frac{p₂}{T₂}\ln\left[
+            \frac{p₂}{p_f}(\frac{T_f}{T₂})^{5/2}
+        \right] + \frac{p_f}{T_f} \ln 2 \right\}
+\end{align*}
+Plugging in the values for all these numbers as given or we determined, the
+change in entropy is
+\begin{align}
+    \boxed{ ΔS = \SI{7.55}{\J/\K} }
+\end{align}
