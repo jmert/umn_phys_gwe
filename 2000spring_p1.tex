@@ -86,6 +86,71 @@ or in units of $c$
 \end{align}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{3}
+\subsubsection{Question}
+% Keywords
+    \index{electrodynamics!Voltage and phase in an RL circuit}
+    \index{circuits!Voltage and phase in an RL circuit}
+
+A resistance $R$ and an inductance $L$ are connected in series, and an
+alternating voltage $V₀\cos ωt$ is impressed across the combination. The
+resulting steady state voltage across the resistance can be written as $V_R
+\cos(ωt + β)$. Find $V_R$ and $β$, assuming both $V₀$ and $V_R$ to be
+positive.
+
+\subsubsection{Answer}
+
+The problem is simplified by constucting the solution using complex voltages
+and currents and recovering the correct component at the end. Since the
+source voltage is a cosine, the real component will be kept at the end.
+
+The complex impedance for a resistor is simply the resitance itself, so $Z_R
+= R$. For the inductor, it is $Z_L = iωL$. We then use the complex
+impedances together with Ohm's Law and the first Kirchoff rule to solve for
+the complex current $I$.
+\begin{align*}
+    V₀e^{iωt} &= IR + iωLI \\
+    I &= \frac{V₀}{R+iωL} e^{iωt}
+\end{align*}
+Then by inserting this solution into the voltage law for inductors, we can
+solve for the complex voltage across the inductor.
+\begin{align*}
+    V_L &= L\frac{dI}{dt} \\
+    V_L &= V₀ \frac{iωL}{R+iωL} e^{iωt}
+\end{align*}
+
+The voltage drops across the resistor and inductor must equal the impressed
+voltage, so we can solve for the unknown voltage across the resistor.
+\begin{align*}
+    V₀e^{iωt} &= V + V_L \\
+    V &= V₀e^{iωt} - V₀\frac{iωL}{R+iωL}e^{iωt} \\
+    V &= V₀ (\frac{R² - iωRL}{R² + ω²L²}) e^{iωt}
+\end{align*}
+In order to make taking the real component simpler, we put the term in
+parentheses in complex exponential form according to the relation $z =
+|z|e^{i \arg z}$.
+\begin{align*}
+    \left| \frac{R² - iωRL}{R² + ω²L²} \right| &=
+	\frac{R\sqrt{R² + ω²L²}}{R² + ω²L²}
+    \\
+    \arg (\frac{R² - iωRL}{R² + ω²L²}) &= \arctan(-\frac{ωL}{R})
+\end{align*}
+Therefore the voltage across the resistor has the form
+\begin{align*}
+    V &= V₀ \frac{R\sqrt{R² + ω²L²}}{R² + ω²L²} e^{iωt + \arctan(-ωL/R)} \\
+    V &= V_R e^{iωt + iβ} \\
+    \Re\{V\} &= V_R \cos(ωt + β)
+\end{align*}
+where
+\begin{align}
+    \boxed{ V_R = V₀ \frac{R\sqrt{R² + ω²L²}}{R² + ω²L²} }
+    \quad\quad
+    \boxed{ β = \arctan(-\frac{ωL}{R}) \vphantom{\frac{\sqrt{R}}{R}} }
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% Problem 4
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \problem{4}
