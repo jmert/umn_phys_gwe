@@ -673,3 +673,75 @@ change in entropy is
 \begin{align}
     \boxed{ ΔS = \SI{7.55}{\J/\K} }
 \end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 6
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{6}
+\subsubsection{Question}
+% Keywords
+	\index{special relativity!Rocket sending signal to Earth}
+
+A rocket passes Earth at a speed $v = 0.6c$. When a clock on the rocket says
+that one hour has elapsed since passing, the rocket sends a light signal
+back to Earth.
+\begin{enumerate}[(a)]
+    \item
+        Suppose that the Earth and rocket clocks were synchronized at zero
+        at the time passing. According to the \emph{Earth} clocks, when was
+        the signal sent?
+    \item
+        According to the \emph{Earth} clocks, when did the signa arrive back
+        on Earth?
+    \item
+        According to the \emph{rocket} clocks, how long after the rocket
+        passed did the signal arrive back on Earth?
+\end{enumerate}
+
+\subsubsection{Answer}
+
+Let $β = v/c$.
+
+\begin{enumerate}[(a)]
+    \item
+        Let $t'_{sent} = \SI{1}{\hour}$ be the time at which the rocket sent
+        the signal according to its own clock. Because from the Earth's
+        reference frame the rocket's clocks are running slow, the clocks on
+        Earth must show a time greater than the rocket's by a factor of $γ$.
+        \begin{align*}
+            t_{sent} &= γt'_{sent} \\
+            {} &= \frac{\SI{1}{\hour}}{\sqrt{1 - β²}}
+        \end{align*}
+        \begin{align}
+            \boxed{ t_{sent} = \frac 54 \,\si{\hour} = \SI{1.25}{\hour} }
+        \end{align}
+    \item
+        The returning light will traverse the intermediate distance at $c$, so
+        $t_{ret} = x/c$. The distance from the Earth is simply the velocity
+        times the time (in Earth's reference frame), so together,
+        \begin{align*}
+            t_{ret} &= \frac{vt_{sent}}{c} \\
+            {} &= βt_{sent} \\
+            t_{ret} &= \frac 34 \,\si{\hour} = \SI{0.75}{\hour}
+        \end{align*}
+        The total round trip time is then
+        \begin{align}
+            \boxed{ t_{tot} = t_{sent} + t_{ret} = \SI{2}{\hour} }
+        \end{align}
+    \item
+        Because the rocket is flying away from the Earth, the distance behind
+        it towards the earth appears to have been length expanded by a factor
+        of $γ$ compared to the distance that Earth would report. Therefore the
+        time for the signal to be sent from the rocket to Earth appears to the
+        rocket to be
+        \begin{align*}
+            t'_{ret} &= \frac{γx}{c} \\
+            {} &= γt_{ret} \\
+            t'_{ret} &= \frac{15}{16} \,\si{\hour} = \SI{0.9375}{\hour}
+        \end{align*}
+        Added to the 1 hour that the rocket observes as the time before it
+        sent the signal, the signal would arrive at earth at time
+        \begin{align*}
+            \boxed{ t'_{tot} = \frac{31}{16} \,\si{\hour} = \SI{1.9375}{\hour} }
+        \end{align*}
+\end{enumerate}
