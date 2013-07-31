@@ -246,3 +246,117 @@ Plugging in all the numbers,
 \begin{align}
     \boxed{ t = \SI{2.83e9}{\year} }
 \end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 12
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{12}
+\subsubsection{Question}
+% Keywords
+	\index{circuits!Current amplitude and phase in LRC circuit}
+
+The applied AC voltage in the circuit is given by $V(t) = V₀ \sin ωt$, with 
+a frequency fixed at $ω = 1/(LC)^{1/2}$. Determine the steady state 
+amplitude and phase of the current through the resistor $R$. Express your 
+answer in terms of the amplitude $V₀$ of the applied voltage and the other 
+circuit parameters.
+
+\begin{center}
+	\vspace{\baselineskip}
+	\begin{circuitikz}
+		\resetparens
+		\draw (0,-2)
+		to [sV,l=$V(t)$] ++(0,4)
+			-- ++(3,0)
+		to [L,l=$L$] ++(0,-2)
+			coordinate (split)
+			-- ++(-1,0)
+		to [C,l=$C$] ++(0,-2)
+			-- (0,-2)
+			(split) -- ++(1,0)
+		to [R,l=$R$] ++(0,-2)
+			-- (0,-2)
+		;
+	\end{circuitikz}
+	\vspace{\baselineskip}
+\end{center}
+
+\subsubsection{Answer}
+
+AC problems are simplified by using complex impedances, so we first convert 
+the given voltage into a complex one:
+\begin{align*}
+	\tilde V(t) &= V₀ e^{iωt}
+\end{align*}
+where the physical solution can be recovered by keeping the imaginary 
+component of the complex solution. Then to solve the problem, we realize 
+that there is another complimentary circuit diagram which is helpful: the 
+one with the resistor and capacitor replaced by an effective resistor 
+(impedance). The circuit looks like
+\begin{center}
+	\vspace{\baselineskip}
+	\begin{circuitikz}
+		\resetparens
+		\draw (0,-2)
+		to [sV,l=$V(t)$] ++(0,4)
+			-- ++(3,0)
+		to [R,l=$Z_L$] ++(0,-2)
+		to [R,l=$Z_{eff}$] ++(0,-2)
+			-- (0,-2)
+		;
+	\end{circuitikz}
+	\vspace{\baselineskip}
+\end{center}
+The inductor has been been replaced by an effective resistor with impedance 
+$Z_L = iωL$. The effective resistor that replaced the capacitor and resistor 
+is a complex impedance that is calculated the same as for traditional 
+resistors in parallel:
+\begin{align*}
+	Z_{eff} &= ( \frac{1}{Z_C} + \frac{1}{Z_R} )^{-1} \\
+		&= ( iωC + \frac{1}{R} )^{-1} \\
+		&= \frac{R}{iωCR + 1}
+\end{align*}
+Now making use of Kirchoff's loop rule on this simplified circuit where the 
+total current passing through the voltage source is labeled $\tilde I₀$,
+\begin{align*}
+	0 &= \tilde V - \tilde I₀ (Z_L + Z_{eff}) \\
+	\tilde V &= (iωL + \frac{R}{iωCR + 1}) \tilde I₀ \\
+	\tilde V &= \frac{R(1 - ω²LC) + iωL}{iωRC + 1} \tilde I₀
+\intertext{The first term in the numerator goes to zero since $ω² = 1/LC$,
+leaving}
+	\tilde I₀ &= \frac{iωRC + 1}{iωL} V₀ e^{iωt}
+\end{align*}
+
+To isolate the current passing through the resistor, we return to the 
+original unsimplified circuit diagram and apply Kirchoff's loop rule to only 
+the inner loop. If we define the current through capacitor to be $I₁$ and
+through the resistor to be $I₂$, we get
+\begin{align*}
+	0 &= -\tilde I₂ Z_R + \tilde I₁ Z_C \\
+	\tilde I₁ &= \frac{Z_R}{Z_C} I₂ \\
+	\tilde I₁ &= iωRC I₂ \\	
+\end{align*}
+Remembering the the current passing into a junction must be conserved, we know
+that $I₀ = I₁ + I₂$ and therefore,
+\begin{align*}
+	\tilde I₀ &= iωRC \tilde I₂ + \tilde I₂ \\
+	\tilde I₂ &= \frac{1}{iωRC + 1} \tilde I₀
+\end{align*}
+Inserting the solution for $I₀$ from the previous part leaves
+\begin{align*}
+	\tilde I₂ &= \frac{V₀}{iωL} e^{iωt}
+\end{align*}
+To prepare for finding the physical solution, we transform the coefficient
+complex polar form.
+\begin{align*}
+	\tilde I₂ &= \left|-\frac{iV₀}{ωL}\right| e^{i\arg(-iV₀/ωL)} e^{iωt} \\
+		&= \frac{V₀}{ωL} e^{-iπ/2} e^{iωt}
+\end{align*}
+Therefore taking the imaginary part of the solution,
+\begin{align}
+	\boxed{
+	I_R(t) = V₀ \sqrt{\frac{C}{L}} \sin(ωt - \frac π2)
+	}
+\end{align}
+The current's amplitude is $V₀\sqrt{C/L}$ and has a phase of $-π/2$ with
+respect to the voltage.
