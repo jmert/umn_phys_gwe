@@ -1,0 +1,57 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 9
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{9}
+\subsubsection{Question}
+% Keywords
+	\index{thermodynamics!Light bulb as blackbody radiator}
+	\index{circuits!Light bulb as blackbody radiator}
+
+An electric bulb is rated at \SI{100}{\W} when used with a DC voltage of \SI
+{110}{\V}. What total power is dissipated if this voltage is applied to two
+such bulbs connected in series? It can be assumed that each bulb dissipates
+heat by radiation from its filament similar to a black body and that the
+resistance of the filament is proportional to its absolute temperature.
+
+\subsubsection{Answer}
+
+Beginning from the known properties of a single bulb, we know that the
+dissipated power in a single bulb $P₀$ is like a black body, so the power
+must follow the Stefan-Boltmann law:
+\begin{align*}
+	P₀ &= σ_B {T₀}⁴
+\end{align*}
+where $T₀$ is operating equilibrium temperature. In addition, we are told
+that the bulb is like a resistor with a resistance proportional to its
+temperature:
+\begin{align*}
+	P₀ &= \frac{V²}{R} = \frac{V₀²}{C T₀}
+\end{align*}
+Combining the two equations gives the proportionality constant for a single
+bulb in the circuit.
+\begin{align*}
+	C &= \frac{{V₀}²}{σ_B {T₀}⁵}
+\end{align*}
+
+When a second bulb is added to the circuit, the voltage across each bulb is
+dropped and a corresponding change in the equilibrium temperature is
+created. Since the bulbs are in series, the voltage $V = \frac 12 V₀$ across
+each resistor sums in series. Repeating the same procedure as in the first
+case,
+\begin{align*}
+	σ_B T⁴ &= 2 \frac{V²}{R} = 2 \frac{(\frac 12 V₀)²}{C T} \\
+	σ_B T⁵ &= \frac 12 \frac{{V₀}²}{C}
+\end{align*}
+and inserting the constant $C$,
+\begin{align*}
+	T⁵ &= \frac 18 {T₀}⁵ \\
+	T &= \frac{1}{2^{1/5}} T₀
+\end{align*}
+Therefore from the Stefan-Boltmann law, the total power dissipated is
+\begin{align*}
+	P &= σ_B T⁴ = \frac{1}{2^{4/5}} σ_B {T₀}⁴
+\end{align*}
+\begin{align}
+	\boxed{ P = \frac{\SI{100}{\W}}{2^{4/5}} = \SI{57.435}{\W} }
+\end{align}
+
