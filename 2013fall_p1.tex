@@ -1,0 +1,134 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{1}
+\subsubsection{Question}
+% Keywords
+	\index{quantum!Spinning electron}
+	\index{mechanics!Spinning electron}
+
+Assuming the electron to be a classical particle, a sphere of radius 
+\SI{e-15}{\m} and of a uniform mass density with an intrinsic angular 
+momentum of order $ℏ$, compute the speed of rotation at the electron's 
+equator. How does your result compare with the speed of light?
+
+\subsubsection{Answer}
+
+Since we're assuming the electron is a classical sphere, we can equate the 
+angular momentum of a spinning sphere to the intrinsic angular momentum $ℏ$. 
+Knowing that the moment of inertia of a sphere is $I = \frac 25 m r²$ for a 
+sphere of uniform density, that means the momentum equation is,
+\begin{align*}
+	ℏ &= \frac 25 m R² ω
+\end{align*}
+Then solving for the frequency and relating it to the velocity of a point on
+the equator,
+\begin{align*}
+	v &= \frac 52 \frac{ℏ}{mR}
+\end{align*}
+Plugging in the values,
+\begin{align}
+	\boxed{ v = \SI{2.89e11}{\m\per\s} = \SI{965}{c} }
+\end{align}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{2}
+\subsubsection{Question}
+% Keywords
+	\index{quantum!Distinguishable electrons}
+
+Two electrons can be considered distinguishable if they are well separated 
+in space from each other, that is, their single particle wavefunctions are 
+non-overlapping. In that case, for every possible $x₁$ value, either 
+$ψ_α(x₁)$ and $ψ_β(x₁)$ is zero. Show that for non-overlapping wavefunctions 
+as defined above, the probability density for the total antisymmetric 
+wavefunction $ψ^*_Aψ_A$ is equal to the probability density of the total 
+symmetric wavefunction $ψ^*_Sψ_S$.
+
+\subsubsection{Answer}
+
+We start by constructing the antisymmetric and symmetric wavefunctions:
+\begin{align*}
+	ψ_A &= \frac{1}{\sqrt 2}( ψ_α(x₁)ψ_β(x₂) - ψ_α(x₂)ψ_β(x₁) ) \\
+	ψ_S &= \frac{1}{\sqrt 2}( ψ_α(x₁)ψ_β(x₂) + ψ_α(x₂)ψ_β(x₁) )
+\end{align*}
+Then calculating the complex square of both (where the $A/S$ indicates the 
+choice of $±$),
+\begin{align*}
+	\resetparens
+	ψ^*_{A/S}ψ_{A/S} = \frac 12 \Big(
+		&  ψ^*_α(x₁)ψ^*_β(x₂)ψ_α(x₁)ψ_β(x₂) \\
+		&∓ ψ^*_α(x₁)ψ^*_β(x₂)ψ_α(x₂)ψ_β(x₁) \\
+		&∓ ψ^*_α(x₂)ψ^*_β(x₁)ψ_α(x₁)ψ_β(x₂) \\
+		&+ ψ^*_α(x₂)ψ^*_β(x₁)ψ_α(x₂)ψ_β(x₁)
+	\Big)
+\end{align*}
+The first and fourth lines are simply the complex square of each 
+wavefunction. The second and third, though, contain the cross-terms, and 
+since we are given that the wavefunctions are non-overlapping, that means 
+necessarily the product of different wavefunctions at the same point in 
+space must be zero. Therefore both the second and third lines result in a 
+value of 0, thus simplifying the expression to,
+\begin{align}
+	\boxed{
+	ψ^*ψ = \frac 12 \Big( |ψ_α(x₁)|² |ψ_β(x₂)|² + |ψ_α(x₂)|² |ψ_β(x₁)|² \Big)
+	}
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Problem 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{3}
+\subsubsection{Question}
+% Keywords
+	\index{mechanics!Hooke-like Bohr atom}
+	\index{quantum!Hooke-like Bohr atom}
+
+A particle of mass $m$ moves in a circular orbit of radius $r$ in a 
+hypothetical atom where the force on the particle is in the form of a 
+generalized Hooke's alw: $F = -Cr$ directed towards the center of the atom, 
+where $C$ is the `spring constant'. Assuming that Bohr's postulates for the 
+atom apply in this case, in particular, that the orbital angular momentum 
+is quantized with a quantum number $n$, derive:
+\begin{enumerate}[(a)]
+	\item The radii of the allowed orbits
+	\item
+		The energies of these orbits in terms of the quantum number $n$. 
+		(You may take the potential energy of this ``spring atom'' to be 
+		$V(r) = \frac 12 Cr²$.)
+\end{enumerate}
+
+\subsubsection{Answer}
+
+With the assumption that the orbits are circular, we know that the Hooke 
+force must provide the centripital acceleration. Setting them equal and 
+solving for the angular frequency by $v = ωr$,
+\begin{align*}
+	m \frac{v²}{r} &= Cr \\
+	ω &= \sqrt{\frac{C}{m}}
+\end{align*}
+The point-particle electron then has an associated moment of inertia and 
+angular momentum as it orbits the nucleus.
+\begin{align*}
+	L &= mr² ⋅ \sqrt{\frac{C}{m}} \\
+	nℏ &= r² \sqrt{Cm}
+\end{align*}
+The quantization condition on the orbital radii is
+\begin{align}
+	\boxed{ r = (\frac{ℏ²}{Cm})^{1/4} \sqrt{n} }
+\end{align}
+
+To find the energies, we simply sum the kinetic energy from the orbital 
+motion with the potential energy contained in the ``spring''.
+\begin{align*}
+	E_n &= \frac 12 I ω² + \frac 12 C r² \\
+	&= \frac 12 m r² \frac{C}{m} + \frac 12 C r² \\
+	&= C r² = C ⋅ \sqrt{\frac{ℏ²}{Cm}} n
+\end{align*}
+Therefore the associated energy states are
+\begin{align}
+	\boxed{ E_n = ℏn\sqrt{\frac{C}{m}} }
+\end{align}
