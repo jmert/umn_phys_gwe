@@ -1,0 +1,382 @@
+%%
+% Collection of LaTeX input files which provide many convenient changes to the
+% default environment.
+%
+% See also:
+%    defaults-beamer.tex
+%    defaults-bib.tex
+%    defaults-drawing.tex
+%    defaults-utilities.sty
+%
+% AUTHORS:      Justin Willmert ‹justin@jdjlab.com›
+% SOURCES:      http://www.jdjlab.com/hg/latex/
+%
+% CONTRIBUTORS:
+%   1. Ian-Mathew Hornburg ‹imhornburg@gmail.com›
+%      (none — by personal correspondence)
+%
+%==============================================================================
+%
+% ********************
+% CONFIGURABLE OPTIONS
+% ********************
+%
+% There are a few configurable options that if set before the file is loaded
+% will override defaults set here. In order to override a feature, simply
+% declare a macro with the desired value. For example, to define the default
+% font color used throughout the document, one should provide a command such
+% as
+%     \newcommand{\deftextcolor}{0,0,0,0.5}
+%
+% TODO: Use pgfkeys as a way to get and set options instead? Maybe something
+%       like
+%           \def\optdefaults{%
+%               textcolor      = {0,0,0,1},
+%               stretchyparens = 0
+%               ...
+%            }
+%            \input{defaults}
+%
+% The following options are current recognized and supported:
+%
+% COMMAND              DEFAULT VALUE        DESCRIPTION
+% -----------------------------------------------------------------------------
+% \deftextcolor        0,0,0,1              The default text color is any valid
+%                                           CMYK color value supported by the
+%                                           xcolor package. Currently, no
+%                                           support is available for setting
+%                                           the default in other color spaces.
+%
+%
+%==============================================================================
+%
+% *****************
+% COMMANDS PROVIDED
+% *****************
+%
+% This section documents some commands which may be necessary due to the
+% modifications which are made by default, either overriding a previous change
+% locally or restoring the LaTeX default functionality.
+%
+% COMMAND              DESCRIPTION
+% -----------------------------------------------------------------------------
+% \definetextcolor     Change the font color of the body text. Attempts are
+%                      made to propagate the changes into all environments,
+%                      but see the inline documentation for a list of the
+%                      exceptions/caveats.
+%
+% \resetparents        By default, all parentheses in math mode made stretchy,
+%                      but this may be undesirable in some context, so this
+%                      command restores them to their default, inactive state.
+%
+%%
+
+%% Provide a package-like environment where internal macros are accessible
+\makeatletter
+
+%% Load several commonly-assumed commands or macros to be defined
+    \RequirePackage{defaults-utilities}
+
+
+
+%% Load all commonly used packages
+	\usepackage[
+		margin=1in,
+		twoside=true
+	]{geometry}
+	\usepackage{amsmath,amssymb}
+	\usepackage[
+		usenames,dvipsnames,svgnames,
+		table,
+		hyperref
+	]{xcolor}
+	\usepackage{float}
+	\usepackage{verbatim}
+	\usepackage{array}
+	\usepackage{tabularx}
+	\usepackage[
+		exponent-product     = \cdot,
+		load-configurations  = abbreviations,
+		per-mode             = symbol-or-fraction,
+		separate-uncertainty = true,
+		math-micro           = \text{µ},
+		text-micro           = µ
+	]{siunitx}
+	\usepackage[
+		font      = footnotesize,
+		labelfont = bf
+	]{caption}
+
+
+
+%% Make some amsmath fixes
+%
+% As of 2012-12-23 (XeTeX version 3.1415926-2.4-0.9998, TeXLive 2012), XeTeX
+% does not properly handle parentheses when using the TeX primitives
+%   \overwithdelims
+%   \atopwithdelims
+%   \abovewithdelims
+% Because of this, the macro \binom which internally uses these these commands
+% creates a binomial with the wrong size of brackets (too small). Patch around
+% this issue by using \left( and \right) around a bracket-less binomial.
+% LuaTeX doesn't seem to suffer from this.
+\ifxetex
+	\renewrobustcmd{\binom} [2]{\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)}
+	\renewcommand  {\dbinom}[2]{\left(\genfrac{}{}{0pt}{0}{#1}{#2}\right)}
+	\renewcommand  {\tbinom}[2]{\left(\genfrac{}{}{0pt}{1}{#1}{#2}\right)}
+\fi
+
+
+
+%% Before loading advanced fonts, set up a default color scheme.
+	% We choose black by default to correspond to norms, but this default can
+	% be overridden by simply defining textcolor before loading this defaults
+	% file.
+	\providecommand{\deftextcolor}{0,0,0,1}
+	\providecolor{textcolor}{cmyk}{\deftextcolor}
+	% Now define a command which can be used to change the text colors mid-way
+	% through a document. Right now, this doesn't work in all locations (e.g.
+	% the body text will change color but section headings don't), but by
+	% using a macro, we can potentially update the macro to also affect various
+	% text environments.
+	%
+	% TODO: Colors do not apply to these environments even when the color is
+	%       set within the preamble:
+	%         · \hrule, \rule
+	%
+	% TODO: Colors currently will not propagate into the following modes if
+	%       this macro is used after font selection/definition has occurred:
+	%         · math mode
+	%         · section headings
+	%
+	% \definetextcolor
+	%    #1 -> xcolor model-list — See the xcolor documentation for more info
+	%    #2 -> xcolor spec-list  — See the xcolor documentation for more info
+	\newcommand{\definetextcolor}[2]{%
+		% Define/Change the color which textcolor corresponds to
+		\definecolor{textcolor}{#1}{#2}
+		% If we're in a XeTeX/LuaTeX engine, use fontspec features to update
+		% the font color.
+		\ifxeluatex
+			\addfontfeatures{Color=textcolor}
+		\else
+			% TODO: Extensive testing in non-XeTeX/LuaTeX environments.
+			%       PDFTEX HAS BEEN COMPLETELY UNTESTED!
+		\fi
+	}
+
+	% Taken from I.-M.:
+	% “
+	%   Many of these macro patches are gonna take work, since the color
+	%   commands aren’t hooking well into the \rule family of commands. They’re
+	%   pretty fragile to start, and occasionally \color commands “bleed” their
+	%   color past their local contexts.
+	%
+	%   According to The LaTeX Companion, TeX’s \hrule command is actually used
+	%   in the default LaTeX definition of \footnoterule instead of LaTeX’s
+	%   \rule command in order to avoid strange effects of \rule, which
+	%   actually starts a paragraph and related calculations. KOMA-Script
+	%   modifies the footnote definition, but it still appears to be patchable.
+	%
+	%   If the below patch fails, the undefined macro \xpatchfailed will be
+	%   “executed”, resulting in an undefined control sequence error, and will
+	%   stop processing. A successful patch will be silent.
+	%
+	%   [TO-DO] Create a macro that writes a confirmation of the successful
+	%           patch either to the terminal or a logfile during compilation.
+	% ”
+	\usepackage{xpatch}
+	\xpretocmd{\footnoterule}{\color{textcolor}}{}{\xpatchfailed}
+	% “
+	%   Make table/array rules match the ambient text color...
+	% ”
+	\usepackage{colortbl}
+	\AfterPreamble{\arrayrulecolor{textcolor}}
+
+
+
+%% Add fancy font features if using an advanced TeX engine.
+\ifxeluatex\usepackage{fontspec}
+
+	% Set font features which should be true for all fonts loaded by default
+	\defaultfontfeatures{
+		% Permit using TeX-style ligatures (i.e. --- for em-dash)
+		Ligatures = TeX,
+		% Also use our defined color by default
+		Color     = textcolor,
+	}
+
+	% Also allow math to input using Unicode by default
+	\usepackage{unicode-math}
+	% Use the XITS Math font by default
+	\setmathfont[
+			% Use italic fonts at all times
+			math-style = ISO,
+			bold-style = ISO,
+			% Force \epsilon,\varepsilon and \phi,\varphi match the unicode
+			% character ε,ϵ and φ,ϕ
+			vargreek-shape = unicode
+		]{XITS Math}
+	% Additionally, use an alternate stylistic set for caligraphic letters so
+	% that they are different from the script letters
+	\setmathfont[range={\mathcal,\mathbfcal},StylisticSet=1]{XITS Math}
+	% Finally, request that certain symbols be provided by Latin Modern
+	% Math instead of XITS Math since I think the LM ones looks much nicer.
+	\setmathfont[range={"220F}]{Latin Modern Math}	% Product
+	\setmathfont[range={"2210}]{Latin Modern Math}	% Coproduct
+	\setmathfont[range={"2211}]{Latin Modern Math}	% Summation
+
+	% Have the Linux Libertine family of fonts provide the default serif and
+	% sans-serif fonts
+	\setmainfont{Linux Libertine O}
+	\setsansfont{Linux Biolinum O}
+
+\else %\ifxeluatex
+
+	% Also use Linux Libertine fonts in pdflatex mode, but do this through the
+	% libertine package.
+	\usepackage{libertine}
+
+	% Also choose to use use the STIX fonts like the XeLaTeX version
+	\usepackage[notext]{stix}
+
+\fi %\ifxeluatex
+
+
+
+%% Taken from I.-M.:
+%
+% Default glue settings under XeTeX for some fonts sometimes creates very
+% cramped text.
+%
+% From http://tex.stackexchange.com/questions/49298/what-settings-for-xspaceskip-would-you-suggest-for-linux-libertine?rq=1
+% Bringhurst suggests these values for body text: m/3 (even better if you can
+% keep it at m/4) for interword space, m/2 for maximum space, and m/5 for
+% minimum space. He also feels strongly against using the extra space after
+% sentences, so assume \frenchspacing.
+\appto\selectfont{%
+		\fontdimen2\font=0.250em % M/4
+		\fontdimen3\font=\dimexpr0.500em-\fontdimen2\font % M/2
+		\fontdimen4\font=\dimexpr\fontdimen2\font-0.200em%
+	}
+    \AfterPreamble{\frenchspacing}
+
+
+
+%% Make all parentheses stretchy
+%
+% By default, all parentheses are just normal parentheses in math mode. This
+% to me doesn't seem to make sense since I almost always want them to be
+% stretchy.
+%
+% Adapted from http://tex.stackexchange.com/questions/7359/how-to-make-a-real-backslash-escape-character/7372#7372
+	% Start by defining a macro to quickly reset the default behavior if we
+	% decide that a given environment shouldn't use the active definition. We
+	% need the \edef so that the \the\mathcode is immediately expanded before
+	% we change things.
+	\edef\resetparens{%
+			\mathcode`(=\the\mathcode`(
+			\mathcode`)=\the\mathcode`)
+		}
+	% Now we actually do the magic like this:
+	%   1) Start a local group so that we can temporarily define a lowercase
+	%      tilde to be the left paranetheses and not affect anything later in
+	%      the document.
+	%      a) We use the tilde because it is already defined to be an active
+	%         character. This saves a step since to define a character to
+	%         execute a macro sequence, it first needs to be active. The
+	%         \lowercase command does for us since the lowercase tilde (i.e.
+	%         paren) is made to have the same category code as its uppercase
+	%         counterpart.
+	%   2) \lccode assigns the lowercase tilde to be the left paren
+	%   3) Then use \lowercase to cause us to define the macro of active left
+	%      paren (without explicitly changing category codes).
+	%      a) The \endgroup ends the local group we just started, but not
+	%         before lowercase has already learned how to convert the tilde
+	%         This lets the next \edef to be at the current global scope,
+	%         avoiding use of \global
+	%   4) Then define the active left paren to be the sequence \left( so that
+	%      we invoke the stretchy code
+	%   5) Finally change the mathcode of the left paren to be active within
+	%      math environments, meaning we don't have to worry about the
+	%      character being active in normal text mode.
+	\begingroup%
+			\lccode`~=`(%
+			\lowercase{\endgroup\edef~}{\left(}
+		\mathcode`(="8000
+	% Do it again for the right paren
+	\begingroup%
+			\lccode`~=`)%
+			\lowercase{\endgroup\edef~}{\right)}
+		\mathcode`)="8000
+	% Finally, this change of math codes breaks some changes the amsmath
+	% package makes to the definitions of \left( and \right), so we fix this
+	% by patching the internal amsmath macro which breaks to be prepended with
+	% the \resetparens command
+	\makeatletter
+		\preto{\resetMathstrut@}{\resetparens}
+		\makeatother
+
+
+
+% Enable the microtypographic extensions
+% · Requires that the 2.5 (beta-08) version of microtype be installed. This can
+%   be included by loading the tlcontrib repo with tlmgr and upgrading
+%   the TeXLive version of microtype
+\usepackage[
+    protrusion=true,
+]{microtype}
+
+
+
+%% Enable all the PDF features
+	% First patch the author and title macros to let us access their values
+	% more easily
+	\let\dflttitle\title%
+	\let\dfltauthor\author%
+	\renewcommand{\title}[1]{\def\dfltthetitle{#1}\dflttitle{#1}}
+	\renewcommand{\author}[1]{\def\dflttheauthor{#1}\dfltauthor{#1}}
+	% Then make the inclusion of hyperref and hypcap the last things done
+	% before the end of the preamble
+	\AtEndPreamble{
+		\usepackage[bookmarks,pagebackref=false]{hyperref}
+			\usepackage[all]{hypcap}
+			\hypersetup{
+				,bookmarksopen  = false%
+				,pdfborderstyle = {/S/U/W 1}%
+				,ocgcolorlinks  = true%
+				,colorlinks     = false%
+				,setpagesize    = false%
+				,pdfstartview   = {XYZ null null 1}%
+				,pdfprintscaling= None%
+				,pdfpagelayout  = TwoPageLeft%
+				,verbose        = true%
+			}
+
+		% Taken from I.M.:
+		% “
+		%   When default colors are set by fontspec, hyperref isn’t able to
+		%   color the links at all. The following hack allows hyperref colors
+		%   to make it to the top of the stack.
+		% ”
+		\def\HyColor@@@@UseColor#1\@nil{\addfontfeatures{Color=#1}}
+
+		% Check to see if the author and title macros have been set in the
+		% preamble. If they have, then set the PDF attributes accordingly
+		\ifdefined\dfltthetitle
+			\hypersetup{ pdftitle = {\dfltthetitle} }
+		\fi
+		\ifdefined\dflttheauthor%
+			% Sanitize the author string for use in the PDF properties:
+			\begingroup
+				% Separate authors with ampersands
+				\def\and{ \& }
+				\hypersetup{ pdfauthor = {\dflttheauthor} }%
+			\endgroup
+		\else
+			\hypersetup{ pdfauthor = {Justin Willmert} }%
+		\fi
+	}
+
+%% Hide internal macros again
+\makeatletter

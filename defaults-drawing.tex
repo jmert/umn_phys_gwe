@@ -1,0 +1,64 @@
+%%
+% Collection of LaTeX input files which provide many convenient changes to the
+% default environment.
+%
+% See defaults.tex for more info.
+%
+% AUTHORS:      Justin Willmert ‹justin@jdjlab.com›
+% SOURCES:      http://www.jdjlab.com/hg/latex/
+%
+% CONTRIBUTORS:
+%   1. Ian-Mathew Hornburg ‹imhornburg@gmail.com›
+%      (none — by personal correspondence)
+%
+%==============================================================================
+%
+% ********************
+% CONFIGURABLE OPTIONS
+% ********************
+%
+% 1. To enable the tightpages environment, add the line
+%        \PassOptionsToPackage{active}{preview}
+%    before loading this file.
+%
+%%
+
+%% Provide a package-like environment where internal macros are accessible
+\makeatletter
+
+%% Load TikZ and pgfplots libraries
+\usepackage{pgfplots}
+	\usetikzlibrary{calc}
+	% Use the command \tikzexternalize to enable externalization
+	\usetikzlibrary{external}
+	% Then set the external call to match the currently running invocation of
+	% TeX. Note that the extra spaces are critical since LaTeX gobbles the
+	% separating space between \externlatex and \tikzexternalcheckshellescape,
+	% so we include it in the command so that the system call works.
+	\ifxetex
+		\def\externlatex{xelatex }
+	\else
+		\ifluatex
+			\def\externlatex{lualatex }
+		\else
+			\def\externlatex{pdflatex }
+		\fi
+	\fi
+	% Now set the external command to use the appropriate LaTeX engine
+	\tikzset{external/system call={\externlatex \tikzexternalcheckshellescape
+		-halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}}
+
+	% It is assumed that defaults.tex is loaded before this file, so also
+	% patch tikzpicture environments to respect the change in font colors
+	%
+	% Taken from I.-M.:
+	\AtBeginEnvironment{tikzpicture}{\color{textcolor}}
+
+
+%% Enable use of the preview package to isolate environments as PDF pages
+\usepackage[
+		tightpages
+	]{preview}
+
+%% Hide internal macros again
+\makeatletter
