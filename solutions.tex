@@ -105,10 +105,10 @@
 	\newif\ifgwe@firstproblem
 	% Then add an internal macro which will make the GWE Exam headings
 	\newcommand{\gwe@examname}{\relax}
-	\newcommand{\gwe@examsymb}{\relax}
+	\xdef\gwe@examsymb{\relax}
 	\newcommand{\gwe@exam}[4]{%
 		\renewcommand{\gwe@examname}{#1}%
-		\renewcommand{\gwe@examsymb}{#2}%
+		\xdef\gwe@examsymb{#2}%
 		\setcounter{gwe@year}{#3}%
 		\setcounter{gwe@part}{#4}%
 		\setcounter{gwe@prob}{0}%
@@ -138,7 +138,7 @@
 	% Next, add convenience wrappers to quickly define the Spring and Fall
 	% exams.
 	\newcommand{\fallexam}[2]{\gwe@exam{Fall}{F}{#1}{#2}}%
-	\newcommand{\springexam}[2]{\gwe@exam{Spring}{F}{#1}{#2}}%
+	\newcommand{\springexam}[2]{\gwe@exam{Spring}{S}{#1}{#2}}%
 	% Finally, provide a heading for each problem
 	\newcommand{\problem}[1]{%
 		\setcounter{gwe@prob}{#1}%
@@ -176,6 +176,23 @@
 	% Set the equation numbering system:
 	\renewcommand{\theequation}{%
 		\gwe@examsymb\arabic{gwe@year} \Roman{gwe@part} \arabic{gwe@prob}.\arabic{equation}%
+	}
+	% hyperref makes use of special macros to set the internal
+	% cross-referencing names, so mangle those so that they're unique for
+	% problems and equations.
+	%
+	% Must be done after hyperref is loaded at the end of the preamble by
+	% defaults.tex, so wrap in \AtEndPreamble{} to delay execution.
+	\AtEndPreamble{
+		\renewcommand{\theHsection}{%
+			\gwe@examsymb\arabic{gwe@year}\Roman{gwe@part}%
+		}
+		\renewcommand{\theHsubsection}{%
+			\theHsection.\arabic{gwe@prob}%
+		}
+		\renewcommand{\theHequation}{%
+			\theHsubsection.\arabic{equation}%
+		}
 	}
 	\makeatother
 
