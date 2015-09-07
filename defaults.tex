@@ -6,6 +6,7 @@
 %    defaults-beamer.tex
 %    defaults-bib.tex
 %    defaults-drawing.tex
+%    defaults-fonts.tex
 %    defaults-utilities.sty
 %
 % AUTHORS:      Justin Willmert ‹justin@jdjlab.com›
@@ -195,52 +196,8 @@
 
 
 
-%% Add fancy font features if using an advanced TeX engine.
-\ifxeluatex\usepackage{fontspec}
-
-	% Set font features which should be true for all fonts loaded by default
-	\defaultfontfeatures{
-		% Permit using TeX-style ligatures (i.e. --- for em-dash)
-		Ligatures = TeX,
-		% Also use our defined color by default
-		Color     = textcolor,
-	}
-
-	% Also allow math to input using Unicode by default
-	\usepackage{unicode-math}
-	% Use the XITS Math font by default
-	\setmathfont[
-			% Use italic fonts at all times
-			math-style = ISO,
-			bold-style = ISO,
-			% Force \epsilon,\varepsilon and \phi,\varphi match the unicode
-			% character ε,ϵ and φ,ϕ
-			vargreek-shape = unicode
-		]{XITS Math}
-	% Additionally, use an alternate stylistic set for caligraphic letters so
-	% that they are different from the script letters
-	\setmathfont[range={\mathcal,\mathbfcal},StylisticSet=1]{XITS Math}
-	% Finally, request that certain symbols be provided by Latin Modern
-	% Math instead of XITS Math since I think the LM ones looks much nicer.
-	\setmathfont[range={"220F}]{Latin Modern Math}	% Product
-	\setmathfont[range={"2210}]{Latin Modern Math}	% Coproduct
-	\setmathfont[range={"2211}]{Latin Modern Math}	% Summation
-
-	% Have the Linux Libertine family of fonts provide the default serif and
-	% sans-serif fonts
-	\setmainfont{Linux Libertine O}
-	\setsansfont{Linux Biolinum O}
-
-\else %\ifxeluatex
-
-	% Also use Linux Libertine fonts in pdflatex mode, but do this through the
-	% libertine package.
-	\usepackage{libertine}
-
-	% Also choose to use use the STIX fonts like the XeLaTeX version
-	\usepackage[notext]{stix}
-
-\fi %\ifxeluatex
+%% Now include advanced font features from defaults-fonts.tex
+	\input{defaults-fonts}
 
 
 
@@ -276,7 +233,7 @@
 	% we change things.
 	\edef\resetparens{%
 			\mathcode`(=\the\mathcode`(
-			\mathcode`)=\the\mathcode`)
+			\mathcode`)=\the\mathcode`)\relax
 		}
 	% Now we actually do the magic like this:
 	%   1) Start a local group so that we can temporarily define a lowercase
@@ -337,8 +294,39 @@
 	\renewcommand{\title}[1]{\def\dfltthetitle{#1}\dflttitle{#1}}
 	\renewcommand{\author}[1]{\def\dflttheauthor{#1}\dfltauthor{#1}}
 	% Then make the inclusion of hyperref and hypcap the last things done
-	% before the end of the preamble
-	\AtEndPreamble{
+	% before the end of the preamble.
+	%
+	% IMPORTANT NOTE!
+	%   It took much debugging to figure out that biblatex makes use of the
+	%   \AtEndPreamble command to finalize much of its setup, especially with
+	%   respect to knowing if hyperref has been loaded or not. For this reason,
+	%   loading hyperref with \AtEndPreamble as well *after* we've already
+	%   loaded biblatex means the the code below is executed after code that
+	%   biblatex has loaded into the hook.
+	%
+	%   To guard against such mistakes (and assumptions that hyperref was
+	%   loaded in the user-written preamble which will definitely occur
+	%   before the hook), we can instead *prepend* our code to the hook that
+	%   \AtEndPreamble normally appends to. We do this by patching a copy of
+	%   the command to use \gpreto instead of \gappto.
+	%
+	\let\PreAtEndPreamble\AtEndPreamble%
+	\patchcmd{\PreAtEndPreamble}{\gappto}{\gpreto}{}{%
+		\PackageError{defaults}{%
+			Prepending to the \verb|\AtEndPreamble| hook failed. Could not
+			setup hyperref correctly.
+		}{%
+			Loading hyperref is a tricky business, and our attempt to have
+			hyperref load at the correct time when also using biblatex failed.
+			A guess would be that the format of the \verb|\AtEndPreamble|
+			command has changed, which means our attempt to patch a copy for
+			our purposes has failed.
+			\MessageBreak\MessageBreak
+			See comments in the source for umnthesis.cls for more information.`
+		}
+	}
+	% Now prepend to the \AtEndPreamble hook.
+	\PreAtEndPreamble{
 		\usepackage[bookmarks,pagebackref=false]{hyperref}
 			\usepackage[all]{hypcap}
 			\hypersetup{
