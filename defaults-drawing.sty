@@ -5,29 +5,21 @@
 % See defaults.tex for more info.
 %
 % AUTHORS:      Justin Willmert ‹justin@jdjlab.com›
-% SOURCES:      http://www.jdjlab.com/hg/latex/
+% SOURCES:      http://jmert.jdjlab.com/cgit/latex.git
 %
 % CONTRIBUTORS:
 %   1. Ian-Mathew Hornburg ‹imhornburg@gmail.com›
 %      (none — by personal correspondence)
 %
-%==============================================================================
-%
-% ********************
-% CONFIGURABLE OPTIONS
-% ********************
-%
-% 1. To enable the tightpages environment, add the line
-%        \PassOptionsToPackage{active}{preview}
-%    before loading this file.
-%
 %%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{defaults-drawing}
+    [2016/04/09 J. Willmert's preample elements]
+\RequirePackage{defaults-utilities}
 
-%% Provide a package-like environment where internal macros are accessible
-\makeatletter
 
 %% Load TikZ and pgfplots libraries
-\usepackage{pgfplots}
+\RequirePackage{pgfplots}
 	\usetikzlibrary{calc}
 	% Use the command \tikzexternalize to enable externalization
 	\usetikzlibrary{external}
@@ -48,5 +40,22 @@
 	\tikzset{external/system call={\externlatex \tikzexternalcheckshellescape
 		-halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}}
 
-%% Hide internal macros again
-\makeatletter
+%% Provide a command which can check whether a particular pgf/TikZ library is
+%% loaded.
+	\def\ifpgflibraryloaded#1{%
+		\ifx\csname pgf@library@#1@loaded\endcsname\relax%
+			\expandafter\@firstoftwo%
+		\else%
+			\expandafter\@secondoftwo%
+		\fi%
+	}
+	\def\iftikzlibraryloaded#1{%
+		\ifx\csname tikz@library@#1@loaded\endcsname\relax%
+			\expandafter\@firstoftwo%
+		\else%
+			\expandafter\@secondoftwo%
+		\fi%
+	}
+
+\endinput
+

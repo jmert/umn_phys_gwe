@@ -1,0 +1,121 @@
+%%
+% Collection of LaTeX input files which provide many convenient changes to the
+% default environment.
+%
+% See defaults.tex for more info.
+%
+% AUTHORS:      Justin Willmert ‹justin@jdjlab.com›
+% SOURCES:      http://jmert.jdjlab.com/cgit/latex.git
+%
+% CONTRIBUTORS:
+%   1. Ian-Mathew Hornburg ‹imhornburg@gmail.com›
+%      (none — by personal correspondence)
+%
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{defaults-layout}
+    [2016/04/09 J. Willmert's preample elements]
+\RequirePackage{defaults-utilities}
+
+%% Taken from I.-M.:
+%
+% Default glue settings under XeTeX for some fonts sometimes creates very
+% cramped text.
+%
+% From http://tex.stackexchange.com/questions/49298/what-settings-for-xspaceskip-would-you-suggest-for-linux-libertine?rq=1
+% Bringhurst suggests these values for body text: m/3 (even better if you can
+% keep it at m/4) for interword space, m/2 for maximum space, and m/5 for
+% minimum space. He also feels strongly against using the extra space after
+% sentences, so assume \frenchspacing.
+    \appto\selectfont{%
+            \fontdimen2\font=0.250em % M/4
+            \fontdimen3\font=\dimexpr0.500em-\fontdimen2\font % M/2
+            \fontdimen4\font=\dimexpr\fontdimen2\font-0.200em%
+        }
+        \AfterPreamble{\frenchspacing}
+
+
+% Enable the microtypographic extensions
+% · Requires that the 2.5 (beta-08) version of microtype be installed. This can
+%   be included by loading the tlcontrib repo with tlmgr and upgrading
+%   the TeXLive version of microtype
+    \RequirePackage[
+        protrusion=true,
+    ]{microtype}
+
+
+%% Enable all the PDF features
+	% First patch the author and title macros to let us access their values
+	% more easily
+	\let\dflttitle\title%
+	\let\dfltauthor\author%
+	\renewcommand{\title}[1]{\def\dfltthetitle{#1}\dflttitle{#1}}
+	\renewcommand{\author}[1]{\def\dflttheauthor{#1}\dfltauthor{#1}}
+	% Then make the inclusion of hyperref and hypcap the last things done
+	% before the end of the preamble.
+	%
+	% IMPORTANT NOTE!
+	%   It took much debugging to figure out that biblatex makes use of the
+	%   \AtEndPreamble command to finalize much of its setup, especially with
+	%   respect to knowing if hyperref has been loaded or not. For this reason,
+	%   loading hyperref with \AtEndPreamble as well *after* we've already
+	%   loaded biblatex means the code below is executed after code that
+	%   biblatex has loaded into the hook.
+	%
+	%   To guard against such mistakes (and assumptions that hyperref was
+	%   loaded in the user-written preamble which will definitely occur
+	%   before the hook), we can instead *prepend* our code to the hook that
+	%   \AtEndPreamble normally appends to. We do this by patching a copy of
+	%   the command to use \gpreto instead of \gappto.
+	%
+	\let\PreAtEndPreamble\AtEndPreamble%
+	\patchcmd{\PreAtEndPreamble}{\gappto}{\gpreto}{}{%
+		\PackageError{defaults}{%
+			Prepending to the \verb|\AtEndPreamble| hook failed. Could not
+			setup hyperref correctly.
+		}{%
+			Loading hyperref is a tricky business, and our attempt to have
+			hyperref load at the correct time when also using biblatex failed.
+			A guess would be that the format of the \verb|\AtEndPreamble|
+			command has changed, which means our attempt to patch a copy for
+			our purposes has failed.
+			\MessageBreak\MessageBreak
+			See comments in the source for defaults-layout.sty for more
+			information.
+		}
+	}
+	% Now prepend to the \AtEndPreamble hook.
+	\PreAtEndPreamble{
+		\RequirePackage[bookmarks,unicode=true,pagebackref=false]{hyperref}
+			\RequirePackage[all]{hypcap}
+			\hypersetup{
+				,bookmarksopen  = false%
+				,pdfborderstyle = {/S/U/W 1}%
+				,ocgcolorlinks  = true%
+				,colorlinks     = false%
+				,setpagesize    = false%
+				,pdfstartview   = {XYZ null null 1}%
+				,pdfprintscaling= None%
+				,pdfpagelayout  = TwoPageLeft%
+				,verbose        = true%
+			}
+
+		% Check to see if the author and title macros have been set in the
+		% preamble. If they have, then set the PDF attributes accordingly
+		\ifdefined\dfltthetitle
+			\hypersetup{ pdftitle = {\dfltthetitle} }
+		\fi
+		\ifdefined\dflttheauthor%
+			% Sanitize the author string for use in the PDF properties:
+			\begingroup
+				% Separate authors with ampersands
+				\def\and{ \& }
+				\hypersetup{ pdfauthor = {\dflttheauthor} }%
+			\endgroup
+		\else
+			\hypersetup{ pdfauthor = {Justin Willmert} }%
+		\fi
+	}
+
+\endinput
+

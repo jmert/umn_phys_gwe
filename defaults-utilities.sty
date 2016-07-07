@@ -5,37 +5,41 @@
 % See defaults.tex for more info.
 %
 % AUTHORS:      Justin Willmert ‹justin@jdjlab.com›
-% SOURCES:      http://www.jdjlab.com/hg/latex/
+% SOURCES:      http://jmert.jdjlab.com/cgit/latex.git
 %
 % CONTRIBUTORS:
 %   1. Ian-Mathew Hornburg ‹imhornburg@gmail.com›
 %      (none — by personal correspondence)
 %
 %%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{defaults-utilities}
+    [2016/04/09 J. Willmert's preample elements]
 
 %% Load low-level tools
-\usepackage{etoolbox}
+\RequirePackage{etoolbox}
+\RequirePackage{xpatch}
 
 
 %% Detect draft mode
-	\usepackage{ifdraft}
+\RequirePackage{ifdraft}
 
 
 %% Allow LuaTeX and XeTeX-specific options
-	\usepackage{ifxetex}
-	\usepackage{ifluatex}
-	% Also generate a boolean which is true for either XeTeX or LuaTeX since
-	% some features (i.e. fontspec) is allowable in both but not pdfTeX
-	\newif\ifxeluatex
-	\ifxetex
-		\xeluatextrue
-	\else
-		\ifluatex
-			\xeluatextrue
-		\else
-			\xeluatexfalse
-		\fi
-	\fi
+\RequirePackage{ifxetex}
+\RequirePackage{ifluatex}
+% Also generate a boolean which is true for either XeTeX or LuaTeX since
+% some features (i.e. fontspec) is allowable in both but not pdfTeX
+\newif\ifxeluatex
+\ifxetex
+    \xeluatextrue
+\else
+    \ifluatex
+        \xeluatextrue
+    \else
+        \xeluatexfalse
+    \fi
+\fi
 
 
 
@@ -46,3 +50,5 @@
 	% XeTeX defaults to no normalization.
 	\XeTeXinputnormalization=1
 \fi
+
+\endinput

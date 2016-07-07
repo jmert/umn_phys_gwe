@@ -1,0 +1,40 @@
+%%
+% Collection of LaTeX input files which provide many convenient changes to the
+% default environment.
+%
+% See defaults.tex for more info.
+%
+% AUTHORS:      Justin Willmert ‹justin@jdjlab.com›
+% SOURCES:      http://jmert.jdjlab.com/cgit/latex.git
+%
+% CONTRIBUTORS:
+%   1. Ian-Mathew Hornburg ‹imhornburg@gmail.com›
+%      (none — by personal correspondence)
+%
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{defaults-article}
+    [2016/04/09 J. Willmert's preample elements]
+\RequirePackage{defaults-utilities}
+
+%% Load all commonly used packages
+	\RequirePackage[
+		margin=1in,
+		twoside=true
+	]{geometry}
+	\RequirePackage[
+		usenames,dvipsnames,svgnames,
+		table,
+		hyperref
+	]{xcolor}
+	\RequirePackage{float}
+	\RequirePackage{verbatim}
+	\RequirePackage{array}
+	\RequirePackage{tabularx}
+	\RequirePackage[
+		font      = footnotesize,
+		labelfont = bf
+	]{caption}
+
+\endinput
+

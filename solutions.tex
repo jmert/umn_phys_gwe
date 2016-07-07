@@ -1,12 +1,10 @@
 \documentclass[10pt]{article}
-\input{defaults}
-\input{defaults-drawing}
+\usepackage{defaults}
+\usepackage{defaults-drawing}
 \usetikzlibrary{intersections}
 
 \title{University of Minnesota Physics GWE Solutions}
-\author{%
-	Justin Willmert%
-}
+\author{Justin Willmert}
 
 % Extend the capabilities of enumerations and itemized lists
 	\usepackage{enumerate}
@@ -182,7 +180,7 @@
 	% problems and equations.
 	%
 	% Must be done after hyperref is loaded at the end of the preamble by
-	% defaults.tex, so wrap in \AtEndPreamble{} to delay execution.
+	% defaults package, so wrap in \AtEndPreamble{} to delay execution.
 	\AtEndPreamble{
 		\renewcommand{\theHsection}{%
 			\gwe@examsymb\arabic{gwe@year}\Roman{gwe@part}%

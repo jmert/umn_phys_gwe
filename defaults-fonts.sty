@@ -1,0 +1,113 @@
+%%
+% Package which provides some minimal common elements for use by all defaults-*
+% files.
+%
+% See defaults.tex for more info.
+%
+% AUTHORS:      Justin Willmert ‹justin@jdjlab.com›
+% SOURCES:      http://jmert.jdjlab.com/cgit/latex.git
+%
+% CONTRIBUTORS:
+%   1. Ian-Mathew Hornburg ‹imhornburg@gmail.com›
+%      (none — by personal correspondence)
+%
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{defaults-fonts}
+    [2016/04/09 J. Willmert's preample elements]
+\RequirePackage{defaults-utilities}
+
+
+%% Add fancy font features if using an advanced TeX engine.
+\ifxeluatex\RequirePackage{fontspec}
+
+    % Set font features which should be true for all fonts loaded by default
+    \defaultfontfeatures{
+        % Permit using TeX-style ligatures (i.e. --- for em-dash)
+        Ligatures = TeX
+    }
+
+    % Also allow math to input using Unicode by default
+    \RequirePackage{amsmath,amssymb}
+    \RequirePackage{unicode-math}
+
+    % Skip resetting the fonts if we're in draft mode
+    \ifdraft{\relax}{
+        % Use the XITS Math font by default
+        \setmathfont[
+                % Use italic fonts at all times
+                math-style = ISO,
+                bold-style = ISO,
+                % Force \epsilon,\varepsilon and \phi,\varphi match the unicode
+                % character ε,ϵ and φ,ϕ
+                %vargreek-shape = unicode
+            ]{XITS Math}
+        
+        % Additionally, use an alternate stylistic set for caligraphic letters
+        % so that they are different from the script letters
+        \setmathfont[range={\mathcal,\mathbfcal},StylisticSet=1]{XITS Math}
+        
+        % The author's opinion is that the STIX summation symbol is highly
+        % inferior to those in Computer Modern/Latin Modern. Use CM since it
+        % provides a symbol which is slightly larger than LM, and therefore
+        % matches the rest of STIX a bit better.
+        \setmathfont[range={"220F}]{Latin Modern Math}  % Product
+        \setmathfont[range={"2210}]{Latin Modern Math}  % Coproduct
+        \setmathfont[range={"2211}]{Latin Modern Math}  % Summation
+        % Use the Asana Math for \top (Unicode Down Tack) since it's slightly
+        % better when used as a transpose symbol.
+        \setmathfont[range={"22A4}]{Asana Math}  % Down Tack
+        % The beginner of the STIX \ell loop starts far too high up (close to
+        % half-way up the character height), so replace it. Again, LM has the
+        % right shape, but in this case, it's a bit too light compared to the
+        % rest of STIX glyphs. Asana Math is a reasonable compromise.
+        \setmathfont[range={"2113}]{Asana Math}  % Small Script L
+
+        % Have the Linux Libertine family of fonts provide the default serif
+        % and sans-serif fonts
+        \setmainfont{Linux Libertine O}
+        \setsansfont{Linux Biolinum O}
+    } %\ifdraft
+
+\else %\ifxeluatex
+
+    % Allow pdfLaTeX to parse Unicode without choking. Note, though, that a
+    % document *probably* still won't compile since the mapping from character
+    % code to font glyph isn't setup by this. Additional work is needed yet
+    % before this can happen automatically (if ever).
+    %
+    % Currently, my use is to allow \ifxeluatex ... \else ... \fi guards to be
+    % used around tricky spots and not have pdflatex completely barf as it
+    % parses those.
+    \RequirePackage[T1]{fontenc}
+    \RequirePackage[utf8]{inputenc}
+
+    \ifdraft{\relax}{
+        % Also use Linux Libertine fonts in pdflatex mode, but do this through
+        % the libertine package.
+        \RequirePackage{libertine}
+        % Also choose to use use the STIX fonts like the XeLaTeX version
+        \RequirePackage[notext]{stix}
+
+        % Similar font substitutions as in the Xe/LuaLaTeX cases above.
+
+        % Summation symbol substitution:
+        %     Loads Computer Modern instead of Latin Modern
+        \DeclareSymbolFont{cmlargesymbols}{OMX}{cmex}{m}{n}
+        %     Map the summation operator to use the CM glyph
+        \DeclareMathSymbol{\sumop}{\mathop}{cmlargesymbols}{"50}
+
+        % Small Script L substitution:
+        %     Loads Palatino instead of Asana Math
+        \DeclareSymbolFont{plletters}{OML}{zplm}{m}{it}
+        \DeclareMathSymbol{\ell}{\mathalpha}{plletters}{"60}
+
+        % Inconsolata is sized much more appropriately for the other chosen
+        % fonts
+        \RequirePackage{inconsolata}
+    }
+
+\fi %\ifxeluatex
+
+\endinput
+

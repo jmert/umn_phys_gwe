@@ -1,0 +1,61 @@
+%%
+% Collection of LaTeX input files which provide many convenient changes to the
+% default environment.
+%
+% See also:
+%    defaults-article.sty
+%    defaults-beamer.sty
+%    defaults-bib.sty
+%    defaults-drawing.sty
+%    defaults-fonts.sty
+%    defaults-layout.sty
+%    defaults-math.sty
+%    defaults-utilities.sty
+%
+% AUTHORS:      Justin Willmert ‹justin@jdjlab.com›
+% SOURCES:      http://jmert.jdjlab.com/cgit/latex.git
+%
+% CONTRIBUTORS:
+%   1. Ian-Mathew Hornburg ‹imhornburg@gmail.com›
+%      (none — by personal correspondence)
+%
+%==============================================================================
+%
+% *****************
+% COMMANDS PROVIDED
+% *****************
+%
+% This section documents some commands which may be necessary due to the
+% modifications which are made by default, either overriding a previous change
+% locally or restoring the LaTeX default functionality.
+%
+% COMMAND              DESCRIPTION
+% -----------------------------------------------------------------------------
+%
+% \resetparents        By default, all parentheses in math mode made stretchy,
+%                      but this may be undesirable in some context, so this
+%                      command restores them to their default, inactive state.
+%
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{defaults}
+    [2016/04/09 J. Willmert's preample elements]
+\RequirePackage{defaults-utilities}
+
+%% Modify environment available to article class
+%
+% Under most circumstances, I use the article class, so the included list
+% of packages have been tuned to make it work best.
+    \RequirePackage{defaults-article}
+
+%% Include advanced font features from defaults-fonts.sty
+    \RequirePackage{defaults-fonts}
+
+%% Make math handling better by default.
+    \RequirePackage{defaults-math}
+
+%% Then change the overall document layout
+    \RequirePackage{defaults-layout}
+
+\endinput
+

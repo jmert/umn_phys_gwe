@@ -1,0 +1,127 @@
+%%
+% Collection of LaTeX input files which provide many convenient changes to the
+% default environment.
+%
+% See defaults.tex for more info.
+%
+% AUTHORS:      Justin Willmert ‹justin@jdjlab.com›
+% SOURCES:      http://jmert.jdjlab.com/cgit/latex.git
+%
+% CONTRIBUTORS:
+%   1. Ian-Mathew Hornburg ‹imhornburg@gmail.com›
+%      (none — by personal correspondence)
+%
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{defaults-math}
+    [2016/04/09 J. Willmert's preample elements]
+\RequirePackage{defaults-utilities}
+
+%% Load all commonly used packages
+	\RequirePackage{amsmath,amssymb}
+	\RequirePackage[
+		exponent-product     = \cdot,
+		load-configurations  = abbreviations,
+		per-mode             = symbol-or-fraction,
+		separate-uncertainty = true
+	]{siunitx}
+	% Only redefine micro using Unicode characters if running with a compatible
+	% TeX compiler.
+	\ifxeluatex
+		\sisetup{
+			math-micro = \text{μ},
+			text-micro = μ
+		}
+	\fi
+
+%% Make some amsmath fixes
+%
+% As of 2012-12-23 (XeTeX version 3.1415926-2.4-0.9998, TeXLive 2012), XeTeX
+% does not properly handle parentheses when using the TeX primitives
+%   \overwithdelims
+%   \atopwithdelims
+%   \abovewithdelims
+% Because of this, the macro \binom which internally uses these these commands
+% creates a binomial with the wrong size of brackets (too small). Patch around
+% this issue by using \left( and \right) around a bracket-less binomial.
+% LuaTeX doesn't seem to suffer from this.
+    \ifxetex
+        \renewrobustcmd{\binom} [2]{\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)}
+        \renewcommand  {\dbinom}[2]{\left(\genfrac{}{}{0pt}{0}{#1}{#2}\right)}
+        \renewcommand  {\tbinom}[2]{\left(\genfrac{}{}{0pt}{1}{#1}{#2}\right)}
+    \fi
+
+%% Make all parentheses stretchy
+%
+% By default, all parentheses are just normal parentheses in math mode. This
+% to me doesn't seem to make sense since I almost always want them to be
+% stretchy.
+%
+% Adapted from http://tex.stackexchange.com/questions/7359/how-to-make-a-real-backslash-escape-character/7372#7372
+
+	% Only do after all font setup has been completed. Loading a font package
+	% that changes math fonts can cause the slot numbers to change, so we delay
+	% until that should all be completed.
+\AtBeginDocument{%
+	% Start by defining a macro to quickly reset the default behavior if we
+	% decide that a given environment shouldn't use the active definition. We
+	% need the \edef so that the \the\mathcode is immediately expanded before
+	% we change things.
+	\edef\resetparens{%
+			\mathcode`(=\the\mathcode`(
+			\mathcode`)=\the\mathcode`)\relax
+		}
+	% Now we actually do the magic like this:
+	%   1) Start a local group so that we can temporarily define a lowercase
+	%      tilde to be the left paranetheses and not affect anything later in
+	%      the document.
+	%      a) We use the tilde because it is already defined to be an active
+	%         character. This saves a step since to define a character to
+	%         execute a macro sequence, it first needs to be active. The
+	%         \lowercase command does for us since the lowercase tilde (i.e.
+	%         paren) is made to have the same category code as its uppercase
+	%         counterpart.
+	%   2) \lccode assigns the lowercase tilde to be the left paren
+	%   3) Then use \lowercase to cause us to define the macro of active left
+	%      paren (without explicitly changing category codes).
+	%      a) The \endgroup ends the local group we just started, but not
+	%         before lowercase has already learned how to convert the tilde
+	%         This lets the next \edef to be at the current global scope,
+	%         avoiding use of \global
+	%   4) Then define the active left paren to be the sequence \left( so that
+	%      we invoke the stretchy code
+	%   5) Finally change the mathcode of the left paren to be active within
+	%      math environments, meaning we don't have to worry about the
+	%      character being active in normal text mode.
+	\begingroup%
+			\lccode`~=`(%
+			\lowercase{\endgroup\edef~}{\left(}
+		\mathcode`(="8000
+	% Do it again for the right paren
+	\begingroup%
+			\lccode`~=`)%
+			\lowercase{\endgroup\edef~}{\right)}
+		\mathcode`)="8000
+	% Finally, this change of math codes breaks some changes the amsmath
+	% package makes to the definitions of \left( and \right), so we fix this
+	% by patching the internal amsmath macro which breaks to have the
+	% non-active parentheses in scope instead.
+		\xpatchcmd{\resetMathstrut@}%
+			{\begingroup}{\begingroup\resetparens}{}{
+			\PackageError{defaults}{%
+				Fixing amsmath for use with always-stretchy parens failed.
+			}{%
+				Implementing always-stretchy parentheses breaks some basic
+				assumptions that a parenthesis is always a character.
+				A guess would be that the format of the \verb|\resetMathstrut@|
+				command has changed, which means our attempt to patch a copy
+				for our purposes has failed.
+				\MessageBreak\MessageBreak
+				See comments in the source for defaults-math.sty for more
+				information.`
+			}
+		}
+}
+
+\endinput
+
